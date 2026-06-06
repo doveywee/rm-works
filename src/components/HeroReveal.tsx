@@ -7,11 +7,48 @@ import {
   useScroll,
   useTransform,
   useMotionValueEvent,
+  type MotionValue,
 } from "framer-motion";
 import { MagneticButton } from "./ui/MagneticButton";
-import { BlackHoleCanvas } from "./three/BlackHoleCanvas";
 
-const HEADLINE = ["Websites with", "gravity."];
+const HOLE_BG =
+  "radial-gradient(circle, #000 0%, #000 60%, rgba(12,10,28,0.92) 80%, rgba(124,107,255,0) 100%)";
+
+/** A single headline word that gets torn off and spiralled into the hole. */
+function WarpWord({
+  progress,
+  index,
+  gradient = false,
+  children,
+}: {
+  progress: MotionValue<number>;
+  index: number;
+  gradient?: boolean;
+  children: ReactNode;
+}) {
+  const s = index * 0.05; // stagger so words are pulled in one after another
+  const e = 0.32 + index * 0.04;
+  const dir = index % 2 === 0 ? 1 : -1;
+
+  const scale = useTransform(progress, [s, e], [1, 0.2]);
+  const opacity = useTransform(progress, [s + 0.1, e], [1, 0]);
+  const rotate = useTransform(progress, [s, e], [0, dir * 130]);
+  const skewX = useTransform(progress, [s, e], [0, dir * 18]);
+  const y = useTransform(progress, [s, e], [0, dir * 55]);
+  const blurV = useTransform(progress, [s + 0.04, e], [0, 14]);
+  const filter = useTransform(blurV, (b) => `blur(${b}px)`);
+
+  return (
+    <motion.span
+      style={{ scale, opacity, rotate, skewX, y, filter }}
+      className={`inline-block will-change-transform ${
+        gradient ? "gradient-text" : ""
+      }`}
+    >
+      {children}
+    </motion.span>
+  );
+}
 
 export function HeroReveal({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
@@ -28,13 +65,20 @@ export function HeroReveal({ children }: { children: ReactNode }) {
     progressRef.current = v;
   });
 
+  // black hole: grows to engulf, then fades away (it does not close back in)
+  const holeScale = useTransform(scrollYProgress, [0, 0.45], [0, 1]);
+  const holeOpacity = useTransform(scrollYProgress, [0.45, 0.78], [1, 0]);
+
+  // whole headline converges toward the hole's centre while words warp in
+  const hlScale = useTransform(scrollYProgress, [0, 0.42], [1, 0.25]);
+  const hlRotate = useTransform(scrollYProgress, [0, 0.42], [0, 18]);
+
   const domOpacity = useTransform(scrollYProgress, [0.02, 0.3], [1, 0]);
   const domScale = useTransform(scrollYProgress, [0, 0.34], [1, 0.55]);
-  const flash = useTransform(scrollYProgress, [0.38, 0.5, 0.64], [0, 0.5, 0]);
+  const flash = useTransform(scrollYProgress, [0.4, 0.52, 0.66], [0, 0.5, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
-  // the site is born out of the collapsed point: it grows from the centre and
-  // fades in over the page background, then each section pops in on its own
+  // the site is born out of the centre: grows from the middle and fades in
   const siteScale = useTransform(scrollYProgress, [0.48, 0.96], [0.4, 1]);
   const siteOpacity = useTransform(scrollYProgress, [0.46, 0.66], [0, 1]);
 
@@ -71,7 +115,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
           className="relative flex min-h-dvh flex-col items-center justify-center gap-7 overflow-hidden px-6 pt-28 text-center"
         >
           {badge}
-          <h1 className="font-display text-5xl font-semibold leading-[1.02] tracking-tight text-chalk sm:text-7xl text-balance">
+          <h1 className="font-headline text-5xl font-bold leading-[1.02] tracking-tight text-chalk sm:text-7xl text-balance">
             Websites with <span className="gradient-text">gravity.</span>
           </h1>
           <div className="max-w-3xl">{lower}</div>
@@ -83,37 +127,61 @@ export function HeroReveal({ children }: { children: ReactNode }) {
 
   return (
     <div className="relative">
-      {/* pinned black-hole hero — stays put while the site rises over it */}
+      {/* pinned hero — stays put while the site rises over it */}
       <div
         id="top"
         className="sticky top-0 z-0 flex h-dvh items-center justify-center overflow-hidden"
       >
-        <BlackHoleCanvas
-          progress={progressRef}
-          lines={HEADLINE}
-          consumeEnd={0.45}
-          className="pointer-events-none absolute inset-0 z-20"
+        {/* black hole disc */}
+        <motion.div
+          aria-hidden
+          style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full"
         />
 
+        {/* badge */}
         <motion.div
           style={{ opacity: domOpacity, scale: domScale }}
-          className="absolute left-1/2 top-[23%] z-10 -translate-x-1/2"
+          className="absolute left-1/2 top-[22%] z-30 -translate-x-1/2"
         >
           {badge}
         </motion.div>
 
+        {/* headline — real type, each word warped into the hole */}
+        <motion.h1
+          style={{ scale: hlScale, rotate: hlRotate }}
+          className="absolute left-1/2 top-1/2 z-30 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 px-6 text-center font-headline text-5xl font-bold leading-[1.04] tracking-tight text-chalk sm:text-7xl md:text-8xl"
+        >
+          <span className="flex flex-wrap items-baseline justify-center gap-x-[0.28em]">
+            <WarpWord progress={scrollYProgress} index={0}>
+              Websites
+            </WarpWord>
+            <WarpWord progress={scrollYProgress} index={1}>
+              with
+            </WarpWord>
+          </span>
+          <span className="mt-1 block">
+            <WarpWord progress={scrollYProgress} index={2} gradient>
+              gravity.
+            </WarpWord>
+          </span>
+        </motion.h1>
+
+        {/* subtitle + CTAs */}
         <motion.div
           style={{ opacity: domOpacity, scale: domScale }}
-          className="absolute left-1/2 top-[63%] z-10 w-full max-w-3xl -translate-x-1/2 px-6 text-center"
+          className="absolute left-1/2 top-[66%] z-30 w-full max-w-3xl -translate-x-1/2 px-6 text-center"
         >
           {lower}
         </motion.div>
 
+        {/* collapse flash */}
         <motion.div
           style={{ opacity: flash }}
           className="pointer-events-none absolute inset-0 z-30 bg-[radial-gradient(circle_at_center,#ffffff_0%,rgba(168,140,255,0.4)_18%,transparent_50%)]"
         />
 
+        {/* scroll cue */}
         <motion.div
           style={{ opacity: cueOpacity }}
           className="absolute bottom-7 left-1/2 z-30 -translate-x-1/2"
@@ -132,9 +200,9 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         </motion.div>
       </div>
 
-      {/* the real site — grows out of the collapsed point over the page bg
-          (transparent, so there's no box/border), each section then pops in.
-          outer div is scroll-tracked; the transform lives on the inner one */}
+      {/* the real site — grows out of the centre over the page bg, then each
+          section pops in on its own. outer div is scroll-tracked; the transform
+          lives on the inner one so it doesn't feed back into the measurement */}
       <div ref={contentRef} className="relative z-10">
         <motion.div
           style={{ scale: siteScale, opacity: siteOpacity }}

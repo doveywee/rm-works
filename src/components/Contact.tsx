@@ -39,10 +39,10 @@ export function Contact() {
             </p>
             <div className="mt-8 space-y-1 text-sm text-mist">
               <p>
-                <span className="text-fog">Email</span> · studio@aether.design
+                <span className="text-fog">Email</span> · studio@vantagesystems.com
               </p>
               <p>
-                <span className="text-fog">Booking</span> · cal.com/aether
+                <span className="text-fog">Booking</span> · cal.com/vantage
               </p>
             </div>
           </div>

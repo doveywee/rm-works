@@ -32,7 +32,7 @@ export function Nav() {
             <span className="h-2.5 w-2.5 rounded-sm bg-ink transition-transform duration-300 group-hover:rotate-45" />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight text-chalk">
-            AETHER
+            Vantage Systems
           </span>
         </a>
 

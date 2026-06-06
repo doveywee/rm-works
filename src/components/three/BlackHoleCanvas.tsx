@@ -59,7 +59,7 @@ export function BlackHoleCanvas({
 
     const family =
       getComputedStyle(document.documentElement)
-        .getPropertyValue("--font-display")
+        .getPropertyValue("--font-headline")
         .trim() || "sans-serif";
 
     const setup = () => {
@@ -76,7 +76,7 @@ export function BlackHoleCanvas({
 
       // fit font size to the box
       let fs = Math.min(cw * 0.14, 96) * dpr;
-      const weight = "600";
+      const weight = "700";
       const widthOf = (size: number) => {
         ctx.font = `${weight} ${size}px ${family}`;
         return Math.max(...lines.map((l) => ctx.measureText(l).width));
@@ -177,20 +177,17 @@ export function BlackHoleCanvas({
       const cp = clamp(p / consumeEnd, 0, 1);
       const R = cp * maxRadius;
 
-      // visual radius: grow to engulf during the consume, then collapse back to
-      // a single point so the site can be born out of the centre
+      // visual radius: grow to engulf during the consume, then hold — and as
+      // the site emerges, the hole simply fades out (it does not close back in)
       const growEnd = consumeEnd;
-      const collapseEnd = Math.min(consumeEnd + 0.28, 0.99);
-      let rVis: number;
-      if (p <= growEnd) rVis = (p / growEnd) * maxRadius;
-      else if (p <= collapseEnd)
-        rVis = (1 - (p - growEnd) / (collapseEnd - growEnd)) * maxRadius;
-      else rVis = 0;
+      const rVis = (p <= growEnd ? p / growEnd : 1) * maxRadius;
+      const holeAlpha = 1 - clamp((p - growEnd) / 0.32, 0, 1);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // black hole beneath the particles
-      if (rVis > 1) {
+      if (rVis > 1 && holeAlpha > 0.01) {
+        ctx.globalAlpha = holeAlpha;
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rVis);
         g.addColorStop(0, "rgba(0,0,0,1)");
         g.addColorStop(0.7, "rgba(7,6,18,1)");
@@ -206,6 +203,7 @@ export function BlackHoleCanvas({
         ctx.lineWidth = Math.max(1, ps * 0.7);
         ctx.strokeStyle = "rgba(194,182,255,0.45)";
         ctx.stroke();
+        ctx.globalAlpha = 1;
       }
 
       // particles pulled in + spiralling

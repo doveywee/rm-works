@@ -245,9 +245,9 @@ function ServiceVisual({ id }: { id: Id }) {
       return (
         <div className="space-y-3">
           <div className="rounded-xl border border-line bg-ink p-4">
-            <div className="text-xs text-fog">aether.design › services</div>
+            <div className="text-xs text-fog">vantagesystems.com › services</div>
             <div className="mt-1 font-display text-base text-[#8fe6ff]">
-              Premium Web Design Studio — AETHER
+              Premium Web Design Studio — Vantage Systems
             </div>
             <div className="mt-1 space-y-1">
               <span className="block h-1.5 w-full rounded-full bg-white/12" />

@@ -1,4 +1,4 @@
-// Custom GLSL for the AETHER hero orb.
+// Custom GLSL for the Vantage Systems hero orb.
 // Vertex: 3D simplex-noise displacement along normals (an animated, mouse-reactive
 // "breathing" surface). Fragment: iridescent fresnel using an Inigo-Quilez cosine
 // palette, so the rim shifts violet -> cyan as it turns.

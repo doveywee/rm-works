@@ -1,4 +1,4 @@
-// Accretion-disk shader for the AETHER black hole.
+// Accretion-disk shader for the Vantage Systems black hole.
 // The disk is a flat ring in its local XY plane; we read radius/angle from the
 // vertex position to draw glowing spiral arms with a hot inner lip. Rendered with
 // additive blending over a near-black core sphere so the silhouette reads as a hole.

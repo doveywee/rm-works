@@ -24,7 +24,7 @@ export function Footer() {
                 <span className="h-2.5 w-2.5 rounded-sm bg-ink" />
               </span>
               <span className="font-display text-lg font-semibold text-chalk">
-                AETHER
+                Vantage Systems
               </span>
             </a>
             <p className="mt-4 max-w-xs text-sm text-mist">
@@ -55,7 +55,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-sm text-fog sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} AETHER Studio. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Vantage Systems. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="transition-colors hover:text-chalk">
               Privacy

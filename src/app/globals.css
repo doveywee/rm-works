@@ -60,6 +60,10 @@ body {
   font-family: var(--font-display);
 }
 
+.font-headline {
+  font-family: var(--font-headline);
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.07);
