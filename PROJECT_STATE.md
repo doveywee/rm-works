@@ -45,6 +45,15 @@ Node 20+ recommended (built on Node 24).
   warp, hole fades instead of collapsing.
 Switch with `git checkout <branch>`. Compare with `git diff v3 v4`.
 
+## NEXT UP — v5 design polish pass (planned, not started)
+On a fresh session (so the global skills load live), create branch **v5 off v4** and
+do a design polish pass. Use these now-installed global skills (`~/.claude/skills/`):
+`frontend-design` (Anthropic), `ui-ux-pro-max`, `emil-design-eng`, `high-end-visual-design`,
+`minimalist-ui`, `design-taste-frontend`. Focus areas: hero black-hole motion feel,
+section spacing/rhythm, typography scale, color restraint (monotone + selective accent),
+and micro-interactions (hover/scroll). 60 design+marketing skills are now installed
+globally on this Mac. Project folder is now `vantage-systems` (renamed from aether-studio).
+
 ## OPEN / TODO
 - **Contact form email is wired to Web3Forms but NOT finished.** `src/components/
   Contact.tsx` POSTs to web3forms with `process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`.
@@ -59,4 +68,4 @@ Switch with `git checkout <branch>`. Compare with `git diff v3 v4`.
 
 ## Notes
 - `.env.local` is gitignored (keys stay private; recreate it on the Mac).
-- The folder is still named `aether-studio` (internal only; not shown to users).
+- The folder and package are named `vantage-systems`.
