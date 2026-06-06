@@ -56,7 +56,7 @@ export function LogoMarquee() {
   });
 
   return (
-    <section className="relative overflow-hidden border-y border-line/60 py-12">
+    <section className="relative overflow-hidden py-16">
       <motion.div
         style={reduce ? undefined : { skewX: skew }}
         className="flex whitespace-nowrap [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]"

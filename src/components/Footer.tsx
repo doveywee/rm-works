@@ -15,7 +15,7 @@ const groups = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-line/60">
+    <footer className="relative">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
@@ -54,7 +54,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-line/60 pt-8 text-sm text-fog sm:flex-row sm:items-center">
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-sm text-fog sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} AETHER Studio. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="transition-colors hover:text-chalk">

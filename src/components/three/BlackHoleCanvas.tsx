@@ -30,22 +30,23 @@ function colorAt(t: number) {
   return `rgb(${r},${g},${bl})`;
 }
 
-const CONSUME_END = 0.95; // progress at which everything is fully swallowed
-
 export function BlackHoleCanvas({
   progress,
   lines = ["Websites with", "gravity."],
   className = "",
+  consumeEnd = 0.95, // progress at which everything is fully swallowed
 }: {
   progress: RefObject<number>;
   lines?: string[];
   className?: string;
+  consumeEnd?: number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const geomRef = useRef({ cx: 0, cy: 0, farthest: 1, maxRadius: 1 });
   const psRef = useRef(4);
   const rafRef = useRef<number | null>(null);
+  const lastPRef = useRef(-2);
 
   // ---- sample the text into particles --------------------------------
   useEffect(() => {
@@ -123,6 +124,7 @@ export function BlackHoleCanvas({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particlesRef.current = parts;
+      lastPRef.current = -2; // force a redraw now that particles exist
       geomRef.current = {
         cx,
         cy,
@@ -163,13 +165,31 @@ export function BlackHoleCanvas({
       const parts = particlesRef.current;
 
       const p = clamp(progress.current ?? 0, 0, 1);
-      const cp = clamp(p / CONSUME_END, 0, 1);
+
+      // skip the redraw when nothing changed (e.g. at rest or once consumed)
+      if (Math.abs(p - lastPRef.current) < 0.0008) {
+        rafRef.current = requestAnimationFrame(render);
+        return;
+      }
+      lastPRef.current = p;
+
+      // particles are swallowed monotonically as the hole grows (stays consumed)
+      const cp = clamp(p / consumeEnd, 0, 1);
       const R = cp * maxRadius;
+
+      // visual radius: grow to engulf during the consume, then collapse back to
+      // a single point so the site can be born out of the centre
+      const growEnd = consumeEnd;
+      const collapseEnd = Math.min(consumeEnd + 0.28, 0.99);
+      let rVis: number;
+      if (p <= growEnd) rVis = (p / growEnd) * maxRadius;
+      else if (p <= collapseEnd)
+        rVis = (1 - (p - growEnd) / (collapseEnd - growEnd)) * maxRadius;
+      else rVis = 0;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // black hole beneath the particles — grows to fill the whole screen
-      const rVis = Math.min(R, maxRadius);
+      // black hole beneath the particles
       if (rVis > 1) {
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rVis);
         g.addColorStop(0, "rgba(0,0,0,1)");
@@ -216,7 +236,7 @@ export function BlackHoleCanvas({
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [progress]);
+  }, [progress, consumeEnd]);
 
   return <canvas ref={canvasRef} className={`h-full w-full ${className}`} />;
 }

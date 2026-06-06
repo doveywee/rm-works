@@ -27,10 +27,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section
-      id="process"
-      className="relative overflow-hidden border-y border-line/60 bg-ink-soft/40 py-28"
-    >
+    <section id="process" className="relative overflow-hidden py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -41,10 +38,10 @@ export function Process() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <Reveal key={s.no} delay={i * 0.08}>
-              <div className="group h-full bg-ink p-7 transition-colors duration-300 hover:bg-surface">
+              <div className="group h-full rounded-2xl border border-line/50 bg-surface/40 p-7 transition-colors duration-300 hover:border-white/15 hover:bg-surface">
                 <span className="font-display text-sm font-medium text-fog">
                   {s.no}
                 </span>
