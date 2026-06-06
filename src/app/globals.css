@@ -1,26 +1,174 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---- Design tokens ---------------------------------------------------- */
+@theme {
+  --color-ink: #08080a;
+  --color-ink-soft: #0e0e12;
+  --color-surface: #131318;
+  --color-surface-2: #1a1a21;
+  --color-line: #26262f;
+  --color-mist: #b8b8c6;
+  --color-fog: #6f6f80;
+  --color-chalk: #f4f4f7;
+
+  --color-violet-glow: #8b5cf6;
+  --color-indigo-glow: #6366f1;
+  --color-cyan-glow: #22d3ee;
+  --color-accent: #7c6bff;
+
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow: 0 0 70px -24px rgba(255, 255, 255, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---- Base ------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1000px 700px at 15% -8%, rgba(255, 255, 255, 0.035), transparent 60%),
+    radial-gradient(700px 500px at 92% 4%, rgba(124, 107, 255, 0.03), transparent 55%),
+    var(--color-ink);
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34343f;
+}
+
+/* ---- Utilities -------------------------------------------------------- */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+}
+
+.gradient-text {
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #b6a8ff 30%,
+    #ffffff 50%,
+    #8fe6ff 70%,
+    #ffffff 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* prevent descenders (g, y) being clipped by background-clip:text */
+  padding-bottom: 0.12em;
+  animation: shimmer 9s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 220% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text {
+    animation: none;
+  }
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 100%);
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* CSS 3D cube (used in the "Immersive 3D" service detail) */
+.scene3d {
+  perspective: 600px;
+}
+.cube3d {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  transform-style: preserve-3d;
+  animation: cube-rot 12s linear infinite;
+}
+.cube3d__face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(124, 107, 255, 0.5);
+  background: rgba(124, 107, 255, 0.08);
+  box-shadow: inset 0 0 30px rgba(124, 107, 255, 0.15);
+}
+@keyframes cube-rot {
+  from {
+    transform: rotateX(-22deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-22deg) rotateY(360deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float-slow,
+  .cube3d {
+    animation: none;
+  }
 }
