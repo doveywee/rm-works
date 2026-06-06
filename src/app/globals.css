@@ -126,6 +126,21 @@ body {
   animation: marquee 32s linear infinite;
 }
 
+/* Spinning rim for the 2D black-hole landing circle */
+@keyframes bh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.bh-rim {
+  animation: bh-spin 16s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bh-rim {
+    animation: none;
+  }
+}
+
 /* CSS 3D cube (used in the "Immersive 3D" service detail) */
 .scene3d {
   perspective: 600px;

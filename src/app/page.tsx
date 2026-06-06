@@ -1,5 +1,5 @@
 import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/Hero";
+import { HeroStage } from "@/components/HeroStage";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { Services } from "@/components/Services";
 import { Templates } from "@/components/Templates";
@@ -9,6 +9,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CursorGlow } from "@/components/ui/CursorGlow";
+import { WarpIn } from "@/components/ui/WarpIn";
 
 export default function Home() {
   return (
@@ -18,9 +19,11 @@ export default function Home() {
       <Nav />
       <main className="relative">
         <div className="noise" aria-hidden />
-        <Hero />
-        <LogoMarquee />
-        <Services />
+        <HeroStage />
+        <WarpIn>
+          <LogoMarquee />
+          <Services />
+        </WarpIn>
         <Templates />
         <Process />
         <Pricing />
