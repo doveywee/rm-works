@@ -21,11 +21,11 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vantage Systems — Websites with gravity",
+  title: "Vantage Systems · Websites with gravity",
   description:
     "Vantage Systems is a premium web design studio. We engineer immersive, high-converting websites with motion, 3D, and obsessive craft.",
   openGraph: {
-    title: "Vantage Systems — Websites with gravity",
+    title: "Vantage Systems · Websites with gravity",
     description:
       "A premium web design studio engineering immersive, high-converting websites.",
     type: "website",

@@ -20,6 +20,14 @@
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
   --shadow-glow: 0 0 70px -24px rgba(255, 255, 255, 0.18);
+
+  /* Motion — strong custom curves (built-in CSS easings are too weak).
+     Overriding the bare-transition defaults upgrades every `transition-*`
+     utility across the site in one place. */
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 200ms;
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snappy: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ---- Base ------------------------------------------------------------- */

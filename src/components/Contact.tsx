@@ -27,15 +27,12 @@ export function Contact() {
 
         <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">
-              Start a project
-            </p>
-            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
               Let&apos;s build something with gravity.
             </h2>
             <p className="mt-5 max-w-md text-mist">
               Tell us about your project. We reply within one business day, and
-              the first call is a free strategy session — not a sales pitch.
+              the first call is a free strategy session, not a sales pitch.
             </p>
             <div className="mt-8 space-y-1 text-sm text-mist">
               <p>
@@ -61,7 +58,7 @@ export function Contact() {
                 Message sent
               </h3>
               <p className="mt-2 max-w-xs text-sm text-mist">
-                Thanks — we&apos;ll be in touch within one business day. Keep an
+                Thanks, we&apos;ll be in touch within one business day. Keep an
                 eye on your inbox.
               </p>
             </motion.div>
@@ -91,8 +88,8 @@ export function Contact() {
                   <option value="" disabled>
                     Select a range
                   </option>
-                  <option>$8k – $15k</option>
-                  <option>$15k – $30k</option>
+                  <option>$8k - $15k</option>
+                  <option>$15k - $30k</option>
                   <option>$30k+</option>
                   <option>Monthly retainer</option>
                 </select>
@@ -119,7 +116,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-chalk px-7 text-sm font-medium text-ink transition-all hover:bg-white disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-chalk px-7 text-sm font-medium text-ink transition-[transform,background-color,opacity] duration-200 hover:bg-white active:scale-[0.98] disabled:opacity-60 disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 {loading ? (
                   <>

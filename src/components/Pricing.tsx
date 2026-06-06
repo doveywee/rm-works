@@ -54,10 +54,7 @@ export function Pricing() {
     <section id="pricing" className="relative mx-auto max-w-6xl px-6 py-28">
       <Reveal>
         <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">
-            Pricing
-          </p>
-          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
+          <h2 className="font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
             Clear scope. Fixed price. No surprises.
           </h2>
         </div>

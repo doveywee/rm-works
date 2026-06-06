@@ -23,7 +23,7 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
     >
       <nav
-        className={`flex w-full max-w-6xl items-center justify-between rounded-full px-5 py-3 transition-all duration-300 ${
+        className={`flex w-full max-w-6xl items-center justify-between rounded-full px-5 py-3 transition-[background-color,box-shadow,border-color] duration-300 ${
           scrolled ? "glass shadow-glow" : "border border-transparent"
         }`}
       >
@@ -50,7 +50,7 @@ export function Nav() {
 
         <a
           href="#contact"
-          className="rounded-full bg-chalk px-5 py-2.5 text-sm font-medium text-ink transition-transform hover:scale-[1.03] active:scale-95"
+          className="rounded-full bg-chalk px-5 py-2.5 text-sm font-medium text-ink transition-[transform,background-color] duration-200 hover:bg-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           Start a project
         </a>

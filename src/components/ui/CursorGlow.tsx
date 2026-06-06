@@ -15,9 +15,10 @@ export function CursorGlow() {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!fine || reduce) return;
-    setEnabled(true);
 
     function move(e: MouseEvent) {
+      // enable on first real pointer move (avoids setState in the effect body)
+      setEnabled(true);
       x.set(e.clientX - 250);
       y.set(e.clientY - 250);
     }

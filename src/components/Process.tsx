@@ -38,22 +38,32 @@ export function Process() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s, i) => (
-            <Reveal key={s.no} delay={i * 0.08}>
-              <div className="group h-full rounded-2xl border border-line/50 bg-surface/40 p-7 transition-colors duration-300 hover:border-white/15 hover:bg-surface">
-                <span className="font-display text-sm font-medium text-fog">
-                  {s.no}
-                </span>
-                <h3 className="mt-6 font-display text-xl font-medium text-chalk">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  {s.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="relative mt-16">
+          {/* connecting rail behind the step nodes (desktop only) */}
+          <div
+            aria-hidden
+            className="absolute inset-x-6 top-5 hidden h-px bg-gradient-to-r from-transparent via-line to-transparent lg:block"
+          />
+
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <Reveal key={s.no} delay={i * 0.08}>
+                <div className="group relative">
+                  <div className="flex items-center gap-4 lg:block">
+                    <span className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line bg-ink font-display text-sm font-medium text-mist transition-colors duration-300 group-hover:border-accent/60 group-hover:text-accent">
+                      {s.no}
+                    </span>
+                    <h3 className="font-display text-xl font-medium text-chalk lg:mt-6">
+                      {s.title}
+                    </h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-mist lg:max-w-[15rem]">
+                    {s.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

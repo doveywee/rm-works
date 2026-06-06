@@ -37,7 +37,7 @@ const services: Service[] = [
     span: "md:col-span-2",
     accent: true,
     overview:
-      "We build identity from the ground up — a coherent system of color, type, motion, and art direction that makes your product instantly recognizable and impossible to confuse with anyone else.",
+      "We build identity from the ground up: a coherent system of color, type, motion, and art direction that makes your product instantly recognizable and impossible to confuse with anyone else.",
     points: [
       "Logo & wordmark systems",
       "Color & type foundations",
@@ -53,7 +53,7 @@ const services: Service[] = [
     span: "",
     accent: false,
     overview:
-      "Real-time 3D and custom shaders, rendered right in the browser. We build interactive scenes and generative visuals that turn a flat page into a moment people remember — without tanking performance.",
+      "Real-time 3D and custom shaders, rendered right in the browser. We build interactive scenes and generative visuals that turn a flat page into a moment people remember, without tanking performance.",
     points: [
       "Custom GLSL shaders",
       "Interactive product scenes",
@@ -85,7 +85,7 @@ const services: Service[] = [
     span: "",
     accent: false,
     overview:
-      "Speed is a feature — and a ranking factor. We obsess over load times, bundle size, and Core Web Vitals so your site feels instant on every device and network.",
+      "Speed is a feature, and a ranking factor. We obsess over load times, bundle size, and Core Web Vitals so your site feels instant on every device and network.",
     points: [
       "Sub-second load times",
       "95+ Lighthouse scores",
@@ -117,7 +117,7 @@ const services: Service[] = [
     span: "md:col-span-2",
     accent: true,
     overview:
-      "Every section earns its place. We design the narrative, hierarchy, and micro-interactions that guide visitors down the funnel — then test relentlessly to push conversion higher.",
+      "Every section earns its place. We design the narrative, hierarchy, and micro-interactions that guide visitors down the funnel, then test relentlessly to push conversion higher.",
     points: [
       "Narrative & hierarchy",
       "Funnel & CTA design",
@@ -247,7 +247,7 @@ function ServiceVisual({ id }: { id: Id }) {
           <div className="rounded-xl border border-line bg-ink p-4">
             <div className="text-xs text-fog">vantagesystems.com › services</div>
             <div className="mt-1 font-display text-base text-[#8fe6ff]">
-              Premium Web Design Studio — Vantage Systems
+              Premium Web Design Studio · Vantage Systems
             </div>
             <div className="mt-1 space-y-1">
               <span className="block h-1.5 w-full rounded-full bg-white/12" />
@@ -366,7 +366,7 @@ export function Services() {
               <a
                 href="#contact"
                 onClick={() => setSelected(null)}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-chalk px-6 text-sm font-medium text-ink transition-colors hover:bg-white"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-chalk px-6 text-sm font-medium text-ink transition-[transform,background-color] duration-200 hover:bg-white active:scale-[0.98]"
               >
                 Talk to us about this →
               </a>

@@ -40,6 +40,7 @@ export function MagneticButton({
       onMouseMove={onMove}
       onMouseLeave={() => setPos({ x: 0, y: 0 })}
       animate={{ x: pos.x, y: pos.y }}
+      whileTap={reduce ? undefined : { scale: 0.97 }}
       transition={{ type: "spring", stiffness: 120, damping: 22, mass: 0.5 }}
       className={`${base} ${styles} ${className}`}
     >

@@ -48,7 +48,7 @@ const templates: Template[] = [
     blurb:
       "A gallery-led portfolio for designers and studios with smooth lightbox transitions.",
     overview:
-      "Folio puts the work first. A masonry gallery and image-led case studies let the projects speak, while subtle motion and a refined type system keep the focus where it belongs — on what you made.",
+      "Folio puts the work first. A masonry gallery and image-led case studies let the projects speak, while subtle motion and a refined type system keep the focus where it belongs: on what you made.",
     pages: "Home · Work · Case study · About",
     features: [
       "Image-first case studies",
@@ -65,7 +65,7 @@ const templates: Template[] = [
     blurb:
       "A headless storefront with product grid, quick-add cart, search, and one-page checkout.",
     overview:
-      "Mercer is a fast, headless storefront designed to convert. Shoppers can browse a clean product grid, quick-add to cart, search collections, and check out on a single streamlined page — no friction, no drop-off.",
+      "Mercer is a fast, headless storefront designed to convert. Shoppers can browse a clean product grid, quick-add to cart, search collections, and check out on a single streamlined page. No friction, no drop-off.",
     pages: "Shop · Product · Cart · Checkout",
     features: [
       "Product grid with quick add",
@@ -97,7 +97,7 @@ const templates: Template[] = [
     name: "Ledger",
     category: "Fintech · App",
     blurb:
-      "Marketing site plus a dashboard UI kit — stat cards, charts, and tables for finance products.",
+      "Marketing site plus a dashboard UI kit: stat cards, charts, and tables for finance products.",
     overview:
       "Ledger pairs a trustworthy marketing site with a full dashboard UI kit. Stat cards, charts, and data tables come ready to wire into your app, so design and product stay perfectly in sync.",
     pages: "Home · Dashboard · Reports · Pricing",
@@ -390,20 +390,13 @@ export function Templates() {
   return (
     <section id="templates" className="relative mx-auto max-w-6xl px-6 py-28">
       <Reveal>
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">
-              Templates
-            </p>
-            <h2 className="mt-4 max-w-xl font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
-              Start from a template we crafted.
-            </h2>
-          </div>
-          <p className="max-w-xs text-sm text-mist">
-            Production-ready templates we design and build — each one a complete,
-            multi-page site. Click any to explore it in detail.
-          </p>
-        </div>
+        <h2 className="max-w-2xl font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
+          Start from a template we crafted.
+        </h2>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-mist">
+          Production-ready templates we design and build, each one a complete,
+          multi-page site. Click any to explore it in detail.
+        </p>
       </Reveal>
 
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -465,14 +458,14 @@ export function Templates() {
                 <a
                   href="#contact"
                   onClick={() => setSelected(null)}
-                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-chalk px-6 text-sm font-medium text-ink transition-colors hover:bg-white"
+                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-chalk px-6 text-sm font-medium text-ink transition-[transform,background-color] duration-200 hover:bg-white active:scale-[0.98]"
                 >
                   Start with {selected.name} <ArrowUpRight size={16} />
                 </a>
                 <button
                   type="button"
                   onClick={() => setSelected(null)}
-                  className="inline-flex h-12 items-center justify-center rounded-full border border-line px-6 text-sm font-medium text-chalk transition-colors hover:bg-white/5"
+                  className="inline-flex h-12 items-center justify-center rounded-full border border-line px-6 text-sm font-medium text-chalk transition-[transform,background-color] duration-200 hover:bg-white/5 active:scale-[0.98]"
                 >
                   Back to templates
                 </button>
