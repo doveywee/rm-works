@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   motion,
   useReducedMotion,
@@ -61,13 +61,20 @@ export function HeroReveal({ children }: { children: ReactNode }) {
     target: contentRef,
     offset: ["start end", "start start"],
   });
+  // once the hole has consumed the screen, latch the reveal so the site's tiles
+  // light up one by one (a one-shot sequence, not tied to scrub position)
+  const [revealed, setRevealed] = useState(false);
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     progressRef.current = v;
+    if (v > 0.46) setRevealed(true);
   });
+  useEffect(() => {
+    if (scrollYProgress.get() > 0.46) setRevealed(true);
+  }, [scrollYProgress]);
 
   // black hole: hidden at rest, fades in on first scroll, grows to engulf, then fades
   const holeScale = useTransform(scrollYProgress, [0, 0.45], [0.04, 1]);
-  const holeOpacity = useTransform(scrollYProgress, [0, 0.06, 0.45, 0.78], [0, 1, 1, 0]);
+  const holeOpacity = useTransform(scrollYProgress, [0, 0.06, 0.45, 0.82], [0, 1, 1, 0]);
 
   // whole headline converges toward the hole's centre while words warp in
   const hlScale = useTransform(scrollYProgress, [0, 0.42], [1, 0.25]);
@@ -75,11 +82,6 @@ export function HeroReveal({ children }: { children: ReactNode }) {
 
   const domOpacity = useTransform(scrollYProgress, [0.02, 0.3], [1, 0]);
   const domScale = useTransform(scrollYProgress, [0, 0.34], [1, 0.55]);
-  const flash = useTransform(scrollYProgress, [0.4, 0.52, 0.66], [0, 0.5, 0]);
-
-  // the site is born out of the centre: grows from the middle and fades in
-  const siteScale = useTransform(scrollYProgress, [0.48, 0.96], [0.4, 1]);
-  const siteOpacity = useTransform(scrollYProgress, [0.46, 0.66], [0, 1]);
 
   const lower = (
     <>
@@ -157,24 +159,14 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         >
           {lower}
         </motion.div>
-
-        {/* collapse flash */}
-        <motion.div
-          style={{ opacity: flash }}
-          className="pointer-events-none absolute inset-0 z-30 bg-[radial-gradient(circle_at_center,#ffffff_0%,rgba(249,115,22,0.4)_18%,transparent_50%)]"
-        />
       </div>
 
-      {/* the real site — grows out of the centre over the page bg, then each
-          section pops in on its own. outer div is scroll-tracked; the transform
-          lives on the inner one so it doesn't feed back into the measurement */}
+      {/* the real site — appears in place where the hole was; once the hole has
+          consumed the screen, each tile lights up in turn (dim -> bright) */}
       <div ref={contentRef} className="relative z-10">
-        <motion.div
-          style={{ scale: siteScale, opacity: siteOpacity }}
-          className="origin-top"
-        >
+        <div className={`site-reveal ${revealed ? "is-revealed" : ""}`}>
           {children}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

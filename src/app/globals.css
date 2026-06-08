@@ -125,6 +125,52 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Hero reveal — site tiles light up one by one, dim -> bright, in place */
+.site-reveal > * {
+  opacity: 0;
+}
+.site-reveal.is-revealed > * {
+  animation: tile-light 0.85s var(--ease-fluid) both;
+}
+.site-reveal.is-revealed > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.site-reveal.is-revealed > *:nth-child(2) {
+  animation-delay: 0.24s;
+}
+.site-reveal.is-revealed > *:nth-child(3) {
+  animation-delay: 0.43s;
+}
+.site-reveal.is-revealed > *:nth-child(4) {
+  animation-delay: 0.62s;
+}
+.site-reveal.is-revealed > *:nth-child(5) {
+  animation-delay: 0.81s;
+}
+.site-reveal.is-revealed > *:nth-child(6) {
+  animation-delay: 1s;
+}
+
+@keyframes tile-light {
+  from {
+    opacity: 0;
+    filter: brightness(0.25);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-reveal > *,
+  .site-reveal.is-revealed > * {
+    opacity: 1;
+    filter: none;
+    animation: none;
+  }
+}
+
 /* Marquee */
 @keyframes marquee {
   from {
