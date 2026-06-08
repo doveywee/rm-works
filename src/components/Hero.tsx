@@ -91,7 +91,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.24, ease }}
           className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-mist sm:text-lg text-balance"
         >
-          Vantage Systems is a design &amp; engineering studio building immersive,
+          RM Works is a design &amp; engineering studio building immersive,
           high-converting websites. Motion, 3D, and obsessive craft — shipped fast.
         </motion.p>
 

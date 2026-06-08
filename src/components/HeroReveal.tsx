@@ -106,7 +106,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
           id="top"
           className="relative flex min-h-dvh flex-col items-center justify-center gap-7 overflow-hidden px-6 pt-28 text-center"
         >
-          <h1 className="font-headline text-5xl font-bold leading-[1.02] tracking-tight text-chalk sm:text-7xl text-balance">
+          <h1 className="font-headline text-5xl font-extrabold leading-[1.02] tracking-tight text-chalk sm:text-7xl text-balance">
             Websites with <span className="gradient-text">gravity.</span>
           </h1>
           <div className="max-w-3xl">{lower}</div>
@@ -133,7 +133,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         {/* headline — real type, each word warped into the hole */}
         <motion.h1
           style={{ scale: hlScale, rotate: hlRotate }}
-          className="absolute left-1/2 top-1/2 z-30 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 px-6 text-center font-headline text-5xl font-bold leading-[1.04] tracking-tight text-chalk sm:text-7xl md:text-8xl"
+          className="absolute left-1/2 top-1/2 z-30 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 px-6 text-center font-headline text-5xl font-extrabold leading-[1.04] tracking-tight text-chalk sm:text-7xl md:text-8xl"
         >
           <span className="flex flex-wrap items-baseline justify-center gap-x-[0.28em]">
             <WarpWord progress={scrollYProgress} index={0}>

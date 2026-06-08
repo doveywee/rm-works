@@ -245,9 +245,9 @@ function ServiceVisual({ id }: { id: Id }) {
       return (
         <div className="space-y-3">
           <div className="rounded-xl border border-line bg-ink p-4">
-            <div className="text-xs text-fog">vantagesystems.com › services</div>
+            <div className="text-xs text-fog">rmworks.com › services</div>
             <div className="mt-1 font-display text-base text-[#fb923c]">
-              Premium Web Design Studio · Vantage Systems
+              Premium Web Design Studio · RM Works
             </div>
             <div className="mt-1 space-y-1">
               <span className="block h-1.5 w-full rounded-full bg-white/12" />
@@ -272,7 +272,7 @@ function ServiceVisual({ id }: { id: Id }) {
               <span className="w-20 text-xs text-fog">{row.l}</span>
               <div className="h-7 flex-1 rounded-md bg-white/[0.04]">
                 <div
-                  className="flex h-full items-center justify-end rounded-md bg-gradient-to-r from-accent/40 to-accent/80 pr-2 text-[10px] font-medium text-white"
+                  className="flex h-full min-w-[2.5rem] items-center justify-center rounded-md bg-gradient-to-r from-accent/40 to-accent/80 px-1 text-[11px] font-semibold leading-none text-white"
                   style={{ width: row.w, opacity: 1 - i * 0.12 }}
                 >
                   {row.v}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -8,6 +8,16 @@ export function Contact() {
   const reduce = useReducedMotion();
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pkg, setPkg] = useState("");
+
+  // auto-fill the package when a card in the Pricing section is chosen
+  useEffect(() => {
+    function onSelect(e: Event) {
+      setPkg((e as CustomEvent<string>).detail);
+    }
+    window.addEventListener("select-package", onSelect);
+    return () => window.removeEventListener("select-package", onSelect);
+  }, []);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,10 +46,10 @@ export function Contact() {
             </p>
             <div className="mt-8 space-y-1 text-sm text-mist">
               <p>
-                <span className="text-fog">Email</span> · studio@vantagesystems.com
+                <span className="text-fog">Email</span> · studio@rmworks.com
               </p>
               <p>
-                <span className="text-fog">Booking</span> · cal.com/vantage
+                <span className="text-fog">Booking</span> · cal.com/rmworks
               </p>
             </div>
           </div>
@@ -74,24 +84,24 @@ export function Contact() {
               />
               <div className="grid gap-2">
                 <label
-                  htmlFor="budget"
+                  htmlFor="package"
                   className="text-sm font-medium text-chalk"
                 >
-                  Budget range
+                  Package selection
                 </label>
                 <select
-                  id="budget"
-                  name="budget"
+                  id="package"
+                  name="package"
                   className="h-12 rounded-xl border border-line bg-ink px-4 text-sm text-chalk outline-none transition-colors focus:border-white/40 focus:ring-2 focus:ring-white/15"
-                  defaultValue=""
+                  value={pkg}
+                  onChange={(e) => setPkg(e.target.value)}
                 >
                   <option value="" disabled>
-                    Select a range
+                    Select a package
                   </option>
-                  <option>$8k - $15k</option>
-                  <option>$15k - $30k</option>
-                  <option>$30k+</option>
-                  <option>Monthly retainer</option>
+                  <option>Website Design</option>
+                  <option>Management Package</option>
+                  <option>Creative Package</option>
                 </select>
               </div>
               <div className="grid gap-2">

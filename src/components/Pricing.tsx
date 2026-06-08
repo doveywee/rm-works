@@ -6,44 +6,36 @@ import { MagneticButton } from "./ui/MagneticButton";
 
 const tiers = [
   {
-    name: "Launch",
-    price: "$8k",
-    cadence: "fixed project",
-    blurb: "For founders who need a sharp, fast marketing site.",
+    name: "Website Design",
+    price: "$1,000+",
+    cadence: "one-time",
+    blurb: "A custom website design, delivered ready to launch.",
     features: [
-      "Up to 5 pages",
-      "Custom design system",
-      "CMS + analytics",
-      "Motion & micro-interactions",
-      "2-week turnaround",
+      "Custom website design",
+      "Requires self-hosting",
     ],
     featured: false,
   },
   {
-    name: "Signature",
-    price: "$24k",
-    cadence: "fixed project",
-    blurb: "Our flagship: immersive, 3D, and built to convert.",
+    name: "Management Package",
+    price: "$750",
+    cadence: "+ hosting",
+    blurb: "Design plus ongoing support and revisions.",
     features: [
-      "Everything in Launch",
-      "3D hero & interactive scenes",
-      "Custom shaders & art direction",
-      "Conversion experiments",
-      "Priority 4-week build",
+      "Includes web support",
+      "10 revisions",
     ],
     featured: true,
   },
   {
-    name: "Partner",
-    price: "Retainer",
-    cadence: "from $6k / mo",
-    blurb: "An embedded design + eng team, on tap every month.",
+    name: "Creative Package",
+    price: "TBD",
+    cadence: "price to be determined",
+    blurb: "Our most customizable tier for complex, bespoke builds.",
     features: [
-      "Dedicated studio team",
-      "Continuous design & build",
-      "A/B testing & growth",
-      "Quarterly strategy",
-      "Slack + same-day support",
+      "Includes Management Package",
+      "Unlimited revisions",
+      "Complex, highly customizable designs",
     ],
     featured: false,
   },
@@ -55,7 +47,7 @@ export function Pricing() {
       <Reveal>
         <div className="text-center">
           <h2 className="font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
-            Clear scope. Fixed price. No surprises.
+            Three ways to work together.
           </h2>
         </div>
       </Reveal>
@@ -100,6 +92,11 @@ export function Pricing() {
                   href="#contact"
                   variant={t.featured ? "primary" : "ghost"}
                   className="w-full"
+                  onClick={() =>
+                    window.dispatchEvent(
+                      new CustomEvent("select-package", { detail: t.name })
+                    )
+                  }
                 >
                   Choose {t.name}
                 </MagneticButton>
@@ -108,6 +105,12 @@ export function Pricing() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal>
+        <p className="mt-10 text-center text-sm text-fog">
+          Prices are subject to change depending on client specifications.
+        </p>
+      </Reveal>
     </section>
   );
 }
