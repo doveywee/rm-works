@@ -42,7 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${headline.variable} ${sans.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-ink text-mist font-sans antialiased selection:bg-violet-500/30 selection:text-white">
+      <body className="min-h-full bg-ink text-mist font-sans antialiased selection:bg-orange-500/30 selection:text-white">
         {children}
       </body>
     </html>

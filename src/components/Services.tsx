@@ -179,7 +179,7 @@ function ServiceVisual({ id }: { id: Id }) {
           </div>
           <div className="flex flex-1 flex-col gap-2">
             <div className="flex gap-2">
-              {["#7c6bff", "#22d3ee", "#f4f4f7", "#6f6f80", "#131318"].map(
+              {["#f97316", "#fb923c", "#f5f0ea", "#7a7068", "#191919"].map(
                 (c) => (
                   <span
                     key={c}
@@ -221,11 +221,11 @@ function ServiceVisual({ id }: { id: Id }) {
           <code className="font-mono">
             <span className="text-fog">{"// type-safe by default"}</span>
             {"\n"}
-            <span className="text-[#b6a8ff]">export function</span>{" "}
-            <span className="text-[#8fe6ff]">Hero</span>
+            <span className="text-[#fed7aa]">export function</span>{" "}
+            <span className="text-[#fb923c]">Hero</span>
             <span className="text-mist">{"({ title }: Props) {"}</span>
             {"\n  "}
-            <span className="text-[#b6a8ff]">return</span>{" "}
+            <span className="text-[#fed7aa]">return</span>{" "}
             <span className="text-mist">{"<h1>{title}</h1>;"}</span>
             {"\n"}
             <span className="text-mist">{"}"}</span>
@@ -246,7 +246,7 @@ function ServiceVisual({ id }: { id: Id }) {
         <div className="space-y-3">
           <div className="rounded-xl border border-line bg-ink p-4">
             <div className="text-xs text-fog">vantagesystems.com › services</div>
-            <div className="mt-1 font-display text-base text-[#8fe6ff]">
+            <div className="mt-1 font-display text-base text-[#fb923c]">
               Premium Web Design Studio · Vantage Systems
             </div>
             <div className="mt-1 space-y-1">

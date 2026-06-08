@@ -12,7 +12,7 @@ import {
 import { MagneticButton } from "./ui/MagneticButton";
 
 const HOLE_BG =
-  "radial-gradient(circle, #000 0%, #000 60%, rgba(12,10,28,0.92) 80%, rgba(124,107,255,0) 100%)";
+  "radial-gradient(circle, #000 0%, #000 60%, rgba(13,13,13,0.92) 80%, rgba(249,115,22,0) 100%)";
 
 /** A single headline word that gets torn off and spiralled into the hole. */
 function WarpWord({
@@ -65,9 +65,9 @@ export function HeroReveal({ children }: { children: ReactNode }) {
     progressRef.current = v;
   });
 
-  // black hole: a singularity seed grows to engulf, then fades (never closes in)
+  // black hole: hidden at rest, fades in on first scroll, grows to engulf, then fades
   const holeScale = useTransform(scrollYProgress, [0, 0.45], [0.04, 1]);
-  const holeOpacity = useTransform(scrollYProgress, [0.45, 0.78], [1, 0]);
+  const holeOpacity = useTransform(scrollYProgress, [0, 0.06, 0.45, 0.78], [0, 1, 1, 0]);
 
   // whole headline converges toward the hole's centre while words warp in
   const hlScale = useTransform(scrollYProgress, [0, 0.42], [1, 0.25]);
@@ -80,13 +80,6 @@ export function HeroReveal({ children }: { children: ReactNode }) {
   // the site is born out of the centre: grows from the middle and fades in
   const siteScale = useTransform(scrollYProgress, [0.48, 0.96], [0.4, 1]);
   const siteOpacity = useTransform(scrollYProgress, [0.46, 0.66], [0, 1]);
-
-  const badge = (
-    <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-mist">
-      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-glow" />
-      Taking on 3 new partners for Q3
-    </span>
-  );
 
   const lower = (
     <>
@@ -113,7 +106,6 @@ export function HeroReveal({ children }: { children: ReactNode }) {
           id="top"
           className="relative flex min-h-dvh flex-col items-center justify-center gap-7 overflow-hidden px-6 pt-28 text-center"
         >
-          {badge}
           <h1 className="font-headline text-5xl font-bold leading-[1.02] tracking-tight text-chalk sm:text-7xl text-balance">
             Websites with <span className="gradient-text">gravity.</span>
           </h1>
@@ -137,14 +129,6 @@ export function HeroReveal({ children }: { children: ReactNode }) {
           style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
           className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full"
         />
-
-        {/* badge */}
-        <motion.div
-          style={{ opacity: domOpacity, scale: domScale }}
-          className="absolute left-1/2 top-[22%] z-30 -translate-x-1/2"
-        >
-          {badge}
-        </motion.div>
 
         {/* headline — real type, each word warped into the hole */}
         <motion.h1
@@ -177,7 +161,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         {/* collapse flash */}
         <motion.div
           style={{ opacity: flash }}
-          className="pointer-events-none absolute inset-0 z-30 bg-[radial-gradient(circle_at_center,#ffffff_0%,rgba(168,140,255,0.4)_18%,transparent_50%)]"
+          className="pointer-events-none absolute inset-0 z-30 bg-[radial-gradient(circle_at_center,#ffffff_0%,rgba(249,115,22,0.4)_18%,transparent_50%)]"
         />
       </div>
 
