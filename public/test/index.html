@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Test - Professional services that move your business forward.">
+  <title>Test</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+  <style>
+    /* Design tokens */
+    :root {
+      --a: #0369a1;        /* accent - sky-700 */
+      --ink: #0f172a;
+      --body: #334155;
+      --muted: #64748b;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --r: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --a: #38bdf8;
+        --ink: #f1f5f9;
+        --body: #cbd5e1;
+        --muted: #94a3b8;
+        --bg: #020617;
+        --surface: #0f172a;
+        --border: #1e293b;
+      }
+      body { background: var(--bg); }
+      #site-nav { background: var(--bg) !important; }
+      .field { background: var(--surface) !important; color: var(--ink) !important; }
+      .btn-fill { color: #0c1a2e; }
+      .btn-outline { border-color: #334155; }
+      .btn-outline:hover { border-color: var(--ink); }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Scroll reveal */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      .d1 { transition-delay: 0.1s; }
+      .d2 { transition-delay: 0.2s; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.675rem 1.375rem;
+      border-radius: var(--r);
+      cursor: pointer;
+      white-space: nowrap;
+      line-height: 1;
+      transition: opacity 0.15s ease, transform 0.12s ease, border-color 0.15s ease;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-fill {
+      background: var(--a);
+      color: #fff;
+      border: none;
+    }
+    .btn-fill:hover { opacity: 0.86; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* Nav */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+    }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover { color: var(--ink); }
+
+    /* Inputs */
+    .field {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.875rem;
+      font-family: inherit;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .field::placeholder { color: var(--muted); }
+    .field:focus {
+      outline: none;
+      border-color: var(--a);
+      box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.12);
+    }
+
+    /* Service rows (divider list - avoids 3-equal-cards anti-pattern) */
+    .svc-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .svc-row {
+        grid-template-columns: 180px 1fr;
+        align-items: start;
+        gap: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav id="site-nav">
+  <div class="wrap" style="height:64px; display:flex; align-items:center; justify-content:space-between;">
+    <a href="#" style="font-size:1.2rem; font-weight:900; letter-spacing:-0.025em; color:var(--ink);">Test</a>
+    <div class="hidden md:flex items-center" style="gap:2rem;">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
+    <a class="btn btn-fill" href="#contact">Start a project</a>
+  </div>
+</nav>
+
+<!-- HERO - asymmetric split: text left, image right -->
+<section style="min-height:calc(100dvh - 64px); background:var(--bg); display:flex; align-items:center;">
+  <div class="wrap" style="width:100%; padding-top:4rem; padding-bottom:4rem;">
+    <div class="grid md:grid-cols-2 items-center" style="gap:3rem;">
+      <div>
+        <h1 class="reveal" style="font-size:clamp(2.5rem, 5vw, 3.75rem); font-weight:900; line-height:1.06; letter-spacing:-0.03em;">
+          Work that<br>moves things<br><span style="color:var(--a);">forward.</span>
+        </h1>
+        <p class="reveal d1" style="margin-top:1.5rem; font-size:1.0625rem; line-height:1.75; color:var(--body); max-width:38ch;">
+          Test helps businesses clarify goals, cut through complexity, and grow with confidence.
+        </p>
+        <div class="reveal d2" style="margin-top:2rem; display:flex; flex-wrap:wrap; gap:0.75rem;">
+          <a class="btn btn-fill" href="#contact">Start a project</a>
+          <a class="btn btn-outline" href="#services">See what we do</a>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <img src="https://picsum.photos/seed/professional-office-bright/640/480"
+             alt="Professional team at work"
+             style="width:100%; border-radius:var(--r); object-fit:cover; aspect-ratio:4/3; display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT - asymmetric 2+3 grid with stats left, prose right -->
+<section id="about" style="padding:6rem 0; background:var(--surface); border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="grid md:grid-cols-5 items-start" style="gap:3rem;">
+      <div class="md:col-span-2 reveal" style="display:flex; flex-direction:column; gap:2.5rem;">
+        <div>
+          <div style="font-size:5rem; font-weight:900; line-height:1; letter-spacing:-0.04em; color:var(--a);">12+</div>
+          <div style="margin-top:0.4rem; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted);">Years in business</div>
+        </div>
+        <div>
+          <div style="font-size:5rem; font-weight:900; line-height:1; letter-spacing:-0.04em; color:var(--a);">340</div>
+          <div style="margin-top:0.4rem; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted);">Projects delivered</div>
+        </div>
+      </div>
+      <div class="md:col-span-3 reveal d1">
+        <h2 style="font-size:2rem; font-weight:800; letter-spacing:-0.025em; line-height:1.2;">Built on craft,<br>focused on results.</h2>
+        <p style="margin-top:1.25rem; color:var(--body); line-height:1.8; font-size:0.9375rem;">
+          Test was founded on a simple idea: great work comes from genuine understanding. We take time to learn your business before proposing solutions, and we stay accountable long after the engagement ends.
+        </p>
+        <p style="margin-top:0.9rem; color:var(--body); line-height:1.8; font-size:0.9375rem;">
+          Our team brings together expertise in strategy, design, and technology to deliver outcomes that last.
+        </p>
+        <a class="btn btn-fill" href="#contact" style="margin-top:2rem; display:inline-block;">Start a project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES - divider list layout (not 3-column cards) -->
+<section id="services" style="padding:6rem 0; background:var(--bg);">
+  <div class="wrap">
+    <h2 class="reveal" style="font-size:2rem; font-weight:800; letter-spacing:-0.025em; margin-bottom:3rem;">What we do</h2>
+    <div style="border-top:1px solid var(--border);">
+      <div class="svc-row reveal">
+        <div style="font-size:1.0625rem; font-weight:700;">Strategy</div>
+        <p style="color:var(--body); font-size:0.9375rem; line-height:1.8;">Clear thinking before action. We help you identify where you are, where you want to go, and the most direct path between. Market research, competitive analysis, and roadmapping included.</p>
+      </div>
+      <div class="svc-row reveal d1">
+        <div style="font-size:1.0625rem; font-weight:700;">Design</div>
+        <p style="color:var(--body); font-size:0.9375rem; line-height:1.8;">Interfaces, brands, and systems that communicate precisely. From initial concept through polished delivery, every design decision earns its place.</p>
+      </div>
+      <div class="svc-row reveal d2">
+        <div style="font-size:1.0625rem; font-weight:700;">Development</div>
+        <p style="color:var(--body); font-size:0.9375rem; line-height:1.8;">Robust, maintainable code that scales with your ambitions. Web applications, integrations, and custom tooling built for real-world use.</p>
+      </div>
+      <div class="svc-row reveal d1">
+        <div style="font-size:1.0625rem; font-weight:700;">Advisory</div>
+        <p style="color:var(--body); font-size:0.9375rem; line-height:1.8;">Ongoing guidance for leaders who want a trusted perspective on technology, operations, and growth. Flexible retainers, no lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:6rem 0; background:var(--surface); border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="grid md:grid-cols-5 items-start" style="gap:4rem;">
+      <!-- Info column -->
+      <div class="md:col-span-2 reveal">
+        <h2 style="font-size:2rem; font-weight:800; letter-spacing:-0.025em; line-height:1.2;">Start a project</h2>
+        <p style="margin-top:1rem; color:var(--body); font-size:0.9375rem; line-height:1.8;">
+          Tell us what you're working on. We typically respond within one business day.
+        </p>
+        <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <i class="ph ph-envelope" style="font-size:1.25rem; color:var(--a);"></i>
+            <span style="font-size:0.875rem; color:var(--muted);">hello@test.com</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <i class="ph ph-phone" style="font-size:1.25rem; color:var(--a);"></i>
+            <span style="font-size:0.875rem; color:var(--muted);">+1 (312) 847-2190</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <i class="ph ph-map-pin" style="font-size:1.25rem; color:var(--a);"></i>
+            <span style="font-size:0.875rem; color:var(--muted);">Chicago, IL</span>
+          </div>
+        </div>
+      </div>
+      <!-- Form -->
+      <form class="md:col-span-3 reveal d1" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="grid md:grid-cols-2" style="gap:1rem;">
+          <div style="display:flex; flex-direction:column; gap:0.4rem;">
+            <label style="font-size:0.8125rem; font-weight:600;" for="c-name">Name</label>
+            <input class="field" id="c-name" type="text" placeholder="Your name" required>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.4rem;">
+            <label style="font-size:0.8125rem; font-weight:600;" for="c-email">Email</label>
+            <input class="field" id="c-email" type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div style="margin-top:1rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <label style="font-size:0.8125rem; font-weight:600;" for="c-msg">Message</label>
+          <textarea class="field" id="c-msg" rows="5" placeholder="What are you working on?" required style="resize:none;"></textarea>
+        </div>
+        <div style="margin-top:1.25rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <button class="btn btn-fill" type="submit" id="submit-btn">Send message</button>
+          <span id="form-ok" style="display:none; font-size:0.875rem; font-weight:600; color:#16a34a; align-items:center; gap:0.4rem;">
+            <i class="ph ph-check-circle"></i> Message sent. We'll be in touch.
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid var(--border); padding:1.75rem 0; background:var(--bg);">
+  <div class="wrap" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+    <span style="font-size:1.1rem; font-weight:900; letter-spacing:-0.025em;">Test</span>
+    <span style="font-size:0.8125rem; color:var(--muted);">&copy; 2026 Test. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal via IntersectionObserver (no window scroll listener)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    // Hero section has no id - trigger with staggered timeout
+    if (!el.closest('[id]')) {
+      const base = 80;
+      const extra = el.classList.contains('d1') ? 100 : el.classList.contains('d2') ? 200 : 0;
+      setTimeout(() => el.classList.add('in'), base + extra);
+    } else {
+      io.observe(el);
+    }
+  });
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '0.6';
+    btn.disabled = true;
+    setTimeout(() => {
+      const ok = document.getElementById('form-ok');
+      ok.style.display = 'inline-flex';
+      btn.style.display = 'none';
+      document.getElementById('contact-form').reset();
+    }, 900);
+  }
+</script>
+
+</body>
+</html>
