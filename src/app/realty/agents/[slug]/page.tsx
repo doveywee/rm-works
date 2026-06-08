@@ -20,6 +20,7 @@ import {
   PropertyCard,
   AgentContactForm,
   TestimonialCard,
+  Avatar,
   Button,
   Instagram,
   Linkedin,
@@ -62,9 +63,22 @@ export default async function AgentPage({
             <ArrowLeft size={16} /> Back to team
           </Link>
           <div className="grid md:grid-cols-[300px_1fr] gap-10 items-center">
-            <div className="rounded-2xl overflow-hidden aspect-[4/5] bg-[#16263E] ring-1 ring-white/10 max-w-[300px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={a.photo} alt={a.name} className="w-full h-full object-cover" />
+            <div className="relative overflow-hidden rounded-2xl bg-[#16263E] ring-1 ring-white/10 max-w-[300px] w-full aspect-[4/5] grid place-items-center p-8 text-center">
+              <div
+                className="absolute inset-0 opacity-[0.18]"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 50% 12%, #C9A96A 0, transparent 60%)",
+                }}
+              />
+              <div className="relative">
+                <Avatar name={a.name} size={124} className="mx-auto ring-2 ring-[#C9A96A]/50" />
+                <div className={cx(serifCls, "mt-5 text-[22px] font-semibold text-white")}>
+                  {a.name}
+                </div>
+                <div className="mt-2 text-[13px] text-[#C9A96A]">{a.sales}</div>
+                <div className="mt-1 text-[12px] text-white/50">{a.license}</div>
+              </div>
             </div>
             <div>
               <div className="text-[12px] font-semibold tracking-[0.2em] uppercase text-[#C9A96A]">

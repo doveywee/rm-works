@@ -35,6 +35,7 @@ import {
   company,
   agents,
   formatPrice,
+  pricePerSqft,
   type Listing,
   type Agent,
   type Neighborhood,
@@ -282,6 +283,38 @@ export function Stars({ n = 5, className }: { n?: number; className?: string }) 
           className={i < n ? "fill-[#B4924E] text-[#B4924E]" : "text-[#d8cfbe]"}
         />
       ))}
+    </div>
+  );
+}
+
+/* ---- Monogram avatar (no portraits) -------------------------------------- */
+export function Avatar({
+  name,
+  size = 64,
+  className,
+}: {
+  name: string;
+  size?: number;
+  className?: string;
+}) {
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  return (
+    <div
+      style={{ width: size, height: size, fontSize: Math.round(size * 0.36) }}
+      className={cx(
+        "shrink-0 grid place-items-center rounded-full bg-[#16263E] text-[#C9A96A] font-semibold",
+        serifCls,
+        className,
+      )}
+      aria-hidden
+    >
+      {initials}
     </div>
   );
 }
@@ -575,7 +608,7 @@ export function PropertyCard({ l }: { l: Listing }) {
           {l.address}
         </Link>
         <div className="text-[13px] text-[#8a8170] mb-4">
-          {l.city}, CA · {l.neighborhood}
+          {l.city}, CA · {l.type} · ${pricePerSqft(l)}/sqft
         </div>
 
         <div className="flex items-center gap-4 text-[13px] text-[#3a3630] border-t border-[#EFE9DC] pt-3 mt-auto">
@@ -609,24 +642,32 @@ export function PropertyCard({ l }: { l: Listing }) {
 
 export function AgentCard({ a }: { a: Agent }) {
   return (
-    <div className="group bg-white border border-[#EAE3D6] rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <Link href={`/realty/agents/${a.slug}`} className="block aspect-[4/5] overflow-hidden bg-[#ECE4D6]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={a.photo}
-          alt={a.name}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+    <div className="group bg-white border border-[#EAE3D6] rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+      <Link
+        href={`/realty/agents/${a.slug}`}
+        className="relative block bg-[#0E1C30] px-6 pt-7 pb-6 overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 opacity-[0.16]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 85% 0%, #C9A96A 0, transparent 55%)",
+          }}
         />
-      </Link>
-      <div className="p-5">
-        <h3 className={cx(serifCls, "text-[22px] font-semibold text-[#16181D]")}>
-          {a.name}
-        </h3>
-        <div className="text-[12.5px] font-semibold tracking-[0.12em] uppercase text-[#B4924E] mt-0.5">
-          {a.title}
+        <div className="relative flex items-center gap-4">
+          <Avatar name={a.name} size={62} className="ring-2 ring-[#C9A96A]/40" />
+          <div>
+            <h3 className={cx(serifCls, "text-[22px] font-semibold text-white leading-tight")}>
+              {a.name}
+            </h3>
+            <div className="text-[11.5px] font-semibold tracking-[0.12em] uppercase text-[#C9A96A] mt-1">
+              {a.title}
+            </div>
+          </div>
         </div>
-        <div className="mt-3 flex flex-wrap gap-1.5">
+      </Link>
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex flex-wrap gap-1.5">
           {a.specialties.slice(0, 3).map((s) => (
             <span
               key={s}

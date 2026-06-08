@@ -36,8 +36,8 @@ export default function AboutPage() {
             <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-[#ECE4D6]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80"
-                alt="The Crestline team"
+                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                alt="A Crestline Realty Group home in Chino Hills"
                 className="w-full h-full object-cover"
               />
             </div>

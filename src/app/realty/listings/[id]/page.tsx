@@ -5,9 +5,12 @@ import {
   Bath,
   Maximize,
   Trees,
-  Home,
   CalendarDays,
+  DollarSign,
+  Car,
+  Building2,
   MapPin,
+  GraduationCap,
   Check,
   Phone,
   Mail,
@@ -19,6 +22,7 @@ import {
   findListing,
   findAgent,
   formatPrice,
+  pricePerSqft,
 } from "../../data";
 import {
   Gallery,
@@ -28,6 +32,7 @@ import {
   MapEmbed,
   StatusBadge,
   ShareButton,
+  Avatar,
   Button,
   SectionHeading,
 } from "../../components";
@@ -53,12 +58,14 @@ export default async function PropertyPage({
     .slice(0, 3);
 
   const facts = [
-    { icon: Bed, label: "Bedrooms", value: l.beds },
-    { icon: Bath, label: "Bathrooms", value: l.baths },
-    { icon: Maximize, label: "Sq. Ft.", value: l.sqft.toLocaleString() },
+    { icon: Bed, label: "Beds", value: l.beds },
+    { icon: Bath, label: "Baths", value: l.baths },
+    { icon: Maximize, label: "Sq Ft", value: l.sqft.toLocaleString() },
+    { icon: DollarSign, label: "Per Sq Ft", value: `$${pricePerSqft(l)}` },
     { icon: Trees, label: "Lot", value: l.lot ? `${l.lot} ac` : "—" },
-    { icon: Home, label: "Type", value: l.type },
-    { icon: CalendarDays, label: "Built", value: l.year },
+    { icon: CalendarDays, label: "Year Built", value: l.year },
+    { icon: Car, label: "Garage", value: l.garage },
+    { icon: Building2, label: "HOA", value: l.hoa ? `$${l.hoa}/mo` : "None" },
   ];
 
   return (
@@ -99,11 +106,18 @@ export default async function PropertyPage({
                 <MapPin size={17} className="text-[#B4924E]" />
                 {l.address}, {l.city}, CA · {l.neighborhood}
               </div>
+              <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[13px] text-[#8a8170]">
+                <span>{l.type}</span>
+                <span className="text-[#d8cfbe]">·</span>
+                <span>MLS# {l.mls}</span>
+                <span className="text-[#d8cfbe]">·</span>
+                <span>{l.dom} {l.dom === 1 ? "day" : "days"} on market</span>
+              </div>
             </div>
           </div>
 
           {/* fact grid */}
-          <div className="mt-7 grid grid-cols-3 md:grid-cols-6 gap-3">
+          <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3">
             {facts.map((f) => (
               <div key={f.label} className="bg-[#F4EFE7] rounded-xl p-4 text-center">
                 <f.icon size={20} className="text-[#B4924E] mx-auto" />
@@ -146,6 +160,13 @@ export default async function PropertyPage({
             <div className="rounded-xl overflow-hidden border border-[#E4DCCD]">
               <MapEmbed query={`${l.address}, ${l.city}, CA`} className="h-[380px]" />
             </div>
+            <div className="mt-4 flex items-start gap-2.5 text-[14.5px] text-[#3a3630]">
+              <GraduationCap size={18} className="text-[#B4924E] shrink-0 mt-0.5" />
+              <span>
+                <span className="font-semibold text-[#16181D]">Assigned schools:</span>{" "}
+                {l.schools}
+              </span>
+            </div>
           </div>
 
           {/* mortgage */}
@@ -180,12 +201,7 @@ export default async function PropertyPage({
         <aside className="lg:sticky lg:top-24 self-start">
           <div className="bg-[#0E1C30] text-white rounded-2xl p-6">
             <div className="flex items-center gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={agent.photo}
-                alt={agent.name}
-                className="w-16 h-16 rounded-full object-cover ring-2 ring-[#C9A96A]"
-              />
+              <Avatar name={agent.name} size={64} className="ring-2 ring-[#C9A96A]/50" />
               <div>
                 <div className={cx(serifCls, "text-[20px] font-semibold")}>{agent.name}</div>
                 <div className="text-[12px] text-[#C9A96A] uppercase tracking-wide">

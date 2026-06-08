@@ -10,7 +10,7 @@ import {
 import { cx, serifCls } from "../ui";
 
 const IMG =
-  "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=2000&q=80";
+  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80";
 
 export default function AgentsPage() {
   return (
