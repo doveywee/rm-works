@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 
+// Free email delivery with no server, via Web3Forms. Get a key in ~30 seconds
+// at https://web3forms.com (enter ruijli@icloud.com — the key is emailed to you
+// instantly). Paste it below; submissions then arrive in that inbox.
+const WEB3FORMS_ACCESS_KEY = "a15d05e4-e638-46f4-9dca-88fd381439aa";
+
 export function Contact() {
   const reduce = useReducedMotion();
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [pkg, setPkg] = useState("");
 
   // auto-fill the package when a card in the Pricing section is chosen
@@ -19,14 +25,30 @@ export function Contact() {
     return () => window.removeEventListener("select-package", onSelect);
   }, []);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError(false);
     setLoading(true);
-    // Demo only — no backend wired up.
-    setTimeout(() => {
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+      formData.append("subject", "New project inquiry — RM Works");
+      formData.append("from_name", "RM Works website");
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
       setLoading(false);
-      setSent(true);
-    }, 900);
+    }
   }
 
   return (
@@ -46,10 +68,10 @@ export function Contact() {
             </p>
             <div className="mt-8 space-y-1 text-sm text-mist">
               <p>
-                <span className="text-fog">Email</span> · studio@rmworks.com
+                <span className="text-fog">Email</span> · Info@rmworks.dev
               </p>
               <p>
-                <span className="text-fog">Booking</span> · cal.com/rmworks
+                <span className="text-fog">Booking</span> · cal.com/rmworks.dev
               </p>
             </div>
           </div>
@@ -143,6 +165,13 @@ export function Contact() {
                   </>
                 )}
               </button>
+
+              {error && (
+                <p className="text-center text-sm text-red-400">
+                  Something went wrong. Please try again, or email
+                  Info@rmworks.dev directly.
+                </p>
+              )}
             </form>
           )}
         </div>
