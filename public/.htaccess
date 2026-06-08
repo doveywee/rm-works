@@ -1,0 +1,45 @@
+# ── HTTPS redirect ──────────────────────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── Security headers ─────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Prevent browsers from guessing MIME types (stops drive-by malware)
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Block the site from being embedded in iframes on other domains (clickjacking)
+  Header always set X-Frame-Options "DENY"
+
+  # Control how much referrer info leaks to other sites
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Enforce HTTPS for 1 year, including subdomains
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Restrict access to browser APIs (camera, mic, location, etc.)
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Content Security Policy — only load resources from this domain,
+  # allow Web3Forms for the contact form, block everything else
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
+
+  # Remove the header that tells attackers what server software you're running
+  Header always unset X-Powered-By
+  Header always unset Server
+</IfModule>
+
+# ── Cache static assets ──────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ── Compression ──────────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript font/woff2
+</IfModule>
