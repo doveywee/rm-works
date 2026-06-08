@@ -71,7 +71,7 @@ export function Contact() {
                 <span className="text-fog">Email</span> · Info@rmworks.dev
               </p>
               <p>
-                <span className="text-fog">Booking</span> · cal.com/rmworks.dev
+                <span className="text-fog">Booking</span> · info@rmworks.dev
               </p>
             </div>
           </div>

@@ -35,7 +35,7 @@ function WarpWord({
   const rotate = useTransform(progress, [s, e], [0, dir * 112]);
   const skewX = useTransform(progress, [s, e], [0, dir * 13]);
   const y = useTransform(progress, [s, e], [0, dir * 48]);
-  const blurV = useTransform(progress, [s + 0.04, e], [0, 11]);
+  const blurV = useTransform(progress, [s + 0.04, e], [0, 4]);
   const filter = useTransform(blurV, (b) => `blur(${b}px)`);
 
   return (
@@ -129,7 +129,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         <motion.div
           aria-hidden
           style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
         {/* headline — real type, each word warped into the hole */}
