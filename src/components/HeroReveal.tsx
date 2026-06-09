@@ -77,7 +77,11 @@ export function HeroReveal({ children }: { children: ReactNode }) {
   }, [scrollYProgress]);
 
   // black hole: hidden at rest, fades in on first scroll, grows to engulf, then fades
-  const holeScale = useTransform(scrollYProgress, [0, 0.45], [0.04, 1]);
+  // Small natural size scaled UP past the screen, so the GPU bitmap-scales a
+  // texture that always fits the device texture limit (a 170vmax element would
+  // blow past ~4096px on high-DPI phones and re-raster every frame). Disc is
+  // 90vmax, halo 110vmax; at scale 1.9 they reach ~171/209vmax to engulf.
+  const holeScale = useTransform(scrollYProgress, [0, 0.45], [0.07, 1.9]);
   const holeOpacity = useTransform(scrollYProgress, [0, 0.06, 0.45, 0.82], [0, 1, 1, 0]);
 
   // whole headline converges toward the hole's centre while words warp in
@@ -133,14 +137,14 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         <motion.div
           aria-hidden
           style={{ scale: holeScale, opacity: holeOpacity, background: HALO_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[210vmax] w-[210vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
+          className="hero-halo pointer-events-none absolute left-1/2 top-1/2 z-10 h-[110vmax] w-[110vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
         {/* black hole disc */}
         <motion.div
           aria-hidden
           style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[90vmax] w-[90vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
         {/* headline — real type, each word warped into the hole */}

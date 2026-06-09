@@ -193,6 +193,11 @@ body::before {
     backdrop-filter: none;
     background: rgba(18, 18, 18, 0.86);
   }
+  /* One fewer screen-filling layer for the GPU to blend each scrub frame. The
+     disc's own gradient rim still glows orange on mobile. */
+  .hero-halo {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
