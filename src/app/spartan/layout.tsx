@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar, Footer } from "./components";
 
 const display = Oswald({
@@ -13,6 +13,13 @@ const sans = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-spartan-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-spartan-mono",
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ export default function SpartanLayout({
 }) {
   return (
     <div
-      className={`${display.variable} ${sans.variable} min-h-screen bg-white text-[#20242C] [font-family:var(--font-spartan-sans)] antialiased selection:bg-[#9E2B24]/20`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} min-h-screen bg-[#F4EFE3] text-[#1B2A38] [font-family:var(--font-spartan-sans)] antialiased selection:bg-[#C9A24B]/30`}
     >
       <Navbar />
       <main>{children}</main>

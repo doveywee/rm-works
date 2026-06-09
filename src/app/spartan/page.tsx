@@ -1,75 +1,72 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, Phone, Check } from "lucide-react";
-import {
-  Home,
-  Building2,
-  MapPin,
-  PackageOpen,
-  Dumbbell,
-  Boxes,
-  Sofa,
-  ShieldCheck,
-  Truck,
-  Users,
-  ClipboardCheck,
-  Handshake,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Phone, Check } from "lucide-react";
 import {
   cx,
   head,
+  mono,
   company,
   Reveal,
-  Button,
-  SectionHeading,
-  TrustBar,
-  Stats,
+  Rule,
+  Kicker,
+  SectionHead,
+  Btn,
+  ManifestRow,
+  PlateRow,
   Reviews,
   CtaBand,
-  HeroArt,
   MapEmbed,
   GreekKey,
-  Stars,
+  BlueprintBg,
 } from "./components";
 
-/* ---- Service preview cards ---- */
+const STATS = [
+  { value: company.years, label: "Years Moving" },
+  { value: company.moves, label: "Successful Moves" },
+  { value: company.reviewCount, label: "Yelp Reviews" },
+  { value: `${company.rating}★`, label: "Avg. Rating" },
+];
+
 const SERVICES = [
   {
-    Icon: Home,
-    title: "Residential Moving",
-    copy: "Careful, organized moves for homes, apartments, and condos.",
+    n: "01",
+    title: "Residential",
+    copy: "Homes, apartments, and condos — furniture, boxes, appliances, and household items, handled with care.",
   },
   {
-    Icon: Building2,
-    title: "Commercial Moving",
-    copy: "Efficient office and business moves with less downtime.",
+    n: "02",
+    title: "Commercial",
+    copy: "Offices, schools, and small warehouses moved efficiently with less stress and downtime.",
   },
   {
-    Icon: MapPin,
+    n: "03",
     title: "Local Moving",
-    copy: "Local moves throughout Murrieta and Southern California.",
+    copy: "Murrieta-based moves across Riverside, Orange, and San Diego County and nearby SoCal.",
   },
   {
-    Icon: PackageOpen,
-    title: "Loading & Unloading",
-    copy: "Moving labor for trucks, trailers, PODs, and storage units.",
+    n: "04",
+    title: "Load / Unload",
+    copy: "Moving labor for rental trucks, trailers, PODs, storage units, and containers.",
   },
   {
-    Icon: Dumbbell,
-    title: "Moving Labor",
-    copy: "Strong, professional help for the heavy lifting.",
-  },
-  {
-    Icon: Sofa,
-    title: "Heavy Item Assistance",
-    copy: "Extra planning and care for large or bulky items.",
-  },
-  {
-    Icon: Boxes,
+    n: "05",
     title: "Packing & Protection",
-    copy: "Furniture wrapping and safe handling on request.",
+    copy: "Furniture wrapping, careful loading, and safe handling of fragile or bulky items on request.",
   },
+  {
+    n: "06",
+    title: "Heavy & Single-Item",
+    copy: "Flat-rate single-item moves plus safes, appliances, and oversized furniture with the right gear.",
+  },
+];
+
+const SPECS = [
+  "Local Murrieta moving company",
+  "Residential & commercial moving",
+  "Careful handling of belongings",
+  "Clear, professional communication",
+  "Stress-free moving support",
+  "Licensed & insured service",
 ];
 
 const WHY = [
@@ -77,356 +74,269 @@ const WHY = [
   "Careful handling of furniture and belongings",
   "A clear, easy-to-follow moving process",
   "Licensed and insured business",
-  "Local knowledge of Murrieta and surrounding areas",
+  "Local knowledge of Murrieta and the area",
   "A simple quote request process",
-  "Reliable help for homes, apartments, offices & businesses",
-];
-
-const ABOUT_POINTS = [
-  { Icon: MapPin, t: "Local Murrieta moving company" },
-  { Icon: Users, t: "Residential & commercial moving" },
-  { Icon: ShieldCheck, t: "Careful handling of belongings" },
-  { Icon: Handshake, t: "Clear, professional communication" },
+  "Reliable help for homes, offices & businesses",
+  "On-time crews that work hard",
 ];
 
 export default function SpartanHome() {
   return (
     <>
-      {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-[#0E2840] pt-28 pb-20 sm:pt-36 sm:pb-28">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036] via-[#0E2840] to-[#0E2840]" />
-          <HeroArt />
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
-        </div>
+      {/* ===================== HERO ===================== */}
+      <section className="relative overflow-hidden bg-[#0E2840]">
+        <BlueprintBg />
+        <GreekKey className="absolute inset-x-0 bottom-0 opacity-40" />
+        <div className="relative mx-auto max-w-[1400px] px-6 pt-16 sm:pt-24">
+          <Reveal>
+            <Kicker n="EST. SOUTHERN CALIFORNIA" light>
+              {company.years} Years · {company.moves} Moves
+            </Kicker>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h1
+              className={cx(
+                head,
+                "mt-6 max-w-5xl text-[clamp(2.6rem,7vw,5.2rem)] font-bold uppercase leading-[0.92] tracking-[0.005em] text-white"
+              )}
+            >
+              Reliable Moving Services in Murrieta &amp;{" "}
+              <span className="text-[#C9A24B]">Southern California</span>
+            </h1>
+          </Reveal>
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-x-12 gap-y-14 px-5 sm:px-8 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <p className="flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.22em] text-[#E4C77E]">
-                <span className="h-px w-8 bg-[#C9A24B]/70" />
-                Murrieta · Riverside · Orange · San Diego County
+          <div className="mt-9 grid gap-8 md:grid-cols-12 md:items-end">
+            <Reveal delay={0.12} className="md:col-span-7">
+              <p className="max-w-xl text-[16.5px] leading-relaxed text-white/70">
+                {company.name} provides residential and commercial moving across
+                Murrieta, Riverside County, Orange County, San Diego County, and
+                surrounding Southern California — strong, careful, professional
+                moving help you can trust.
               </p>
             </Reveal>
-            <Reveal delay={0.05}>
-              <h1
-                className={cx(
-                  head,
-                  "mt-6 text-[2.7rem] font-bold uppercase leading-[1.02] tracking-[0.01em] text-white sm:text-[4rem]"
-                )}
-              >
-                Reliable Moving Services in Murrieta &amp;{" "}
-                <span className="text-[#C9A24B]">Southern California.</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/70">
-                {company.name} provides residential and commercial moving services
-                across Murrieta, Riverside County, Orange County, San Diego County,
-                and surrounding Southern California areas — strong, careful, and
-                professional moving help you can trust.
-              </p>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <div className="mt-9 flex flex-wrap gap-3.5">
-                <Button href="/spartan/contact" variant="crimson" size="lg">
-                  Request a Moving Quote <ArrowRight size={17} />
-                </Button>
-                <a
-                  href={company.phoneHref}
-                  className="inline-flex items-center gap-2 border border-white/25 px-7 py-4 text-[14.5px] font-bold uppercase tracking-[0.06em] text-white transition-all hover:border-white/50 hover:bg-white/5"
-                >
-                  <Phone size={17} /> {company.phone}
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/12 pt-6 text-[13px] text-white/55">
-                <span className="inline-flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-[#E4C77E]" /> Licensed &amp;
-                  Insured
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <Truck size={16} className="text-[#E4C77E]" /> {company.dot}
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <ClipboardCheck size={16} className="text-[#E4C77E]" />{" "}
-                  {company.cal}
-                </span>
-              </div>
+            <Reveal delay={0.16} className="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
+              <Btn href="/spartan/contact" variant="gold" size="lg">
+                Request a Quote <ArrowRight size={15} />
+              </Btn>
+              <Btn href={company.phoneHref} variant="outline-light" size="lg">
+                <Phone size={15} /> {company.phone}
+              </Btn>
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} className="lg:col-span-5">
-            <div className="relative mx-auto max-w-sm lg:max-w-none">
-              <div className="absolute -inset-3 -z-0 border border-[#C9A24B]/30" />
-              <div className="relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden bg-[#0A2036] p-8 text-center shadow-2xl ring-1 ring-white/10">
-                <GreekKey className="absolute inset-x-0 top-0 opacity-60" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/spartan-assets/logo.png"
-                  alt="Spartan Moving and Transport Inc logo"
-                  className="h-36 w-36 object-contain sm:h-40 sm:w-40"
-                />
-                <p className={cx(head, "mt-6 text-[1.7rem] font-bold uppercase leading-[1.05] text-white")}>
-                  Strong. Careful.
-                  <br />
-                  Professional.
+          {/* stats ledger */}
+          <div className="mt-14 grid grid-cols-2 border-t border-white/12 sm:grid-cols-4">
+            {STATS.map((s, i) => (
+              <Reveal
+                key={s.label}
+                delay={i * 0.06}
+                className={cx(
+                  "px-1 py-8 sm:px-6",
+                  i % 2 === 1 && "border-l border-white/12",
+                  i > 0 && "sm:border-l"
+                )}
+              >
+                <p className={cx(head, "text-[2.6rem] font-bold leading-none text-[#E4C77E] sm:text-[3.1rem]")}>
+                  {s.value}
                 </p>
-                <p className="mt-3 max-w-xs text-[14px] leading-snug text-white/65">
-                  Moving help handled with Spartan discipline — from the first box
-                  to the final placement.
+                <p className={cx(mono, "mt-3 text-[10.5px] uppercase tracking-[0.18em] text-white/55")}>
+                  {s.label}
                 </p>
-                <div className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-[#E4C77E]">
-                  <Stars n={5} size={14} /> {company.rating} · {company.reviewCount}+
-                  reviews
-                </div>
-                <GreekKey className="absolute inset-x-0 bottom-0 opacity-60" />
-              </div>
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <TrustBar />
+      {/* ===================== ABOUT ===================== */}
+      <section className="bg-[#F4EFE3]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="01"
+            kicker="The Company"
+            title={
+              <>
+                A Murrieta company built
+                <br className="hidden sm:block" /> on discipline &amp; care.
+              </>
+            }
+            intro={
+              <>
+                {company.name} serves families, individuals, and businesses across
+                Southern California — reliable service, careful handling, and clear
+                communication from the first call to final placement.
+              </>
+            }
+          />
 
-      <Stats />
-
-      {/* ================= ABOUT ================= */}
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative">
-              <div className="overflow-hidden shadow-xl ring-1 ring-[#0E2840]/10">
+          <div className="mt-12 grid gap-8 lg:grid-cols-12">
+            {/* map */}
+            <Reveal className="lg:col-span-7">
+              <div className="relative border border-[#0E2840]/15">
                 <MapEmbed
                   query="Murrieta, CA"
                   zoom={11}
                   title="Map of Murrieta, California"
-                  className="aspect-[5/4]"
+                  className="aspect-[16/10]"
                 />
+                <div
+                  className={cx(
+                    mono,
+                    "absolute left-0 top-0 bg-[#0E2840] px-4 py-2 text-[10.5px] uppercase tracking-[0.18em] text-[#E4C77E]"
+                  )}
+                >
+                  Based in Murrieta, CA
+                </div>
               </div>
-              <div className="absolute -bottom-5 -right-4 hidden bg-[#163C5E] px-6 py-5 text-white shadow-xl sm:block">
-                <p className={cx(head, "text-[2rem] font-bold uppercase leading-none")}>
-                  Murrieta
-                </p>
-                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/80">
-                  Based &amp; Operated Locally
-                </p>
-              </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <div>
-            <SectionHeading
-              eyebrow="About the Company"
-              title={<>About Spartan Moving and Transport Inc</>}
-            />
-            <Reveal delay={0.1}>
-              <p className="mt-6 text-[16px] leading-relaxed text-[#566776]">
-                {company.name} is a Murrieta-based moving company serving families,
-                individuals, and businesses throughout Southern California. The
-                company focuses on reliable service, careful handling, clear
-                communication, and a smoother moving experience from start to
-                finish.
-              </p>
-            </Reveal>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {ABOUT_POINTS.map((p, i) => (
-                <Reveal key={p.t} delay={0.12 + i * 0.05}>
-                  <div className="flex items-center gap-3 border border-[#0E2840]/8 bg-[#FAF6EC] px-4 py-3.5">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#0E2840] text-[#E4C77E]">
-                      <p.Icon size={17} />
-                    </span>
-                    <span className="text-[14px] font-semibold text-[#1B2A38]">
-                      {p.t}
-                    </span>
-                  </div>
-                </Reveal>
-              ))}
+            {/* spec register */}
+            <div className="lg:col-span-5">
+              <Reveal>
+                <p className={cx(mono, "text-[10.5px] uppercase tracking-[0.2em] text-[#A87E33]")}>
+                  [ Field Notes ]
+                </p>
+              </Reveal>
+              <div className="mt-2">
+                {SPECS.map((s, i) => (
+                  <Reveal key={s} delay={i * 0.05}>
+                    <div className="flex items-center gap-4 border-t border-[#0E2840]/15 py-4 last:border-b">
+                      <span className={cx(mono, "text-[12px] text-[#A87E33]")}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="flex-1 text-[15px] font-medium text-[#1B2A38]">
+                        {s}
+                      </span>
+                      <Check size={16} className="text-[#C9A24B]" />
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
-            <Reveal delay={0.25}>
-              <p className="mt-6 text-[15px] leading-relaxed text-[#566776]">
-                From stress-free moving support to licensed and insured service,
-                our crew is built to make your move easier, safer, and more
-                organized.
-              </p>
-            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ================= SERVICES PREVIEW ================= */}
-      <section className="border-y border-[#0E2840]/8 bg-[#F1EADB]">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <SectionHeading
-            center
-            eyebrow="What We Do"
-            title="Our Moving Services"
-            sub="From a single heavy item to a full residential or commercial move, our crew is ready to help."
+      {/* ===================== SERVICES MANIFEST ===================== */}
+      <section className="bg-[#EDE6D6]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="02"
+            kicker="Services"
+            title="What We Move"
+            intro="From a single heavy item to a full home or office, our crew brings strength, care, and organization to every job."
+            action={
+              <Btn href="/spartan/services" variant="outline" size="sm">
+                Full services &amp; process <ArrowUpRight size={14} />
+              </Btn>
+            }
           />
-
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12">
             {SERVICES.map((s, i) => (
-              <Reveal key={s.title} delay={(i % 3) * 0.06}>
-                <div className="group flex h-full flex-col border border-[#0E2840]/8 bg-white p-7 transition-all hover:-translate-y-0.5 hover:border-[#163C5E]/40 hover:shadow-[0_18px_50px_-26px_rgba(0,0,0,0.45)]">
-                  <span className="grid h-12 w-12 place-items-center rounded-md bg-[#0E2840] text-[#E4C77E] transition-colors group-hover:bg-[#163C5E] group-hover:text-white">
-                    <s.Icon size={22} />
-                  </span>
-                  <h3 className={cx(head, "mt-5 text-[1.25rem] font-bold uppercase text-[#0E2840]")}>
-                    {s.title}
-                  </h3>
-                  <p className="mt-2.5 flex-1 text-[14.5px] leading-relaxed text-[#566776]">
-                    {s.copy}
-                  </p>
-                  <Link
-                    href="/spartan/services"
-                    className="mt-5 inline-flex items-center gap-1.5 self-start text-[13px] font-bold uppercase tracking-[0.06em] text-[#163C5E] transition-colors hover:text-[#0E2840]"
-                  >
-                    Learn More <ArrowRight size={14} />
-                  </Link>
+              <ManifestRow
+                key={s.n}
+                n={s.n}
+                title={s.title}
+                copy={s.copy}
+                href="/spartan/services"
+                last={i === SERVICES.length - 1}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===================== WHY ===================== */}
+      <section className="relative overflow-hidden bg-[#0E2840]">
+        <BlueprintBg />
+        <div className="relative mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            light
+            n="03"
+            kicker="Why Spartan"
+            title="The Right Team Makes the Difference"
+            intro="We help customers plan their move, understand what to expect, and get the help they need — with care, strength, and professionalism."
+            action={
+              <Btn href="/spartan/contact" variant="gold" size="sm">
+                Request a Quote <ArrowRight size={14} />
+              </Btn>
+            }
+          />
+          <div className="mt-12 grid border-t border-white/12 sm:grid-cols-2">
+            {WHY.map((w, i) => (
+              <Reveal key={w} delay={(i % 2) * 0.05}>
+                <div
+                  className={cx(
+                    "flex items-center gap-4 border-b border-white/12 py-5",
+                    i % 2 === 0 && "sm:border-r sm:border-white/10 sm:pr-8"
+                  )}
+                >
+                  <Check size={17} className="shrink-0 text-[#C9A24B]" />
+                  <span className="text-[15px] font-medium text-white/85">{w}</span>
                 </div>
               </Reveal>
             ))}
-            <Reveal delay={0.12}>
-              <Link
-                href="/spartan/services"
-                className="flex h-full flex-col justify-center border border-dashed border-[#163C5E]/40 bg-[#163C5E]/[0.04] p-7 transition-colors hover:bg-[#163C5E]/[0.08]"
-              >
-                <span className={cx(head, "text-[1.25rem] font-bold uppercase text-[#163C5E]")}>
-                  See the Full Process
-                </span>
-                <p className="mt-2.5 text-[14.5px] leading-relaxed text-[#566776]">
-                  Learn how the moving process works, step by step, and what to
-                  expect on moving day.
-                </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-[0.06em] text-[#163C5E]">
-                  Services &amp; Process <ArrowRight size={14} />
-                </span>
-              </Link>
-            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ================= WHY CHOOSE ================= */}
-      <section className="relative overflow-hidden bg-[#0E2840]">
-        <HeroArt />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              light
-              eyebrow="Why Spartan"
-              title="Why Choose Spartan Moving"
-            />
-            <Reveal delay={0.1}>
-              <p className="mt-6 text-[16px] leading-relaxed text-white/70">
-                Moving can be stressful, but the right team makes a difference.
-                {" "}
-                {company.name} helps customers plan their move, understand what to
-                expect, and get the moving help they need with care, strength, and
-                professionalism.
-              </p>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <div className="mt-8">
-                <Button href="/spartan/contact" variant="bronze" size="lg">
-                  Request a Quote <ArrowRight size={16} />
-                </Button>
-              </div>
-            </Reveal>
-          </div>
-
-          <div className="lg:col-span-7">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {WHY.map((w, i) => (
-                <Reveal key={w} delay={i * 0.04}>
-                  <div className="flex items-start gap-3 border border-white/10 bg-white/[0.04] p-4">
-                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#C9A24B] text-[#0E2840]">
-                      <Check size={14} strokeWidth={3} />
-                    </span>
-                    <span className="text-[14.5px] font-medium text-white/90">
-                      {w}
-                    </span>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= LICENSE TRUST ================= */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-6">
-              <SectionHeading
-                eyebrow="Trust & Licensing"
-                title="Why Moving Licenses Matter"
-              />
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-[16px] leading-relaxed text-[#566776]">
-                  When hiring a moving company, licensing is important because it
-                  helps customers know they are working with a legitimate moving
-                  business. Licensed movers are expected to follow moving
-                  regulations, operate responsibly, and provide a safer, more
-                  professional moving experience.
-                </p>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <p className="mt-4 text-[16px] leading-relaxed text-[#566776]">
-                  {company.name} publicly lists {company.dot}, {company.mc}, and{" "}
-                  {company.cal}. Customers should always verify licensing and
-                  insurance before booking any move.
-                </p>
-              </Reveal>
-              <Reveal delay={0.22}>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <a
-                    href={company.phoneHref}
-                    className="inline-flex items-center gap-2 text-[15px] font-bold text-[#163C5E]"
-                  >
-                    <Phone size={17} /> Have questions about your move? Call{" "}
-                    {company.phone}.
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-
-            <Reveal delay={0.12} className="lg:col-span-6">
-              <div className="grid gap-4 sm:grid-cols-3">
-                {[company.dot, company.mc, company.cal].map((c) => (
-                  <div
-                    key={c}
-                    className="flex flex-col items-center border border-[#0E2840]/8 bg-[#FAF6EC] px-4 py-7 text-center"
-                  >
-                    <ShieldCheck size={26} className="text-[#163C5E]" />
-                    <p className={cx(head, "mt-3 text-[1.05rem] font-bold uppercase leading-tight text-[#0E2840]")}>
-                      {c}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 border border-[#0E2840]/8 bg-[#0E2840] px-6 py-6 text-center">
-                <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#E4C77E]">
-                  Licensed &amp; Insured Business
-                </p>
-                <p className="mt-2 text-[14px] text-white/65">
-                  Verify all licensing and insurance directly with {company.short}{" "}
-                  before booking.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
+      {/* ===================== REVIEWS ===================== */}
       <Reviews />
+
+      {/* ===================== LICENSING ===================== */}
+      <section className="bg-[#F4EFE3]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <Rule />
+          <div className="mt-7 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <Reveal>
+                <Kicker n="04">Trust &amp; Licensing</Kicker>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <h2 className={cx(head, "mt-4 text-[clamp(1.9rem,4.5vw,3rem)] font-bold uppercase leading-[0.98] text-[#0E2840]")}>
+                  Why Moving Licenses Matter
+                </h2>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <p className="mt-6 max-w-xl text-[15.5px] leading-relaxed text-[#5A6675]">
+                  Licensing tells you you&rsquo;re working with a legitimate moving
+                  business — one expected to follow regulations, operate
+                  responsibly, and provide a safer, more professional move.{" "}
+                  {company.name} publicly lists its DOT, MC, and CAL credentials.
+                  Always verify licensing and insurance before booking any move.
+                </p>
+              </Reveal>
+              <Reveal delay={0.18}>
+                <a
+                  href={company.phoneHref}
+                  className={cx(
+                    mono,
+                    "mt-7 inline-flex items-center gap-2.5 text-[12px] font-medium uppercase tracking-[0.16em] text-[#A87E33] hover:text-[#0E2840]"
+                  )}
+                >
+                  <Phone size={14} /> Questions? Call {company.phone}
+                </a>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.1} className="lg:col-span-6">
+              <PlateRow />
+              <div className="mt-3 flex items-center justify-between border border-[#0E2840]/15 bg-[#0E2840] px-5 py-4">
+                <span className={cx(mono, "text-[11px] uppercase tracking-[0.18em] text-[#E4C77E]")}>
+                  Licensed &amp; Insured Business
+                </span>
+                <span className={cx(mono, "text-[10.5px] uppercase tracking-[0.16em] text-white/45")}>
+                  Verify before booking
+                </span>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       <CtaBand
         title="Ready to Plan Your Move?"
-        sub="Request a moving quote or call our crew — we'll help you move easier, safer, and more organized."
+        sub="Request a quote or call the crew — we'll help you move easier, safer, and more organized."
       />
     </>
   );

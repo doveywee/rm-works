@@ -1,123 +1,102 @@
 "use client";
 
-import { ArrowRight, Phone, Check, AlertTriangle } from "lucide-react";
-import {
-  Home,
-  Building2,
-  MapPin,
-  PackageOpen,
-  Boxes,
-  Sofa,
-  ShieldCheck,
-  ClipboardList,
-  MessageSquare,
-  CalendarCheck,
-  PackageCheck,
-  Truck,
-  CheckCircle2,
-} from "lucide-react";
+import { Check, AlertTriangle } from "lucide-react";
 import {
   cx,
   head,
+  mono,
   company,
   Reveal,
-  Eyebrow,
-  Button,
-  SectionHeading,
-  TrustBar,
-  CtaBand,
-  HeroArt,
+  SectionHead,
+  ManifestRow,
+  PlateRow,
+  PageHeader,
   MapEmbed,
+  CtaBand,
 } from "../components";
 
 const SERVICES = [
   {
-    Icon: Home,
-    title: "Residential Moving",
-    copy: "Moving to a new home, apartment, or condo requires planning, care, and the right crew. Spartan Moving and Transport Inc helps with local residential moves, including furniture, boxes, appliances, and household items.",
+    n: "01",
+    title: "Residential",
+    copy: "Moving to a new home, apartment, or condo takes planning, care, and the right crew. We handle local residential moves — furniture, boxes, appliances, and household items.",
   },
   {
-    Icon: Building2,
-    title: "Commercial Moving",
-    copy: "Business moves require efficiency and organization. Spartan Moving and Transport Inc helps offices, schools, and small warehouses move equipment, furniture, and supplies while working to reduce stress and downtime.",
+    n: "02",
+    title: "Commercial",
+    copy: "Business moves need efficiency and organization. We help offices, schools, and small warehouses move equipment, furniture, and supplies while reducing stress and downtime.",
   },
   {
-    Icon: MapPin,
+    n: "03",
     title: "Local Moving",
-    copy: "Based in Murrieta, CA, Spartan Moving and Transport Inc serves customers throughout Riverside County, Orange County, San Diego County, and nearby Southern California communities.",
+    copy: "Based in Murrieta, CA, we serve customers throughout Riverside County, Orange County, San Diego County, and nearby Southern California communities.",
   },
   {
-    Icon: PackageOpen,
-    title: "Loading & Unloading",
-    copy: "Need help loading or unloading a rental truck, trailer, storage unit, POD, or moving container? Spartan Moving and Transport Inc provides moving labor to help with the heavy lifting.",
+    n: "04",
+    title: "Load / Unload",
+    copy: "Need help loading or unloading a rental truck, trailer, storage unit, POD, or moving container? We provide moving labor for the heavy lifting.",
   },
   {
-    Icon: Boxes,
-    title: "Packing & Furniture Protection",
-    copy: "Proper protection helps prevent damage during a move. The team can help with furniture wrapping, careful loading, and safe handling of fragile or bulky items when requested.",
+    n: "05",
+    title: "Packing & Protection",
+    copy: "Proper protection prevents damage. We help with furniture wrapping, careful loading, and safe handling of fragile or bulky items when requested.",
   },
   {
-    Icon: Sofa,
-    title: "Heavy & Single-Item Moves",
-    copy: "From flat-rate single-item moves to safes, appliances, and oversized furniture, large or heavy items may require extra planning, proper equipment, and advance notice. Mention specialty items when requesting a quote.",
+    n: "06",
+    title: "Heavy & Single-Item",
+    copy: "From flat-rate single-item moves to safes, appliances, and oversized furniture, large items may need extra planning, gear, and advance notice. Mention specialty items when requesting a quote.",
   },
 ];
 
 const STEPS = [
   {
-    Icon: ClipboardList,
     title: "Request a Quote",
-    copy: "Start by calling or submitting a quote form with your moving details. Include your moving date, pickup and drop-off locations, property type, number of rooms, and any heavy or fragile items.",
+    copy: "Call or submit the quote form with your moving details — date, pickup and drop-off locations, property type, number of rooms, and any heavy or fragile items.",
   },
   {
-    Icon: MessageSquare,
     title: "Share Move Details",
-    copy: "The more information you provide, the more accurate the moving plan can be. Customers should mention stairs, elevators, long walking distances, parking limits, storage units, bulky furniture, appliances, and specialty items.",
+    copy: "The more you provide, the more accurate the plan. Mention stairs, elevators, long walks, parking limits, storage units, bulky furniture, appliances, and specialty items.",
   },
   {
-    Icon: CalendarCheck,
     title: "Confirm Scheduling",
-    copy: "After reviewing the details, the moving team can confirm availability, estimated labor needs, and scheduling. Same-day or urgent moves may depend on availability.",
+    copy: "After reviewing the details, the team confirms availability, estimated labor needs, and scheduling. Same-day or urgent moves may depend on availability.",
   },
   {
-    Icon: PackageCheck,
-    title: "Prepare Before Moving Day",
-    copy: "Customers should pack personal items, label boxes, separate fragile items, reserve parking if needed, clear walkways, and make sure important documents, medications, valuables, and essentials stay with them.",
+    title: "Prepare for Moving Day",
+    copy: "Pack personal items, label boxes, separate fragile items, reserve parking if needed, clear walkways, and keep documents, medications, valuables, and essentials with you.",
   },
   {
-    Icon: Truck,
     title: "Moving Day",
-    copy: "The movers arrive, review the move, protect furniture as needed, load items carefully, transport belongings, unload at the destination, and place items where directed.",
+    copy: "The movers arrive, review the move, protect furniture as needed, load carefully, transport your belongings, unload at the destination, and place items where directed.",
   },
   {
-    Icon: CheckCircle2,
     title: "Final Walkthrough",
-    copy: "Before the move is complete, customers should check the pickup and drop-off areas, confirm all items have arrived, and communicate any concerns before the crew leaves.",
+    copy: "Before the move is complete, check the pickup and drop-off areas, confirm all items arrived, and raise any concerns before the crew leaves.",
   },
 ];
 
 const RESPONSIBILITIES = [
   "Be honest and detailed when requesting a quote",
-  "Mention stairs, elevators, parking restrictions, gates, long carries, or difficult access",
-  "Tell the movers about heavy, fragile, oversized, or high-value items before moving day",
+  "Mention stairs, elevators, parking limits, gates, long carries, or difficult access",
+  "Tell the movers about heavy, fragile, oversized, or high-value items beforehand",
   "Pack boxes securely before the crew arrives unless packing service is requested",
-  "Keep valuables, cash, jewelry, important documents, medications, and personal items with you",
+  "Keep valuables, cash, jewelry, documents, medications, and personal items with you",
   "Empty drawers, appliances, and loose items when required",
-  "Make sure pets and children are safely away from moving areas",
+  "Keep pets and children safely away from moving areas",
   "Reserve elevator or loading dock access if needed",
   "Confirm building rules with apartments, condos, HOAs, or offices",
   "Make sure someone authorized is present during pickup and delivery",
-  "Do not request movers to transport illegal, hazardous, flammable, or unsafe materials",
-  "Review the quote, service details, and any applicable policies before booking",
+  "Never ask movers to transport illegal, hazardous, flammable, or unsafe materials",
+  "Review the quote, service details, and any policies before booking",
 ];
 
 const LICENSE_POINTS = [
-  "Licensing helps verify that the company is a legitimate moving business",
+  "Licensing helps verify the company is a legitimate moving business",
   "Insurance helps protect customers and the company",
   "DOT and MC numbers help identify transportation carriers",
-  "California moving licenses/certifications may be required for certain moving services",
+  "California licenses/certifications may be required for certain services",
   "Customers should always verify license numbers before booking",
-  "A professional mover should be clear about pricing, scheduling, service limits, and responsibilities",
+  "A professional mover is clear about pricing, scheduling, and responsibilities",
 ];
 
 const SERVICE_AREAS = [
@@ -140,225 +119,145 @@ const SERVICE_AREAS = [
   "Long Beach",
   "Los Angeles",
   "Pasadena",
-  "Nearby Southern California areas",
+  "Nearby SoCal",
 ];
 
 export default function SpartanServices() {
   return (
     <>
-      {/* ================= PAGE HERO ================= */}
-      <section className="relative overflow-hidden bg-[#0E2840] pt-32 pb-16 sm:pt-40 sm:pb-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036] via-[#0E2840] to-[#0E2840]" />
-          <HeroArt />
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
-        </div>
-        <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-          <Reveal>
-            <Eyebrow light>Services &amp; Process</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h1
-              className={cx(
-                head,
-                "mt-5 text-[2.5rem] font-bold uppercase leading-[1.04] tracking-[0.01em] text-white sm:text-[3.4rem]"
-              )}
-            >
-              Moving Services &amp; How the Moving Process Works
-            </h1>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed text-white/70">
-              From planning to final placement, {company.name} helps make your move
-              organized, careful, and easier to manage.
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-              <Button href="/spartan/contact" variant="crimson" size="lg">
-                Request a Moving Quote <ArrowRight size={16} />
-              </Button>
-              <a
-                href={company.phoneHref}
-                className="inline-flex items-center gap-2 border border-white/25 px-7 py-4 text-[14.5px] font-bold uppercase tracking-[0.06em] text-white transition-all hover:border-white/50 hover:bg-white/5"
-              >
-                <Phone size={17} /> {company.phone}
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        index="02"
+        kicker="Services & Process"
+        title={
+          <>
+            Moving Services &amp; How
+            <br className="hidden sm:block" /> the Process Works
+          </>
+        }
+        intro={
+          <>
+            From planning to final placement, {company.name} makes your move
+            organized, careful, and easier to manage.
+          </>
+        }
+      />
 
-      <TrustBar />
-
-      {/* ================= SERVICES ================= */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <SectionHeading
-            center
-            eyebrow="Our Services"
+      {/* ===================== SERVICES MANIFEST ===================== */}
+      <section className="bg-[#F4EFE3]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="A"
+            kicker="Services"
             title="Moving Help, Tailored to Your Move"
-            sub="Residential, commercial, and labor-only — our crew brings strength, care, and organization to every job."
+            intro="Residential, commercial, and labor-only — strength, care, and organization on every job."
           />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12">
             {SERVICES.map((s, i) => (
-              <Reveal key={s.title} delay={(i % 3) * 0.06}>
-                <div className="flex h-full flex-col border border-[#0E2840]/8 bg-[#FAF6EC] p-7">
-                  <span className="grid h-12 w-12 place-items-center rounded-md bg-[#0E2840] text-[#E4C77E]">
-                    <s.Icon size={22} />
-                  </span>
-                  <h3 className={cx(head, "mt-5 text-[1.3rem] font-bold uppercase text-[#0E2840]")}>
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-[14.5px] leading-relaxed text-[#566776]">
-                    {s.copy}
-                  </p>
-                </div>
-              </Reveal>
+              <ManifestRow
+                key={s.n}
+                n={s.n}
+                title={s.title}
+                copy={s.copy}
+                last={i === SERVICES.length - 1}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= MOVING PROCESS ================= */}
-      <section className="border-y border-[#0E2840]/8 bg-[#F1EADB]">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <SectionHeading
-            center
-            eyebrow="Step by Step"
-            title="The Moving Process"
-            sub="A clear, organized path from your first call to the final walkthrough."
+      {/* ===================== PROCESS LEDGER ===================== */}
+      <section className="bg-[#EDE6D6]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="B"
+            kicker="The Moving Process"
+            title="Six Steps, Start to Finish"
+            intro="A clear, organized path from your first call to the final walkthrough."
           />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-12">
             {STEPS.map((s, i) => (
-              <Reveal key={s.title} delay={(i % 3) * 0.06}>
-                <div className="relative flex h-full flex-col border border-[#0E2840]/8 bg-white p-7">
-                  <span
-                    className={cx(
-                      head,
-                      "absolute right-5 top-4 text-[3rem] font-bold leading-none text-[#0E2840]/[0.06]"
-                    )}
-                  >
+              <Reveal key={s.title}>
+                <li className="grid gap-x-8 gap-y-1 border-t border-[#0E2840]/15 py-8 last:border-b sm:grid-cols-[6rem_1fr]">
+                  <div className={cx(head, "text-[3rem] font-bold leading-[0.8] text-[#0E2840]/15")}>
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <span className={cx(mono, "text-[10.5px] uppercase tracking-[0.2em] text-[#A87E33]")}>
+                      Step {i + 1}
+                    </span>
+                    <h3 className={cx(head, "mt-1 text-[1.5rem] font-bold uppercase leading-none text-[#0E2840]")}>
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-[#5A6675]">
+                      {s.copy}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ===================== RULES ===================== */}
+      <section className="bg-[#F4EFE3]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="C"
+            kicker="Customer Responsibilities"
+            title="Important Moving Rules"
+            intro="A smooth move is a shared effort. These responsibilities help the crew work safely, plan accurately, and protect your belongings."
+          />
+          <div className="mt-12 grid border-t border-[#0E2840]/15 sm:grid-cols-2">
+            {RESPONSIBILITIES.map((r, i) => (
+              <Reveal key={r} delay={(i % 2) * 0.04}>
+                <div
+                  className={cx(
+                    "flex items-start gap-4 border-b border-[#0E2840]/12 py-5",
+                    i % 2 === 0 && "sm:border-r sm:border-[#0E2840]/12 sm:pr-8"
+                  )}
+                >
+                  <span className={cx(mono, "mt-0.5 text-[12px] text-[#A87E33]")}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="grid h-12 w-12 place-items-center rounded-md bg-[#163C5E] text-white">
-                    <s.Icon size={22} />
+                  <span className="text-[14.5px] leading-relaxed text-[#1B2A38]">
+                    {r}
                   </span>
-                  <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#163C5E]">
-                    Step {i + 1}
-                  </p>
-                  <h3 className={cx(head, "mt-1 text-[1.2rem] font-bold uppercase text-[#0E2840]")}>
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-[14px] leading-relaxed text-[#566776]">
-                    {s.copy}
-                  </p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.1}>
+            <div className="mt-8 flex items-start gap-3 border border-[#C9A24B] bg-[#C9A24B]/10 p-5">
+              <AlertTriangle size={18} className="mt-0.5 shrink-0 text-[#A87E33]" />
+              <p className="text-[13.5px] leading-relaxed text-[#5A6675]">
+                Movers cannot transport illegal, hazardous, flammable, or unsafe
+                materials. Always review the quote and service details before
+                booking. This page is educational and does not make legal promises.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ================= RULES & RESPONSIBILITIES ================= */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <SectionHeading
-                eyebrow="Customer Responsibilities"
-                title="Important Moving Rules"
-              />
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-[15px] leading-relaxed text-[#566776]">
-                  A smooth move is a shared effort. Following these basic moving
-                  rules and responsibilities helps the crew work safely, plan
-                  accurately, and protect your belongings.
-                </p>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <div className="mt-6 flex items-start gap-3 border border-[#163C5E]/20 bg-[#163C5E]/[0.05] p-4">
-                  <AlertTriangle size={18} className="mt-0.5 shrink-0 text-[#163C5E]" />
-                  <p className="text-[13.5px] leading-relaxed text-[#566776]">
-                    Never ask movers to transport illegal, hazardous, flammable, or
-                    unsafe materials. Always review the quote and service details
-                    before booking.
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-8">
-              <div className="grid gap-3 sm:grid-cols-2">
-                {RESPONSIBILITIES.map((r, i) => (
-                  <Reveal key={r} delay={(i % 2) * 0.05}>
-                    <div className="flex items-start gap-3 border border-[#0E2840]/8 bg-[#FAF6EC] p-4">
-                      <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0E2840] text-[#E4C77E]">
-                        <Check size={13} strokeWidth={3} />
-                      </span>
-                      <span className="text-[14px] leading-relaxed text-[#2c3e4f]">
-                        {r}
-                      </span>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= LICENSE EDUCATION ================= */}
+      {/* ===================== LICENSE EDUCATION ===================== */}
       <section className="relative overflow-hidden bg-[#0E2840]">
-        <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-6">
-              <SectionHeading
-                light
-                eyebrow="Licensing Education"
-                title="The Importance of Hiring Licensed Movers"
-              />
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-[16px] leading-relaxed text-white/70">
-                  Hiring licensed movers matters because moving companies handle
-                  valuable personal property, furniture, business equipment, and
-                  household belongings. A properly licensed moving company is easier
-                  to verify, more accountable, and expected to follow applicable
-                  moving regulations. Licensing also helps customers avoid
-                  unqualified or unsafe moving operators.
-                </p>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <div className="mt-7 border border-white/10 bg-white/[0.04] p-6">
-                  <p className="text-[15px] leading-relaxed text-white/75">
-                    {company.name} publicly lists {company.dot}, {company.mc}, and{" "}
-                    {company.cal}. Customers should verify all licensing and
-                    insurance information before booking.
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {[company.dot, company.mc, company.cal].map((c) => (
-                      <span
-                        key={c}
-                        className="inline-flex items-center gap-2 border border-[#C9A24B]/40 bg-[#163C5E]/10 px-3 py-2 text-[12.5px] font-bold uppercase tracking-[0.06em] text-[#E4C77E]"
-                      >
-                        <ShieldCheck size={15} /> {c}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="grid gap-3">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            light
+            n="D"
+            kicker="Licensing Education"
+            title="The Importance of Hiring Licensed Movers"
+            intro="Movers handle valuable property. A properly licensed company is easier to verify, more accountable, and expected to follow applicable regulations."
+          />
+          <div className="mt-12 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <div className="border-t border-white/12">
                 {LICENSE_POINTS.map((p, i) => (
-                  <Reveal key={p} delay={i * 0.05}>
-                    <div className="flex items-start gap-3 border border-white/10 bg-white/[0.04] p-4">
-                      <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#163C5E] text-white">
-                        <Check size={13} strokeWidth={3} />
-                      </span>
-                      <span className="text-[14.5px] leading-relaxed text-white/85">
+                  <Reveal key={p} delay={i * 0.04}>
+                    <div className="flex items-start gap-4 border-b border-white/12 py-5">
+                      <Check size={16} className="mt-0.5 shrink-0 text-[#C9A24B]" />
+                      <span className="text-[14.5px] leading-relaxed text-white/80">
                         {p}
                       </span>
                     </div>
@@ -366,45 +265,60 @@ export default function SpartanServices() {
                 ))}
               </div>
             </div>
+            <Reveal delay={0.1} className="lg:col-span-5">
+              <PlateRow light />
+              <p className="mt-5 text-[14px] leading-relaxed text-white/55">
+                {company.name} publicly lists its DOT, MC, and CAL credentials.
+                Customers should verify all licensing and insurance information
+                before booking.
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ================= SERVICE AREAS ================= */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <SectionHeading
-            center
-            eyebrow="Where We Work"
+      {/* ===================== SERVICE AREAS ===================== */}
+      <section className="bg-[#EDE6D6]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
+          <SectionHead
+            n="E"
+            kicker="Where We Work"
             title="Service Areas"
-            sub={`${company.name} is based in Murrieta, CA and serves customers throughout Southern California.`}
+            intro={`${company.name} is based in Murrieta, CA and serves customers throughout Southern California.`}
           />
-          <div className="mx-auto mt-12 flex max-w-4xl flex-wrap justify-center gap-2.5">
-            {SERVICE_AREAS.map((a, i) => (
-              <Reveal key={a} delay={(i % 6) * 0.03}>
-                <span className="inline-flex items-center gap-2 border border-[#0E2840]/10 bg-[#FAF6EC] px-4 py-2.5 text-[13.5px] font-semibold text-[#2c3e4f]">
-                  <MapPin size={14} className="text-[#163C5E]" /> {a}
-                </span>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.1}>
-            <div className="mx-auto mt-12 max-w-5xl overflow-hidden border border-[#0E2840]/10 shadow-xl ring-1 ring-[#0E2840]/5">
-              <MapEmbed
-                query="Murrieta, CA"
-                zoom={9}
-                title="Spartan Moving and Transport service area across Southern California"
-                className="aspect-[16/9]"
-              />
+          <div className="mt-12 grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <div className="grid grid-cols-2 border-l border-t border-[#0E2840]/15 sm:grid-cols-3">
+                {SERVICE_AREAS.map((a) => (
+                  <span
+                    key={a}
+                    className={cx(
+                      mono,
+                      "border-b border-r border-[#0E2840]/15 px-4 py-3.5 text-[11.5px] uppercase tracking-[0.12em] text-[#1B2A38]"
+                    )}
+                  >
+                    {a}
+                  </span>
+                ))}
+              </div>
             </div>
-          </Reveal>
+            <Reveal delay={0.1} className="lg:col-span-6">
+              <div className="border border-[#0E2840]/15">
+                <MapEmbed
+                  query="Murrieta, CA"
+                  zoom={9}
+                  title="Spartan Moving service area across Southern California"
+                  className="aspect-[16/11]"
+                />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       <CtaBand
         title="Let's Plan Your Move"
-        sub="Tell us your move details and our crew will help you plan the next step."
+        sub="Tell us your move details and the crew will help you plan the next step."
       />
     </>
   );
