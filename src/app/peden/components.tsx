@@ -37,8 +37,8 @@ import {
 /* ===========================================================================
    Chantelle Peden Hunt, MBA — Licensed Agent with New York Life
    ----------------------------------------------------------------------------
-   Palette: white · ink #16202B · navy #0F2A43 · gold #BD9B5A
-            sand #F7F2E9 · green #245C46 · muted #5A6B7A
+   Palette: white · ink #16202B · navy #003B73 · gold #2E86C1
+            sand #EAF2FB · green #0A5BA0 · muted #5A6B7A
    ========================================================================= */
 
 export const cx = (...c: (string | false | undefined | null)[]) =>
@@ -157,7 +157,7 @@ function Eyebrow({
     <span
       className={cx(
         "inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em]",
-        light ? "text-[#BD9B5A]" : "text-[#A8853F]"
+        light ? "text-[#2E86C1]" : "text-[#0A66B8]"
       )}
     >
       <span className="h-px w-6 bg-current opacity-60" />
@@ -172,18 +172,18 @@ function Eyebrow({
 function Logo({ light = false }: { light?: boolean }) {
   return (
     <Link href="#home" className="flex items-center gap-3 group">
-      <span className="relative grid place-items-center h-10 w-10 rounded-xl bg-[#0F2A43] ring-1 ring-[#BD9B5A]/40 shadow-sm">
-        <ShieldCheck size={20} className="text-[#BD9B5A]" />
+      <span className="relative grid place-items-center h-10 w-10 rounded-xl bg-[#003B73] ring-1 ring-[#2E86C1]/40 shadow-sm">
+        <ShieldCheck size={20} className="text-white" />
       </span>
       <span className="leading-tight">
         <span
           className={cx(
             serif,
             "block text-[17px] font-semibold tracking-tight",
-            light ? "text-white" : "text-[#0F2A43]"
+            light ? "text-white" : "text-[#003B73]"
           )}
         >
-          Chantelle Peden Hunt, <span className="text-[#BD9B5A]">MBA</span>
+          Chantelle Peden Hunt, <span className="text-[#2E86C1]">MBA</span>
         </span>
         <span
           className={cx(
@@ -227,7 +227,7 @@ export function Navbar() {
       className={cx(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled || open
-          ? "bg-white/95 backdrop-blur-md border-b border-[#0F2A43]/8 shadow-[0_2px_20px_-12px_rgba(15,42,67,0.4)]"
+          ? "bg-white/95 backdrop-blur-md border-b border-[#003B73]/8 shadow-[0_2px_20px_-12px_rgba(15,42,67,0.4)]"
           : "bg-transparent"
       )}
     >
@@ -243,7 +243,7 @@ export function Navbar() {
                 "text-[14px] font-medium transition-colors",
                 onDark
                   ? "text-white/80 hover:text-white"
-                  : "text-[#3A4754] hover:text-[#0F2A43]"
+                  : "text-[#3A4754] hover:text-[#003B73]"
               )}
             >
               {l.label}
@@ -257,8 +257,8 @@ export function Navbar() {
             className={cx(
               "inline-flex items-center gap-2 text-[14px] font-semibold transition-colors",
               onDark
-                ? "text-white hover:text-[#D8B978]"
-                : "text-[#0F2A43] hover:text-[#A8853F]"
+                ? "text-white hover:text-[#8FC7EE]"
+                : "text-[#003B73] hover:text-[#0A66B8]"
             )}
           >
             <Phone size={15} />
@@ -269,8 +269,8 @@ export function Navbar() {
             className={cx(
               "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold shadow-sm transition-all hover:shadow-md",
               onDark
-                ? "bg-[#BD9B5A] text-[#0F2A43] hover:bg-[#cda863]"
-                : "bg-[#0F2A43] text-white hover:bg-[#0A1F33]"
+                ? "bg-white text-[#003B73] hover:bg-[#EAF2FB]"
+                : "bg-[#003B73] text-white hover:bg-[#002A52]"
             )}
           >
             Request a Quote
@@ -282,7 +282,7 @@ export function Navbar() {
           onClick={() => setOpen((v) => !v)}
           className={cx(
             "grid h-10 w-10 place-items-center rounded-lg transition-colors lg:hidden",
-            onDark ? "text-white" : "text-[#0F2A43]"
+            onDark ? "text-white" : "text-[#003B73]"
           )}
           aria-label="Toggle menu"
         >
@@ -297,7 +297,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden border-t border-[#0F2A43]/8 bg-white"
+            className="lg:hidden border-t border-[#003B73]/8 bg-white"
           >
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
               {NAV_LINKS.map((l) => (
@@ -305,7 +305,7 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#3A4754] hover:bg-[#F7F2E9]"
+                  className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#3A4754] hover:bg-[#EAF2FB]"
                 >
                   {l.label}
                 </a>
@@ -313,7 +313,7 @@ export function Navbar() {
               <a
                 href="#quote"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#0F2A43] px-5 py-3 text-[15px] font-semibold text-white"
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#003B73] px-5 py-3 text-[15px] font-semibold text-white"
               >
                 Request a Quote <ArrowRight size={16} />
               </a>
@@ -332,16 +332,16 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-[#0F2A43] pt-32 pb-24 sm:pt-44 sm:pb-32"
+      className="relative overflow-hidden bg-[#003B73] pt-32 pb-24 sm:pt-44 sm:pb-32"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F33] via-[#0F2A43] to-[#0F2A43]" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#BD9B5A]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#002A52] via-[#003B73] to-[#003B73]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2E86C1]/40 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <Reveal>
-            <p className="flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-[#D8B978]">
-              <span className="h-px w-8 bg-[#BD9B5A]/70" />
+            <p className="flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-[#8FC7EE]">
+              <span className="h-px w-8 bg-white/70" />
               Corona · Riverside · Inland Empire, CA
             </p>
           </Reveal>
@@ -353,7 +353,7 @@ export function Hero() {
               )}
             >
               Protecting what matters most —{" "}
-              <span className="text-[#D8B978]">
+              <span className="text-[#8FC7EE]">
                 your family, future, and business.
               </span>
             </h1>
@@ -370,7 +370,7 @@ export function Hero() {
             <div className="mt-9 flex flex-wrap gap-3.5">
               <a
                 href="#quote"
-                className="inline-flex items-center gap-2 rounded-full bg-[#BD9B5A] px-7 py-3.5 text-[15px] font-semibold text-[#0F2A43] shadow-lg shadow-black/20 transition-all hover:bg-[#cda863] hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg shadow-black/20 transition-all hover:bg-[#EAF2FB] hover:shadow-xl"
               >
                 Request a Quote <ArrowRight size={17} />
               </a>
@@ -387,15 +387,15 @@ export function Hero() {
         <Reveal delay={0.2}>
           <div className="mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-white/12 pt-7 text-[13px] text-white/55">
             <span className="inline-flex items-center gap-2">
-              <GraduationCap size={16} className="text-[#BD9B5A]" /> MBA ·
+              <GraduationCap size={16} className="text-[#2E86C1]" /> MBA ·
               Business &amp; Leadership
             </span>
             <span className="inline-flex items-center gap-2">
-              <ShieldCheck size={16} className="text-[#BD9B5A]" /> Licensed
+              <ShieldCheck size={16} className="text-[#2E86C1]" /> Licensed
               Agent, New York Life
             </span>
             <span className="inline-flex items-center gap-2">
-              <HandHeart size={16} className="text-[#BD9B5A]" /> Personal, local
+              <HandHeart size={16} className="text-[#2E86C1]" /> Personal, local
               guidance
             </span>
           </div>
@@ -410,11 +410,11 @@ export function Hero() {
    ========================================================================= */
 export function TrustStatement() {
   return (
-    <section className="bg-[#F7F2E9]">
+    <section className="bg-[#EAF2FB]">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
           <Reveal className="md:col-span-4">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#A8853F]">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#0A66B8]">
               Why work with Chantelle
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-[#5A6B7A]">
@@ -426,7 +426,7 @@ export function TrustStatement() {
             <p
               className={cx(
                 serif,
-                "border-l-2 border-[#BD9B5A] pl-6 text-[1.5rem] font-medium leading-snug text-[#0F2A43] sm:text-[1.95rem]"
+                "border-l-2 border-[#2E86C1] pl-6 text-[1.5rem] font-medium leading-snug text-[#003B73] sm:text-[1.95rem]"
               )}
             >
               Insurance and financial planning can feel overwhelming. I help
@@ -464,12 +464,12 @@ const ABOUT_POINTS = [
 
 export function About() {
   return (
-    <section id="about" className="relative bg-[#0F2A43]">
+    <section id="about" className="relative bg-[#003B73]">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2">
         <Reveal>
-          <div className="relative rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#13314c] to-[#0b1f33] p-8 shadow-2xl sm:p-10">
+          <div className="relative rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#0A4E92] to-[#002A52] p-8 shadow-2xl sm:p-10">
             <div className="flex items-center gap-4">
-              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[#BD9B5A] text-[#0F2A43]">
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-white text-[#003B73]">
                 <span className={cx(serif, "text-[1.6rem] font-bold leading-none")}>
                   CP
                 </span>
@@ -478,7 +478,7 @@ export function About() {
                 <p className={cx(serif, "text-[1.3rem] font-semibold text-white")}>
                   Chantelle Peden Hunt, MBA
                 </p>
-                <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D8B978]">
+                <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8FC7EE]">
                   Licensed Agent · New York Life
                 </p>
               </div>
@@ -508,7 +508,7 @@ export function About() {
                 },
               ].map(({ Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-4">
-                  <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5 text-[#BD9B5A]">
+                  <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5 text-[#2E86C1]">
                     <Icon size={18} />
                   </span>
                   <div>
@@ -564,7 +564,7 @@ export function About() {
             {ABOUT_POINTS.map((p, i) => (
               <Reveal key={p.title} delay={0.12 + i * 0.05}>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <p.Icon size={22} className="text-[#BD9B5A]" />
+                  <p.Icon size={22} className="text-[#2E86C1]" />
                   <h3 className="mt-3 text-[14px] font-semibold text-white">
                     {p.title}
                   </h3>
@@ -688,17 +688,17 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
         className={cx(
           "flex h-full flex-col rounded-2xl border bg-white p-7 transition-all",
           open
-            ? "border-[#BD9B5A]/50 shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
-            : "border-[#0F2A43]/8 hover:border-[#BD9B5A]/40 hover:shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
+            ? "border-[#2E86C1]/50 shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
+            : "border-[#003B73]/8 hover:border-[#2E86C1]/40 hover:shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
         )}
       >
-        <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#0F2A43] text-[#BD9B5A]">
+        <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#003B73] text-[#2E86C1]">
           <s.Icon size={22} />
         </span>
         <h3
           className={cx(
             serif,
-            "mt-5 text-[1.35rem] font-semibold text-[#0F2A43]"
+            "mt-5 text-[1.35rem] font-semibold text-[#003B73]"
           )}
         >
           {s.title}
@@ -716,17 +716,17 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <div className="mt-5 border-t border-[#0F2A43]/8 pt-5">
+              <div className="mt-5 border-t border-[#003B73]/8 pt-5">
                 <p className="text-[14px] leading-relaxed text-[#5A6B7A]">
                   {s.intro}
                 </p>
-                <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#A8853F]">
+                <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0A66B8]">
                   How Chantelle can help
                 </p>
                 <ul className="mt-3 space-y-2.5">
                   {s.points.map((p) => (
                     <li key={p} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#F7F2E9] text-[#245C46]">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#EAF2FB] text-[#0A5BA0]">
                         <Check size={12} strokeWidth={3} />
                       </span>
                       <span className="text-[14px] leading-relaxed text-[#3A4754]">
@@ -735,15 +735,15 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-5 rounded-xl bg-[#F7F2E9] px-4 py-3">
-                  <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0F2A43]">
+                <div className="mt-5 rounded-xl bg-[#EAF2FB] px-4 py-3">
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#003B73]">
                     Who it&rsquo;s for ·{" "}
                   </span>
                   <span className="text-[13px] text-[#5A6B7A]">{s.who}</span>
                 </div>
                 <a
                   href="#quote"
-                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0F2A43] px-5 py-2.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0A1F33]"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#003B73] px-5 py-2.5 text-[13px] font-semibold text-white transition-all hover:bg-[#002A52]"
                 >
                   Request guidance <ArrowRight size={14} />
                 </a>
@@ -754,7 +754,7 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="mt-6 inline-flex items-center gap-1.5 self-start text-[14px] font-semibold text-[#A8853F] transition-colors hover:text-[#0F2A43]"
+          className="mt-6 inline-flex items-center gap-1.5 self-start text-[14px] font-semibold text-[#0A66B8] transition-colors hover:text-[#003B73]"
           aria-expanded={open}
         >
           {open ? "Show less" : "Learn more"}
@@ -780,7 +780,7 @@ export function Services() {
             <h2
               className={cx(
                 serif,
-                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#0F2A43] sm:text-[2.6rem]"
+                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#003B73] sm:text-[2.6rem]"
               )}
             >
               Thoughtful protection and planning, made personal.
@@ -791,7 +791,7 @@ export function Services() {
               From life insurance in Riverside to retirement planning in Corona
               and small business insurance across Riverside County, Chantelle
               helps you find the strategy that fits your life. Select{" "}
-              <span className="font-semibold text-[#0F2A43]">Learn more</span> on
+              <span className="font-semibold text-[#003B73]">Learn more</span> on
               any service to see how she can help.
             </p>
           </Reveal>
@@ -804,7 +804,7 @@ export function Services() {
         </div>
 
         <Reveal delay={0.1}>
-          <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl bg-[#0F2A43] px-8 py-8 text-center sm:flex-row sm:text-left">
+          <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl bg-[#003B73] px-8 py-8 text-center sm:flex-row sm:text-left">
             <div>
               <h3 className={cx(serif, "text-[1.4rem] font-semibold text-white")}>
                 Not sure which fits your situation?
@@ -816,7 +816,7 @@ export function Services() {
             </div>
             <a
               href="#quote"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#BD9B5A] px-6 py-3.5 text-[15px] font-semibold text-[#0F2A43] transition-all hover:bg-[#cda863]"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#EAF2FB]"
             >
               Request a consultation <ArrowRight size={16} />
             </a>
@@ -842,8 +842,8 @@ const WHO = [
 
 export function WhoIHelp() {
   return (
-    <section id="who" className="relative overflow-hidden bg-gradient-to-b from-[#245C46] to-[#1c4a37]">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#BD9B5A]/30 to-transparent" />
+    <section id="who" className="relative overflow-hidden bg-gradient-to-b from-[#0A5BA0] to-[#002A52]">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2E86C1]/30 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12">
@@ -871,7 +871,7 @@ export function WhoIHelp() {
             <Reveal delay={0.15}>
               <a
                 href="#quote"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#BD9B5A] px-7 py-3.5 text-[15px] font-semibold text-[#0F2A43] shadow-lg transition-all hover:bg-[#cda863]"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg transition-all hover:bg-[#EAF2FB]"
               >
                 Start the conversation <ArrowRight size={16} />
               </a>
@@ -883,7 +883,7 @@ export function WhoIHelp() {
               {WHO.map((w, i) => (
                 <Reveal key={w} delay={i * 0.04}>
                   <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#BD9B5A] text-[#0F2A43]">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white text-[#003B73]">
                       <Check size={14} strokeWidth={3} />
                     </span>
                     <span className="text-[15px] font-medium text-white/90">
@@ -917,7 +917,7 @@ export function QuoteForm() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="quote" className="bg-[#F7F2E9]">
+    <section id="quote" className="bg-[#EAF2FB]">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -928,7 +928,7 @@ export function QuoteForm() {
               <h2
                 className={cx(
                   serif,
-                  "mt-4 text-[2.1rem] font-semibold leading-tight text-[#0F2A43] sm:text-[2.6rem]"
+                  "mt-4 text-[2.1rem] font-semibold leading-tight text-[#003B73] sm:text-[2.6rem]"
                 )}
               >
                 Let&rsquo;s start the conversation.
@@ -950,7 +950,7 @@ export function QuoteForm() {
                   { Icon: MapPin, t: "Serving Corona, Riverside & the Inland Empire" },
                 ].map(({ Icon, t }) => (
                   <div key={t} className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-white text-[#245C46] shadow-sm">
+                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-white text-[#0A5BA0] shadow-sm">
                       <Icon size={17} />
                     </span>
                     <span className="text-[15px] text-[#3A4754]">{t}</span>
@@ -966,17 +966,17 @@ export function QuoteForm() {
                 e.preventDefault();
                 setSent(true);
               }}
-              className="rounded-3xl border border-[#0F2A43]/8 bg-white p-6 shadow-[0_24px_70px_-40px_rgba(15,42,67,0.45)] sm:p-9"
+              className="rounded-3xl border border-[#003B73]/8 bg-white p-6 shadow-[0_24px_70px_-40px_rgba(15,42,67,0.45)] sm:p-9"
             >
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
-                  <span className="grid h-16 w-16 place-items-center rounded-full bg-[#245C46]/10 text-[#245C46]">
+                  <span className="grid h-16 w-16 place-items-center rounded-full bg-[#0A5BA0]/10 text-[#0A5BA0]">
                     <Check size={30} strokeWidth={2.5} />
                   </span>
                   <h3
                     className={cx(
                       serif,
-                      "mt-5 text-[1.5rem] font-semibold text-[#0F2A43]"
+                      "mt-5 text-[1.5rem] font-semibold text-[#003B73]"
                     )}
                   >
                     Thank you!
@@ -1064,7 +1064,7 @@ export function QuoteForm() {
                   <div className="sm:col-span-2">
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0F2A43] px-7 py-4 text-[15px] font-semibold text-white shadow-lg transition-all hover:bg-[#0A1F33] hover:shadow-xl sm:w-auto"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#003B73] px-7 py-4 text-[15px] font-semibold text-white shadow-lg transition-all hover:bg-[#002A52] hover:shadow-xl sm:w-auto"
                     >
                       Request My Consultation <ArrowRight size={16} />
                     </button>
@@ -1080,7 +1080,7 @@ export function QuoteForm() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-[#0F2A43]/15 bg-[#FBF9F4] px-4 py-3 text-[15px] text-[#16202B] outline-none transition-all placeholder:text-[#9aa6b1] focus:border-[#BD9B5A] focus:ring-2 focus:ring-[#BD9B5A]/20";
+  "w-full rounded-xl border border-[#003B73]/15 bg-[#F4F9FE] px-4 py-3 text-[15px] text-[#16202B] outline-none transition-all placeholder:text-[#9aa6b1] focus:border-[#2E86C1] focus:ring-2 focus:ring-[#2E86C1]/20";
 
 function Field({
   label,
@@ -1095,9 +1095,9 @@ function Field({
 }) {
   return (
     <label htmlFor={name} className="block">
-      <span className="mb-1.5 block text-[13px] font-semibold text-[#0F2A43]">
+      <span className="mb-1.5 block text-[13px] font-semibold text-[#003B73]">
         {label}
-        {required && <span className="text-[#BD9B5A]"> *</span>}
+        {required && <span className="text-[#2E86C1]"> *</span>}
       </span>
       {children}
     </label>
@@ -1151,7 +1151,7 @@ export function FAQ() {
             <h2
               className={cx(
                 serif,
-                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#0F2A43] sm:text-[2.6rem]"
+                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#003B73] sm:text-[2.6rem]"
               )}
             >
               Questions, answered simply.
@@ -1159,7 +1159,7 @@ export function FAQ() {
           </Reveal>
         </div>
 
-        <div className="mt-12 divide-y divide-[#0F2A43]/8 rounded-2xl border border-[#0F2A43]/8 bg-white">
+        <div className="mt-12 divide-y divide-[#003B73]/8 rounded-2xl border border-[#003B73]/8 bg-white">
           {FAQS.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -1172,7 +1172,7 @@ export function FAQ() {
                   <span
                     className={cx(
                       serif,
-                      "text-[1.05rem] font-semibold text-[#0F2A43]"
+                      "text-[1.05rem] font-semibold text-[#003B73]"
                     )}
                   >
                     {f.q}
@@ -1181,8 +1181,8 @@ export function FAQ() {
                     className={cx(
                       "grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all",
                       isOpen
-                        ? "bg-[#0F2A43] text-[#BD9B5A] rotate-180"
-                        : "bg-[#F7F2E9] text-[#0F2A43]"
+                        ? "bg-[#003B73] text-[#2E86C1] rotate-180"
+                        : "bg-[#EAF2FB] text-[#003B73]"
                     )}
                   >
                     <ChevronDown size={16} />
@@ -1219,7 +1219,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t-2 border-[#BD9B5A]/40 bg-[#0F2A43]"
+      className="relative overflow-hidden border-t-2 border-[#2E86C1]/40 bg-[#003B73]"
     >
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-12">
@@ -1249,7 +1249,7 @@ export function Contact() {
               <div className="mt-9 flex flex-wrap gap-3.5">
                 <a
                   href="tel:+10000000000"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#BD9B5A] px-6 py-3.5 text-[15px] font-semibold text-[#0F2A43] transition-all hover:bg-[#cda863]"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#EAF2FB]"
                 >
                   <Phone size={16} /> Call
                 </a>
@@ -1299,7 +1299,7 @@ export function Contact() {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-white/80 transition-all hover:border-[#BD9B5A]/50 hover:bg-[#BD9B5A] hover:text-[#0F2A43]"
+                    className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-white/80 transition-all hover:border-[#2E86C1]/50 hover:bg-white hover:text-[#003B73]"
                   >
                     <Icon size={18} />
                   </a>
@@ -1324,7 +1324,7 @@ function ContactCard({
 }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#BD9B5A]/15 text-[#BD9B5A]">
+      <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/15 text-[#2E86C1]">
         <Icon size={18} />
       </span>
       <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/50">
@@ -1340,7 +1340,7 @@ function ContactCard({
    ========================================================================= */
 export function Footer() {
   return (
-    <footer className="bg-[#0A1F33] text-white/70">
+    <footer className="bg-[#002A52] text-white/70">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -1357,7 +1357,7 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/12 text-white/70 transition-all hover:border-[#BD9B5A]/50 hover:text-[#BD9B5A]"
+                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/12 text-white/70 transition-all hover:border-[#2E86C1]/50 hover:text-[#2E86C1]"
                 >
                   <Icon size={17} />
                 </a>
@@ -1372,13 +1372,13 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-[14px]">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="hover:text-[#BD9B5A]">
+                  <a href={l.href} className="hover:text-[#2E86C1]">
                     {l.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="#quote" className="hover:text-[#BD9B5A]">
+                <a href="#quote" className="hover:text-[#2E86C1]">
                   Request a Quote
                 </a>
               </li>
@@ -1424,13 +1424,13 @@ export function Footer() {
             Agent with New York Life.
           </p>
           <div className="flex gap-5">
-            <a href="#" className="hover:text-[#BD9B5A]">
+            <a href="#" className="hover:text-[#2E86C1]">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-[#BD9B5A]">
+            <a href="#" className="hover:text-[#2E86C1]">
               Terms
             </a>
-            <a href="#" className="hover:text-[#BD9B5A]">
+            <a href="#" className="hover:text-[#2E86C1]">
               Compliance
             </a>
           </div>

@@ -45,7 +45,7 @@ export default function PedenLayout({
 }) {
   return (
     <div
-      className={`${serif.variable} ${sans.variable} min-h-screen bg-white text-[#16202B] [font-family:var(--font-sans-p)] antialiased selection:bg-[#BD9B5A]/25`}
+      className={`${serif.variable} ${sans.variable} min-h-screen bg-white text-[#16202B] [font-family:var(--font-sans-p)] antialiased selection:bg-[#2E86C1]/25`}
     >
       <Navbar />
       <main>{children}</main>

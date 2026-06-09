@@ -70,10 +70,6 @@ export const NAV_LINKS = [
   { label: "Contact / Quote", href: "/spartan/contact" },
 ];
 
-/* Unsplash helper — moving, boxes, trucks, homes & crews. */
-export const img = (id: string, w = 1500) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
 /* ===========================================================================
    Greek key (meander) decorative strip
    ========================================================================= */
@@ -103,6 +99,52 @@ export function GreekKey({
       </defs>
       <rect width="100%" height="14" fill={`url(#${id})`} />
     </svg>
+  );
+}
+
+/* ===========================================================================
+   Hero artwork — brand watermark + meander (replaces stock photography)
+   ========================================================================= */
+export function HeroArt() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute -top-24 right-0 h-[520px] w-[520px] rounded-full bg-[#163C5E]/30 blur-3xl" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/spartan-assets/logo.png"
+        alt=""
+        className="absolute -right-20 top-1/2 hidden h-[460px] w-[460px] -translate-y-1/2 object-contain opacity-[0.07] md:block"
+      />
+      <GreekKey className="absolute inset-x-0 bottom-0 opacity-30" />
+    </div>
+  );
+}
+
+/* ===========================================================================
+   Map embed (keyless Google Maps iframe)
+   ========================================================================= */
+export function MapEmbed({
+  query,
+  zoom = 11,
+  title,
+  className,
+}: {
+  query: string;
+  zoom?: number;
+  title: string;
+  className?: string;
+}) {
+  const src = `https://www.google.com/maps?q=${encodeURIComponent(
+    query
+  )}&z=${zoom}&output=embed`;
+  return (
+    <iframe
+      title={title}
+      src={src}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      className={cx("block h-full w-full border-0", className)}
+    />
   );
 }
 
@@ -624,14 +666,7 @@ export function CtaBand({
 }) {
   return (
     <section className="relative overflow-hidden bg-[#0E2840]">
-      <div className="absolute inset-0 opacity-[0.12]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={img("1600880292203-757bb62b4baf", 1700)}
-          alt=""
-          className="h-full w-full object-cover"
-        />
-      </div>
+      <HeroArt />
       <GreekKey className="absolute inset-x-0 top-0" />
       <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-14 text-center sm:px-8 md:flex-row md:text-left">
         <div>

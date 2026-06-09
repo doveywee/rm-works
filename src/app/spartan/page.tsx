@@ -20,7 +20,6 @@ import {
   cx,
   head,
   company,
-  img,
   Reveal,
   Button,
   SectionHeading,
@@ -28,6 +27,10 @@ import {
   Stats,
   Reviews,
   CtaBand,
+  HeroArt,
+  MapEmbed,
+  GreekKey,
+  Stars,
 } from "./components";
 
 /* ---- Service preview cards ---- */
@@ -92,13 +95,8 @@ export default function SpartanHome() {
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden bg-[#0E2840] pt-28 pb-20 sm:pt-36 sm:pb-28">
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={img("1600518464441-9154a4dea21b", 1900)}
-            alt=""
-            className="h-full w-full object-cover object-center opacity-[0.20]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036]/85 via-[#0E2840]/90 to-[#0E2840]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036] via-[#0E2840] to-[#0E2840]" />
+          <HeroArt />
           <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
         </div>
 
@@ -163,22 +161,28 @@ export default function SpartanHome() {
           <Reveal delay={0.15} className="lg:col-span-5">
             <div className="relative mx-auto max-w-sm lg:max-w-none">
               <div className="absolute -inset-3 -z-0 border border-[#C9A24B]/30" />
-              <div className="relative overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <div className="relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden bg-[#0A2036] p-8 text-center shadow-2xl ring-1 ring-white/10">
+                <GreekKey className="absolute inset-x-0 top-0 opacity-60" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={img("1530124566582-a618bc2615dc", 1000)}
-                  alt="Professional movers carrying boxes and furniture"
-                  className="aspect-[4/5] w-full bg-[#1B2A38] object-cover"
+                  src="/spartan-assets/logo.png"
+                  alt="Spartan Moving and Transport Inc logo"
+                  className="h-36 w-36 object-contain sm:h-40 sm:w-40"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A2036] via-[#0A2036]/70 to-transparent p-6 pt-20">
-                  <p className="text-[15px] font-medium leading-snug text-white">
-                    Strong, careful, and professional moving help — handled with
-                    Spartan discipline from start to finish.
-                  </p>
-                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E4C77E]">
-                    {company.name}
-                  </p>
+                <p className={cx(head, "mt-6 text-[1.7rem] font-bold uppercase leading-[1.05] text-white")}>
+                  Strong. Careful.
+                  <br />
+                  Professional.
+                </p>
+                <p className="mt-3 max-w-xs text-[14px] leading-snug text-white/65">
+                  Moving help handled with Spartan discipline — from the first box
+                  to the final placement.
+                </p>
+                <div className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-[#E4C77E]">
+                  <Stars n={5} size={14} /> {company.rating} · {company.reviewCount}+
+                  reviews
                 </div>
+                <GreekKey className="absolute inset-x-0 bottom-0 opacity-60" />
               </div>
             </div>
           </Reveal>
@@ -195,11 +199,11 @@ export default function SpartanHome() {
           <Reveal>
             <div className="relative">
               <div className="overflow-hidden shadow-xl ring-1 ring-[#0E2840]/10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img("1600585154340-be6161a56a0c", 1100)}
-                  alt="A Southern California home ready for moving day"
-                  className="aspect-[5/4] w-full bg-[#1B2A38] object-cover"
+                <MapEmbed
+                  query="Murrieta, CA"
+                  zoom={11}
+                  title="Map of Murrieta, California"
+                  className="aspect-[5/4]"
                 />
               </div>
               <div className="absolute -bottom-5 -right-4 hidden bg-[#163C5E] px-6 py-5 text-white shadow-xl sm:block">
@@ -307,14 +311,7 @@ export default function SpartanHome() {
 
       {/* ================= WHY CHOOSE ================= */}
       <section className="relative overflow-hidden bg-[#0E2840]">
-        <div className="absolute inset-0 opacity-[0.10]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={img("1581578017093-cd30fce4eeb7", 1800)}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
+        <HeroArt />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading

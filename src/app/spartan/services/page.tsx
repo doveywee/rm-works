@@ -20,13 +20,14 @@ import {
   cx,
   head,
   company,
-  img,
   Reveal,
   Eyebrow,
   Button,
   SectionHeading,
   TrustBar,
   CtaBand,
+  HeroArt,
+  MapEmbed,
 } from "../components";
 
 const SERVICES = [
@@ -148,13 +149,8 @@ export default function SpartanServices() {
       {/* ================= PAGE HERO ================= */}
       <section className="relative overflow-hidden bg-[#0E2840] pt-32 pb-16 sm:pt-40 sm:pb-20">
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={img("1601584115197-04ecc0da31d7", 1900)}
-            alt=""
-            className="h-full w-full object-cover opacity-[0.18]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036]/85 via-[#0E2840]/92 to-[#0E2840]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036] via-[#0E2840] to-[#0E2840]" />
+          <HeroArt />
           <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
         </div>
         <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
@@ -392,6 +388,17 @@ export default function SpartanServices() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.1}>
+            <div className="mx-auto mt-12 max-w-5xl overflow-hidden border border-[#0E2840]/10 shadow-xl ring-1 ring-[#0E2840]/5">
+              <MapEmbed
+                query="Murrieta, CA"
+                zoom={9}
+                title="Spartan Moving and Transport service area across Southern California"
+                className="aspect-[16/9]"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 

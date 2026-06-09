@@ -5,12 +5,14 @@ import {
   cx,
   head,
   company,
-  img,
   Reveal,
   Eyebrow,
   SectionHeading,
   QuoteForm,
   FAQ,
+  HeroArt,
+  MapEmbed,
+  GreekKey,
 } from "../components";
 
 const FAQS = [
@@ -53,13 +55,8 @@ export default function SpartanContact() {
       {/* ================= PAGE HERO ================= */}
       <section className="relative overflow-hidden bg-[#0E2840] pt-32 pb-16 sm:pt-40 sm:pb-20">
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={img("1558642452-9d2a7deb7f62", 1900)}
-            alt=""
-            className="h-full w-full object-cover opacity-[0.18]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036]/85 via-[#0E2840]/92 to-[#0E2840]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036] via-[#0E2840] to-[#0E2840]" />
+          <HeroArt />
           <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
         </div>
         <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
@@ -132,6 +129,59 @@ export default function SpartanContact() {
               </Reveal>
             );
           })}
+        </div>
+      </section>
+
+      {/* ================= LOCATION & MAP ================= */}
+      <section className="relative overflow-hidden bg-[#0E2840]">
+        <GreekKey className="absolute inset-x-0 top-0" />
+        <HeroArt />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              light
+              eyebrow="Location & Service Area"
+              title="Based in Murrieta, CA"
+            />
+            <Reveal delay={0.1}>
+              <p className="mt-6 text-[16px] leading-relaxed text-white/70">
+                {company.name} is based in {company.city} and serves customers
+                throughout Riverside County, Orange County, San Diego County, and
+                nearby Southern California communities.
+              </p>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <ul className="mt-7 space-y-3 text-[15px] text-white/80">
+                <li className="flex items-start gap-3">
+                  <MapPin size={18} className="mt-0.5 shrink-0 text-[#E4C77E]" />
+                  {company.address}
+                </li>
+                <li className="flex items-start gap-3">
+                  <Phone size={18} className="mt-0.5 shrink-0 text-[#E4C77E]" />
+                  <a href={company.phoneHref} className="hover:text-[#E4C77E]">
+                    {company.phone}
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mail size={18} className="mt-0.5 shrink-0 text-[#E4C77E]" />
+                  <a href={company.emailHref} className="break-all hover:text-[#E4C77E]">
+                    {company.email}
+                  </a>
+                </li>
+              </ul>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.12} className="lg:col-span-7">
+            <div className="overflow-hidden border border-white/10 shadow-2xl ring-1 ring-[#C9A24B]/20">
+              <MapEmbed
+                query={company.address}
+                zoom={13}
+                title="Spartan Moving and Transport Inc — Murrieta, CA location"
+                className="aspect-[16/10]"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
