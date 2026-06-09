@@ -46,10 +46,6 @@ export const cx = (...c: (string | false | undefined | null)[]) =>
 
 const serif = "[font-family:var(--font-serif-p)]";
 
-/* Unsplash helper — warm, community & family lifestyle imagery (no portraits). */
-const img = (id: string, w = 1400) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
 /* ---- Brand social icons (lucide build dropped brand glyphs) --------------- */
 type IconProps = { size?: number; className?: string };
 const svgBase = (size: number) => ({
@@ -132,9 +128,17 @@ function Reveal({
     <motion.div
       ref={ref}
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
+      // `initial` must not depend on useReducedMotion(): that hook returns
+      // false during SSR and true on a reduce-motion client, which produces a
+      // hydration mismatch that can leave content stuck at opacity:0. Keep it
+      // constant and let reduced-motion simply make the reveal instant.
+      initial={{ opacity: 0, y }}
       animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: reduce ? 0 : 0.6,
+        delay: reduce ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
     </motion.div>
@@ -328,21 +332,13 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-[#0F2A43] pt-28 pb-20 sm:pt-36 sm:pb-28"
+      className="relative overflow-hidden bg-[#0F2A43] pt-32 pb-24 sm:pt-44 sm:pb-32"
     >
-      {/* background image + wash */}
-      <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={img("1511895426328-dc8714191300", 1900)}
-          alt=""
-          className="h-full w-full object-cover object-top opacity-[0.16]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F33] via-[#0F2A43]/92 to-[#0F2A43]" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F33] via-[#0F2A43] to-[#0F2A43]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#BD9B5A]/40 to-transparent" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-x-12 gap-y-14 px-5 sm:px-8 lg:grid-cols-12">
-        <div className="lg:col-span-7">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-3xl">
           <Reveal>
             <p className="flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-[#D8B978]">
               <span className="h-px w-8 bg-[#BD9B5A]/70" />
@@ -353,18 +349,17 @@ export function Hero() {
             <h1
               className={cx(
                 serif,
-                "mt-6 text-[2.7rem] font-semibold leading-[1.04] tracking-[-0.01em] text-white sm:text-[3.7rem]"
+                "mt-6 text-[2.8rem] font-semibold leading-[1.03] tracking-[-0.01em] text-white sm:text-[4.1rem]"
               )}
             >
-              Protecting what matters most —
-              <br className="hidden sm:block" />{" "}
+              Protecting what matters most —{" "}
               <span className="text-[#D8B978]">
                 your family, future, and business.
               </span>
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-white/70">
+            <p className="mt-7 max-w-2xl text-[17px] leading-relaxed text-white/70">
               I&rsquo;m Chantelle Peden Hunt, MBA, a Licensed Agent with New York
               Life. I help individuals, families, and business owners across the
               Inland Empire protect their income, plan for retirement, and build
@@ -387,46 +382,22 @@ export function Hero() {
               </a>
             </div>
           </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/12 pt-6 text-[13px] text-white/55">
-              <span className="inline-flex items-center gap-2">
-                <GraduationCap size={16} className="text-[#BD9B5A]" /> MBA ·
-                Business &amp; Leadership
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck size={16} className="text-[#BD9B5A]" /> Licensed
-                Agent, New York Life
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <HandHeart size={16} className="text-[#BD9B5A]" /> Personal,
-                local guidance
-              </span>
-            </div>
-          </Reveal>
         </div>
 
-        {/* portrait-orientation image with an overlaid personal note */}
-        <Reveal delay={0.15} className="lg:col-span-5">
-          <div className="relative mx-auto max-w-sm lg:max-w-none">
-            <div className="absolute -inset-3 -z-0 rounded-[1.9rem] border border-[#BD9B5A]/30" />
-            <div className="relative overflow-hidden rounded-[1.5rem] shadow-2xl ring-1 ring-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img("1476703993599-0035a21b17a9", 1000)}
-                alt="A parent and children at home, planning for the future"
-                className="aspect-[4/5] w-full object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A1F33] via-[#0A1F33]/70 to-transparent p-6 pt-20">
-                <p className="text-[15px] font-medium leading-snug text-white">
-                  &ldquo;My job is to make the complicated feel simple — and to
-                  be here for your family long after the paperwork is done.&rdquo;
-                </p>
-                <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#D8B978]">
-                  Chantelle Peden Hunt, MBA
-                </p>
-              </div>
-            </div>
+        <Reveal delay={0.2}>
+          <div className="mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-white/12 pt-7 text-[13px] text-white/55">
+            <span className="inline-flex items-center gap-2">
+              <GraduationCap size={16} className="text-[#BD9B5A]" /> MBA ·
+              Business &amp; Leadership
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <ShieldCheck size={16} className="text-[#BD9B5A]" /> Licensed
+              Agent, New York Life
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <HandHeart size={16} className="text-[#BD9B5A]" /> Personal, local
+              guidance
+            </span>
           </div>
         </Reveal>
       </div>
@@ -496,22 +467,60 @@ export function About() {
     <section id="about" className="relative bg-[#0F2A43]">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2">
         <Reveal>
-          <div className="relative">
-            <div className="overflow-hidden rounded-[1.75rem] shadow-2xl ring-1 ring-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img("1521791136064-7986c2920216", 1100)}
-                alt="A warm handshake — building a relationship of trust"
-                className="aspect-[5/4] w-full object-cover"
-              />
+          <div className="relative rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#13314c] to-[#0b1f33] p-8 shadow-2xl sm:p-10">
+            <div className="flex items-center gap-4">
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[#BD9B5A] text-[#0F2A43]">
+                <span className={cx(serif, "text-[1.6rem] font-bold leading-none")}>
+                  CP
+                </span>
+              </span>
+              <div>
+                <p className={cx(serif, "text-[1.3rem] font-semibold text-white")}>
+                  Chantelle Peden Hunt, MBA
+                </p>
+                <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D8B978]">
+                  Licensed Agent · New York Life
+                </p>
+              </div>
             </div>
-            <div className="absolute -right-4 -top-4 hidden rounded-2xl bg-[#BD9B5A] px-5 py-4 text-[#0F2A43] shadow-xl sm:block">
-              <p className={cx(serif, "text-[2rem] font-bold leading-none")}>
-                MBA
-              </p>
-              <p className="mt-1 text-[12px] font-semibold uppercase tracking-wide">
-                Licensed Agent
-              </p>
+
+            <div className="mt-8 space-y-5 border-t border-white/10 pt-7">
+              {[
+                {
+                  Icon: GraduationCap,
+                  label: "Background",
+                  value: "MBA — business, leadership & mentoring",
+                },
+                {
+                  Icon: ShieldCheck,
+                  label: "Credential",
+                  value: "Licensed Agent with New York Life",
+                },
+                {
+                  Icon: MapPin,
+                  label: "Service area",
+                  value: "Corona, Riverside & the Inland Empire, CA",
+                },
+                {
+                  Icon: Users,
+                  label: "Who she serves",
+                  value: "Individuals, families & business owners",
+                },
+              ].map(({ Icon, label, value }) => (
+                <div key={label} className="flex items-start gap-4">
+                  <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5 text-[#BD9B5A]">
+                    <Icon size={18} />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+                      {label}
+                    </p>
+                    <p className="mt-0.5 text-[15px] font-medium text-white">
+                      {value}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </Reveal>
@@ -833,16 +842,8 @@ const WHO = [
 
 export function WhoIHelp() {
   return (
-    <section id="who" className="relative overflow-hidden bg-[#245C46]">
-      <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={img("1531983412531-1f49a365ffed", 1800)}
-          alt=""
-          className="h-full w-full object-cover opacity-[0.08]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#245C46] via-[#245C46]/95 to-[#1c4a37]" />
-      </div>
+    <section id="who" className="relative overflow-hidden bg-gradient-to-b from-[#245C46] to-[#1c4a37]">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#BD9B5A]/30 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12">

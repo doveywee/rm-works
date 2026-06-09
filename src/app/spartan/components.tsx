@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   useEffect,
+  useId,
   useRef,
   useState,
   type ReactNode,
@@ -25,14 +26,18 @@ import {
   ChevronDown,
   ShieldCheck,
   BadgeCheck,
+  Star,
+  Quote,
 } from "lucide-react";
 
 /* ===========================================================================
    Spartan Moving and Transport Inc — Murrieta, CA
+   Brand drawn from the company logo: deep navy + antique gold + steel blue,
+   Spartan warrior, Greek-key (meander) motif.
    ----------------------------------------------------------------------------
-   Palette: ink #14171C · charcoal #20242C · steel #2A2F38
-            crimson #9E2B24 · crimson-lt #C1392F · bronze #B68A4E
-            bronze-lt #CDA869 · bone #F4F1EA · sand #FAF8F3 · muted #6A7079
+   Palette: navy-deep #0A2036 · navy #0E2840 · navy-mid #163C5E · steel #4E7CA6
+            gold #C9A24B · gold-hi #D4B063 · gold-lt #E4C77E
+            cream #F1EADB · sand #FAF6EC · body #1B2A38 · muted #566776
    ========================================================================= */
 
 export const cx = (...c: (string | false | undefined | null)[]) =>
@@ -45,11 +50,18 @@ export const company = {
   short: "Spartan Moving",
   phone: "(951) 326-5763",
   phoneHref: "tel:+19513265763",
+  email: "angelatsambasis@yahoo.com",
+  emailHref: "mailto:angelatsambasis@yahoo.com",
+  yelp: "https://www.yelp.com/biz/spartan-moving-and-transport-murrieta-3",
   address: "29577 Hubble Way, Murrieta, CA 92563",
   city: "Murrieta, CA",
   dot: "DOT #3480106",
   mc: "MC #0602297",
   cal: "CAL T0192705",
+  years: "11+",
+  moves: "6,000+",
+  reviewCount: "242",
+  rating: "4.7",
 };
 
 export const NAV_LINKS = [
@@ -63,74 +75,65 @@ export const img = (id: string, w = 1500) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 /* ===========================================================================
-   Spartan helmet mark
+   Greek key (meander) decorative strip
    ========================================================================= */
-export function SpartanMark({
-  size = 30,
+export function GreekKey({
   className,
+  color = "#C9A24B",
 }: {
-  size?: number;
   className?: string;
+  color?: string;
 }) {
+  const id = useId();
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 32 32"
-      fill="none"
-      className={className}
       aria-hidden
+      preserveAspectRatio="none"
+      className={cx("block h-3.5 w-full", className)}
     >
-      {/* helmet silhouette */}
-      <path
-        d="M16 2c6 0 9 3.6 9 9v6c0 5.4-3.4 9-9 13-5.6-4-9-7.6-9-13v-6c0-5.4 3-9 9-9Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* crest */}
-      <path
-        d="M9 8c4-3 10-3 14 0"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      {/* nose guard */}
-      <path d="M16 11.5v9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      {/* eye slits */}
-      <path d="M11.5 14.5h2.4M18.1 14.5h2.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <defs>
+        <pattern id={id} width="28" height="14" patternUnits="userSpaceOnUse">
+          <path
+            d="M0 13 H28 M4 13 V4 H20 V11 H10 V7 H16"
+            fill="none"
+            stroke={color}
+            strokeWidth="1.4"
+          />
+        </pattern>
+      </defs>
+      <rect width="100%" height="14" fill={`url(#${id})`} />
     </svg>
   );
 }
 
+/* ===========================================================================
+   Logo (real badge mark + wordmark)
+   ========================================================================= */
 export function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link href="/spartan" className="group flex items-center gap-2.5">
-      <span
-        className={cx(
-          "grid h-10 w-10 place-items-center rounded-md ring-1 transition-colors",
-          light
-            ? "bg-white/5 text-[#CDA869] ring-white/15"
-            : "bg-[#14171C] text-[#CDA869] ring-[#B68A4E]/40"
-        )}
-      >
-        <SpartanMark size={22} />
-      </span>
+    <Link href="/spartan" className="group flex items-center gap-3">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/spartan-assets/logo.png"
+        alt="Spartan Moving and Transport Inc logo"
+        width={44}
+        height={44}
+        className="h-11 w-11 shrink-0 rounded-full object-cover ring-1 ring-[#C9A24B]/40"
+      />
       <span className="leading-none">
         <span
           className={cx(
             head,
-            "block text-[18px] font-bold uppercase tracking-[0.12em]",
-            light ? "text-white" : "text-[#14171C]"
+            "block text-[18px] font-bold uppercase tracking-[0.16em]",
+            light ? "text-white" : "text-[#0E2840]"
           )}
         >
           Spartan
         </span>
         <span
           className={cx(
-            "mt-0.5 block text-[9px] font-semibold uppercase tracking-[0.3em]",
-            light ? "text-white/55" : "text-[#9097a0]"
+            "mt-1 block text-[9px] font-semibold uppercase tracking-[0.28em]",
+            light ? "text-[#E4C77E]" : "text-[#A87E33]"
           )}
         >
           Moving &amp; Transport
@@ -181,7 +184,7 @@ export function Eyebrow({
     <span
       className={cx(
         "inline-flex items-center gap-2.5 text-[12px] font-bold uppercase tracking-[0.22em]",
-        light ? "text-[#CDA869]" : "text-[#9E2B24]"
+        light ? "text-[#C9A24B]" : "text-[#163C5E]"
       )}
     >
       <span className="h-px w-7 bg-current opacity-60" />
@@ -219,11 +222,12 @@ export function Button({
     lg: "text-[14.5px] px-8 py-4",
   }[size];
   const variants = {
-    crimson: "bg-[#9E2B24] text-white hover:bg-[#86241e] shadow-sm",
-    bronze: "bg-[#B68A4E] text-[#14171C] hover:bg-[#c79b5e] shadow-sm",
-    ink: "bg-[#14171C] text-white hover:bg-[#20242C]",
+    // primary CTA — antique gold from the logo lettering
+    crimson: "bg-[#C9A24B] text-[#0E2840] hover:bg-[#D4B063] shadow-sm",
+    bronze: "bg-[#C9A24B] text-[#0E2840] hover:bg-[#D4B063] shadow-sm",
+    ink: "bg-[#0E2840] text-white hover:bg-[#163C5E]",
     outline:
-      "border border-[#14171C]/25 text-[#14171C] hover:border-[#9E2B24] hover:text-[#9E2B24]",
+      "border border-[#0E2840]/25 text-[#0E2840] hover:border-[#C9A24B] hover:text-[#11324F]",
     "outline-light":
       "border border-white/25 text-white hover:border-white/55 hover:bg-white/5",
   }[variant];
@@ -268,7 +272,7 @@ export function SectionHeading({
           className={cx(
             head,
             "mt-4 text-[clamp(1.9rem,4vw,2.9rem)] font-bold uppercase leading-[1.05] tracking-[0.01em]",
-            light ? "text-white" : "text-[#14171C]"
+            light ? "text-white" : "text-[#0E2840]"
           )}
         >
           {title}
@@ -279,7 +283,7 @@ export function SectionHeading({
           <p
             className={cx(
               "mt-4 text-[16px] leading-relaxed",
-              light ? "text-white/70" : "text-[#5b616a]"
+              light ? "text-white/70" : "text-[#566776]"
             )}
           >
             {sub}
@@ -287,6 +291,20 @@ export function SectionHeading({
         </Reveal>
       )}
     </div>
+  );
+}
+
+export function Stars({ n = 5, size = 15 }: { n?: number; size?: number }) {
+  return (
+    <span className="inline-flex gap-0.5" aria-label={`${n} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={size}
+          className={i < n ? "fill-[#C9A24B] text-[#C9A24B]" : "text-[#C9A24B]/30"}
+        />
+      ))}
+    </span>
   );
 }
 
@@ -305,19 +323,161 @@ const BADGES = [
 
 export function TrustBar() {
   return (
-    <div className="border-y border-[#14171C]/8 bg-[#FAF8F3]">
+    <div className="border-y border-[#0E2840]/8 bg-[#FAF6EC]">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-3 px-5 py-4 sm:px-8">
         {BADGES.map((b) => (
           <span
             key={b}
-            className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-[#3a4049]"
+            className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-[#2c3e4f]"
           >
-            <BadgeCheck size={15} className="text-[#9E2B24]" />
+            <BadgeCheck size={15} className="text-[#C9A24B]" />
             {b}
           </span>
         ))}
       </div>
     </div>
+  );
+}
+
+/* ===========================================================================
+   Stats band — real numbers pulled from the company's public profile
+   ========================================================================= */
+const STATS = [
+  { value: company.years, label: "Years Moving" },
+  { value: company.moves, label: "Successful Moves" },
+  { value: company.reviewCount, label: "Yelp Reviews" },
+  { value: `${company.rating}★`, label: "Avg. Customer Rating" },
+];
+
+export function Stats() {
+  return (
+    <section className="relative overflow-hidden bg-[#163C5E]">
+      <GreekKey className="absolute inset-x-0 top-0 opacity-50" />
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px px-5 py-14 sm:px-8 lg:grid-cols-4">
+        {STATS.map((s, i) => (
+          <Reveal key={s.label} delay={i * 0.06}>
+            <div className="px-4 text-center">
+              <p className={cx(head, "text-[2.6rem] font-bold leading-none text-[#E4C77E] sm:text-[3.1rem]")}>
+                {s.value}
+              </p>
+              <p className="mt-2.5 text-[12.5px] font-semibold uppercase tracking-[0.12em] text-white/70">
+                {s.label}
+              </p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ===========================================================================
+   Reviews — verbatim customer reviews from the company's public listings
+   ========================================================================= */
+const REVIEWS: { name: string; loc: string; text: string }[] = [
+  {
+    name: "Tabatha R.",
+    loc: "San Diego, CA",
+    text: "Amazing! Highly recommend using them — they were prompt, worked hard, respectful and polite. They did an amazing job getting everything moved with care and timely. Gladly would hire them for any move! Thank you!",
+  },
+  {
+    name: "Jason B.",
+    loc: "Verified customer",
+    text: "My experience from contacting them to finishing the move was great. They carefully carried everything and also wrapped the furniture before moving.",
+  },
+  {
+    name: "Neilson V.",
+    loc: "Verified customer",
+    text: "These guys were prompt, professional and very efficient. They take care of your belongings as if it's their own.",
+  },
+  {
+    name: "Stephanie S.",
+    loc: "Verified customer",
+    text: "Everything from start to finish was incredibly smooth. They were very efficient but also careful with our belongings.",
+  },
+  {
+    name: "Ram N.",
+    loc: "Verified customer",
+    text: "The movers were very professional and efficient. They were also flexible and accommodating.",
+  },
+];
+
+export function Reviews() {
+  return (
+    <section className="bg-[#FAF6EC]">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              eyebrow="Customer Reviews"
+              title="Trusted by SoCal Movers"
+            />
+            <Reveal delay={0.1}>
+              <div className="mt-6 flex items-center gap-3">
+                <Stars n={5} size={20} />
+                <span className="text-[15px] font-bold text-[#0E2840]">
+                  {company.rating} / 5
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="mt-4 text-[15px] leading-relaxed text-[#566776]">
+                With {company.reviewCount}+ reviews and {company.moves} completed
+                moves, customers across Southern California trust {company.short} to
+                show up on time, work hard, and handle their belongings with care.
+              </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <a
+                href={company.yelp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 text-[14px] font-bold uppercase tracking-[0.06em] text-[#163C5E] hover:text-[#C9A24B]"
+              >
+                Read more on Yelp <ArrowRight size={15} />
+              </a>
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-8">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {REVIEWS.map((r, i) => (
+                <Reveal
+                  key={r.name}
+                  delay={(i % 2) * 0.06}
+                  className={i === 0 ? "sm:col-span-2" : undefined}
+                >
+                  <figure className="relative flex h-full flex-col border border-[#0E2840]/8 bg-white p-6">
+                    <Quote
+                      size={26}
+                      className="absolute right-5 top-5 text-[#C9A24B]/25"
+                      fill="currentColor"
+                    />
+                    <Stars n={5} />
+                    <blockquote className="mt-3 flex-1 text-[14.5px] leading-relaxed text-[#2c3e4f]">
+                      “{r.text}”
+                    </blockquote>
+                    <figcaption className="mt-4 flex items-center gap-3 border-t border-[#0E2840]/8 pt-4">
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0E2840] text-[12px] font-bold text-[#E4C77E]">
+                        {r.name.charAt(0)}
+                      </span>
+                      <span>
+                        <span className="block text-[13.5px] font-bold text-[#0E2840]">
+                          {r.name}
+                        </span>
+                        <span className="block text-[12px] text-[#566776]">
+                          {r.loc}
+                        </span>
+                      </span>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -353,10 +513,10 @@ export function Navbar() {
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         overlay
           ? "bg-transparent"
-          : "border-b border-[#14171C]/8 bg-white/95 backdrop-blur-md shadow-[0_2px_20px_-14px_rgba(0,0,0,0.5)]"
+          : "border-b border-[#0E2840]/8 bg-white/95 backdrop-blur-md shadow-[0_2px_20px_-14px_rgba(0,0,0,0.5)]"
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3.5 sm:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3 sm:px-8">
         <Logo light={overlay} />
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -370,8 +530,8 @@ export function Navbar() {
                   "text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors",
                   overlay
                     ? "text-white/80 hover:text-white"
-                    : "text-[#3a4049] hover:text-[#9E2B24]",
-                  active && (overlay ? "text-white" : "text-[#9E2B24]")
+                    : "text-[#2c3e4f] hover:text-[#163C5E]",
+                  active && (overlay ? "text-[#E4C77E]" : "text-[#163C5E]")
                 )}
               >
                 {l.label}
@@ -386,8 +546,8 @@ export function Navbar() {
             className={cx(
               "inline-flex items-center gap-2 text-[14px] font-bold transition-colors",
               overlay
-                ? "text-white hover:text-[#CDA869]"
-                : "text-[#14171C] hover:text-[#9E2B24]"
+                ? "text-white hover:text-[#E4C77E]"
+                : "text-[#0E2840] hover:text-[#163C5E]"
             )}
           >
             <Phone size={15} />
@@ -402,7 +562,7 @@ export function Navbar() {
           onClick={() => setOpen((v) => !v)}
           className={cx(
             "grid h-10 w-10 place-items-center rounded-md transition-colors lg:hidden",
-            overlay ? "text-white" : "text-[#14171C]"
+            overlay ? "text-white" : "text-[#0E2840]"
           )}
           aria-label="Toggle menu"
         >
@@ -417,7 +577,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-[#14171C]/8 bg-white lg:hidden"
+            className="border-t border-[#0E2840]/8 bg-white lg:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
               {NAV_LINKS.map((l) => (
@@ -425,14 +585,14 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-2.5 text-[14px] font-semibold uppercase tracking-[0.06em] text-[#3a4049] hover:bg-[#F4F1EA]"
+                  className="rounded-md px-3 py-2.5 text-[14px] font-semibold uppercase tracking-[0.06em] text-[#2c3e4f] hover:bg-[#F1EADB]"
                 >
                   {l.label}
                 </Link>
               ))}
               <a
                 href={company.phoneHref}
-                className="rounded-md px-3 py-2.5 text-[14px] font-bold text-[#9E2B24]"
+                className="rounded-md px-3 py-2.5 text-[14px] font-bold text-[#163C5E]"
               >
                 Call {company.phone}
               </a>
@@ -463,7 +623,7 @@ export function CtaBand({
   sub?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#9E2B24]">
+    <section className="relative overflow-hidden bg-[#0E2840]">
       <div className="absolute inset-0 opacity-[0.12]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -472,20 +632,21 @@ export function CtaBand({
           className="h-full w-full object-cover"
         />
       </div>
+      <GreekKey className="absolute inset-x-0 top-0" />
       <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-14 text-center sm:px-8 md:flex-row md:text-left">
         <div>
           <h2 className={cx(head, "text-[1.7rem] font-bold uppercase leading-tight text-white sm:text-[2.1rem]")}>
             {title}
           </h2>
-          {sub && <p className="mt-2 max-w-xl text-[15px] text-white/85">{sub}</p>}
+          {sub && <p className="mt-2 max-w-xl text-[15px] text-white/80">{sub}</p>}
         </div>
         <div className="flex shrink-0 flex-wrap items-center gap-3">
-          <Button href="/spartan/contact" variant="bronze" size="lg">
+          <Button href="/spartan/contact" variant="crimson" size="lg">
             Request a Moving Quote
           </Button>
           <a
             href={company.phoneHref}
-            className="inline-flex items-center gap-2 rounded-none border border-white/40 px-7 py-4 text-[14px] font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white/10"
+            className="inline-flex items-center gap-2 border border-white/40 px-7 py-4 text-[14px] font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white/10"
           >
             <Phone size={16} /> {company.phone}
           </a>
@@ -521,7 +682,7 @@ const SERVICES_NEEDED = [
 ];
 
 const inputCls =
-  "w-full rounded-md border border-[#14171C]/15 bg-[#FBFAF6] px-4 py-3 text-[15px] text-[#14171C] outline-none transition-all placeholder:text-[#9aa1a9] focus:border-[#9E2B24] focus:ring-2 focus:ring-[#9E2B24]/15";
+  "w-full rounded-md border border-[#0E2840]/15 bg-[#FBF8F0] px-4 py-3 text-[15px] text-[#0E2840] outline-none transition-all placeholder:text-[#9aa1a9] focus:border-[#163C5E] focus:ring-2 focus:ring-[#163C5E]/15";
 
 function Field({
   label,
@@ -538,9 +699,9 @@ function Field({
 }) {
   return (
     <label htmlFor={name} className={cx("block", full && "sm:col-span-2")}>
-      <span className="mb-1.5 block text-[12.5px] font-bold uppercase tracking-[0.05em] text-[#14171C]">
+      <span className="mb-1.5 block text-[12.5px] font-bold uppercase tracking-[0.05em] text-[#0E2840]">
         {label}
-        {required && <span className="text-[#9E2B24]"> *</span>}
+        {required && <span className="text-[#C9A24B]"> *</span>}
       </span>
       {children}
     </label>
@@ -557,7 +718,7 @@ function Select({ name, options }: { name: string; options: string[] }) {
       </select>
       <ChevronDown
         size={16}
-        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6A7079]"
+        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#566776]"
       />
     </div>
   );
@@ -568,17 +729,17 @@ export function QuoteForm() {
 
   if (sent) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-xl border border-[#14171C]/8 bg-white p-10 py-20 text-center shadow-[0_24px_70px_-44px_rgba(0,0,0,0.5)]">
-        <span className="grid h-16 w-16 place-items-center rounded-full bg-[#9E2B24]/10 text-[#9E2B24]">
+      <div className="flex flex-col items-center justify-center rounded-xl border border-[#0E2840]/8 bg-white p-10 py-20 text-center shadow-[0_24px_70px_-44px_rgba(0,0,0,0.5)]">
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-[#163C5E]/10 text-[#163C5E]">
           <Check size={30} strokeWidth={2.5} />
         </span>
-        <h3 className={cx(head, "mt-5 text-[1.6rem] font-bold uppercase text-[#14171C]")}>
+        <h3 className={cx(head, "mt-5 text-[1.6rem] font-bold uppercase text-[#0E2840]")}>
           Request Received
         </h3>
-        <p className="mt-2 max-w-sm text-[15px] text-[#5b616a]">
+        <p className="mt-2 max-w-sm text-[15px] text-[#566776]">
           Thank you. {company.name} will review your move details and follow up.
           Need faster help? Call{" "}
-          <a href={company.phoneHref} className="font-bold text-[#9E2B24]">
+          <a href={company.phoneHref} className="font-bold text-[#163C5E]">
             {company.phone}
           </a>
           .
@@ -593,7 +754,7 @@ export function QuoteForm() {
         e.preventDefault();
         setSent(true);
       }}
-      className="rounded-xl border border-[#14171C]/8 bg-white p-6 shadow-[0_24px_70px_-44px_rgba(0,0,0,0.5)] sm:p-8"
+      className="rounded-xl border border-[#0E2840]/8 bg-white p-6 shadow-[0_24px_70px_-44px_rgba(0,0,0,0.5)] sm:p-8"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full Name" name="name" required>
@@ -657,7 +818,7 @@ export function QuoteForm() {
           />
         </Field>
         <div className="sm:col-span-2">
-          <p className="mb-4 text-[13px] leading-relaxed text-[#6A7079]">
+          <p className="mb-4 text-[13px] leading-relaxed text-[#566776]">
             To help us understand your move, please include details about stairs,
             elevators, parking, heavy items, fragile items, and any special
             instructions.
@@ -689,7 +850,7 @@ export function FAQ({
       {(title || eyebrow) && (
         <SectionHeading center eyebrow={eyebrow} title={title} />
       )}
-      <div className="mx-auto mt-10 max-w-3xl divide-y divide-[#14171C]/8 rounded-xl border border-[#14171C]/8 bg-white">
+      <div className="mx-auto mt-10 max-w-3xl divide-y divide-[#0E2840]/8 rounded-xl border border-[#0E2840]/8 bg-white">
         {items.map((f, i) => {
           const isOpen = open === i;
           return (
@@ -699,13 +860,13 @@ export function FAQ({
                 className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                 aria-expanded={isOpen}
               >
-                <span className="text-[16px] font-bold text-[#14171C]">{f.q}</span>
+                <span className="text-[16px] font-bold text-[#0E2840]">{f.q}</span>
                 <span
                   className={cx(
                     "grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all",
                     isOpen
-                      ? "rotate-180 bg-[#9E2B24] text-white"
-                      : "bg-[#F4F1EA] text-[#14171C]"
+                      ? "rotate-180 bg-[#163C5E] text-[#E4C77E]"
+                      : "bg-[#F1EADB] text-[#0E2840]"
                   )}
                 >
                   <ChevronDown size={16} />
@@ -720,7 +881,7 @@ export function FAQ({
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="px-6 pb-6 text-[15px] leading-relaxed text-[#5b616a]">
+                    <p className="px-6 pb-6 text-[15px] leading-relaxed text-[#566776]">
                       {f.a}
                     </p>
                   </motion.div>
@@ -739,15 +900,17 @@ export function FAQ({
    ========================================================================= */
 export function Footer() {
   return (
-    <footer className="bg-[#101317] text-white/70">
+    <footer className="bg-[#0A2036] text-white/70">
+      <GreekKey className="opacity-70" />
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Logo light />
             <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-white/55">
-              {company.name} is a Murrieta-based moving company serving families,
-              individuals, and businesses with reliable, careful, and professional
-              residential and commercial moving help across Southern California.
+              {company.name} is a Murrieta-based moving company with {company.years}{" "}
+              years and {company.moves} moves serving families, individuals, and
+              businesses with reliable, careful, and professional residential and
+              commercial moving help across Southern California.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/spartan/contact" variant="crimson" size="sm">
@@ -769,7 +932,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-[14px]">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-[#CDA869]">
+                  <Link href={l.href} className="hover:text-[#E4C77E]">
                     {l.label}
                   </Link>
                 </li>
@@ -781,13 +944,13 @@ export function Footer() {
             </p>
             <ul className="mt-4 space-y-1.5 text-[13.5px] text-white/55">
               <li className="inline-flex items-center gap-2">
-                <ShieldCheck size={14} className="text-[#CDA869]" /> {company.dot}
+                <ShieldCheck size={14} className="text-[#E4C77E]" /> {company.dot}
               </li>
               <li className="inline-flex items-center gap-2">
-                <ShieldCheck size={14} className="text-[#CDA869]" /> {company.mc}
+                <ShieldCheck size={14} className="text-[#E4C77E]" /> {company.mc}
               </li>
               <li className="inline-flex items-center gap-2">
-                <ShieldCheck size={14} className="text-[#CDA869]" /> {company.cal}
+                <ShieldCheck size={14} className="text-[#E4C77E]" /> {company.cal}
               </li>
               <li>Licensed and insured business</li>
             </ul>
@@ -799,17 +962,23 @@ export function Footer() {
             </p>
             <ul className="mt-4 space-y-3 text-[14px] text-white/60">
               <li className="flex items-start gap-2.5">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-[#CDA869]" />
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[#E4C77E]" />
                 {company.city}
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone size={16} className="mt-0.5 shrink-0 text-[#CDA869]" />
-                <a href={company.phoneHref} className="hover:text-[#CDA869]">
+                <Phone size={16} className="mt-0.5 shrink-0 text-[#E4C77E]" />
+                <a href={company.phoneHref} className="hover:text-[#E4C77E]">
                   {company.phone}
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <Mail size={16} className="mt-0.5 shrink-0 text-[#CDA869]" />
+                <Mail size={16} className="mt-0.5 shrink-0 text-[#E4C77E]" />
+                <a href={company.emailHref} className="break-all hover:text-[#E4C77E]">
+                  {company.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[#E4C77E]" />
                 Serving Riverside County, Orange County, San Diego County &amp;
                 surrounding Southern California areas
               </li>
@@ -836,10 +1005,10 @@ export function Footer() {
             © {new Date().getFullYear()} {company.name} · {company.city}
           </p>
           <div className="flex gap-5">
-            <a href="#" className="hover:text-[#CDA869]">
+            <a href="#" className="hover:text-[#E4C77E]">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-[#CDA869]">
+            <a href="#" className="hover:text-[#E4C77E]">
               Terms
             </a>
           </div>

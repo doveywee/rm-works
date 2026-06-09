@@ -22,10 +22,11 @@ import {
   company,
   img,
   Reveal,
-  Eyebrow,
   Button,
   SectionHeading,
   TrustBar,
+  Stats,
+  Reviews,
   CtaBand,
 } from "./components";
 
@@ -89,7 +90,7 @@ export default function SpartanHome() {
   return (
     <>
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-[#14171C] pt-28 pb-20 sm:pt-36 sm:pb-28">
+      <section className="relative overflow-hidden bg-[#0E2840] pt-28 pb-20 sm:pt-36 sm:pb-28">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -97,15 +98,15 @@ export default function SpartanHome() {
             alt=""
             className="h-full w-full object-cover object-center opacity-[0.20]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#101317]/85 via-[#14171C]/90 to-[#14171C]" />
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-[#9E2B24]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A2036]/85 via-[#0E2840]/90 to-[#0E2840]" />
+          <div className="absolute inset-y-0 left-0 w-1.5 bg-[#C9A24B]" />
         </div>
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-x-12 gap-y-14 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <p className="flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.22em] text-[#CDA869]">
-                <span className="h-px w-8 bg-[#B68A4E]/70" />
+              <p className="flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.22em] text-[#E4C77E]">
+                <span className="h-px w-8 bg-[#C9A24B]/70" />
                 Murrieta · Riverside · Orange · San Diego County
               </p>
             </Reveal>
@@ -117,7 +118,7 @@ export default function SpartanHome() {
                 )}
               >
                 Reliable Moving Services in Murrieta &amp;{" "}
-                <span className="text-[#C1392F]">Southern California.</span>
+                <span className="text-[#C9A24B]">Southern California.</span>
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
@@ -145,14 +146,14 @@ export default function SpartanHome() {
             <Reveal delay={0.2}>
               <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/12 pt-6 text-[13px] text-white/55">
                 <span className="inline-flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-[#CDA869]" /> Licensed &amp;
+                  <ShieldCheck size={16} className="text-[#E4C77E]" /> Licensed &amp;
                   Insured
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <Truck size={16} className="text-[#CDA869]" /> {company.dot}
+                  <Truck size={16} className="text-[#E4C77E]" /> {company.dot}
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <ClipboardCheck size={16} className="text-[#CDA869]" />{" "}
+                  <ClipboardCheck size={16} className="text-[#E4C77E]" />{" "}
                   {company.cal}
                 </span>
               </div>
@@ -161,20 +162,20 @@ export default function SpartanHome() {
 
           <Reveal delay={0.15} className="lg:col-span-5">
             <div className="relative mx-auto max-w-sm lg:max-w-none">
-              <div className="absolute -inset-3 -z-0 border border-[#B68A4E]/30" />
+              <div className="absolute -inset-3 -z-0 border border-[#C9A24B]/30" />
               <div className="relative overflow-hidden shadow-2xl ring-1 ring-white/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img("1530124566582-a618bc2615dc", 1000)}
                   alt="Professional movers carrying boxes and furniture"
-                  className="aspect-[4/5] w-full bg-[#20242C] object-cover"
+                  className="aspect-[4/5] w-full bg-[#1B2A38] object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#101317] via-[#101317]/70 to-transparent p-6 pt-20">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A2036] via-[#0A2036]/70 to-transparent p-6 pt-20">
                   <p className="text-[15px] font-medium leading-snug text-white">
                     Strong, careful, and professional moving help — handled with
                     Spartan discipline from start to finish.
                   </p>
-                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#CDA869]">
+                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#E4C77E]">
                     {company.name}
                   </p>
                 </div>
@@ -186,20 +187,22 @@ export default function SpartanHome() {
 
       <TrustBar />
 
+      <Stats />
+
       {/* ================= ABOUT ================= */}
       <section className="bg-white">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2">
           <Reveal>
             <div className="relative">
-              <div className="overflow-hidden shadow-xl ring-1 ring-[#14171C]/10">
+              <div className="overflow-hidden shadow-xl ring-1 ring-[#0E2840]/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img("1600585154340-be6161a56a0c", 1100)}
                   alt="A Southern California home ready for moving day"
-                  className="aspect-[5/4] w-full bg-[#20242C] object-cover"
+                  className="aspect-[5/4] w-full bg-[#1B2A38] object-cover"
                 />
               </div>
-              <div className="absolute -bottom-5 -right-4 hidden bg-[#9E2B24] px-6 py-5 text-white shadow-xl sm:block">
+              <div className="absolute -bottom-5 -right-4 hidden bg-[#163C5E] px-6 py-5 text-white shadow-xl sm:block">
                 <p className={cx(head, "text-[2rem] font-bold uppercase leading-none")}>
                   Murrieta
                 </p>
@@ -216,7 +219,7 @@ export default function SpartanHome() {
               title={<>About Spartan Moving and Transport Inc</>}
             />
             <Reveal delay={0.1}>
-              <p className="mt-6 text-[16px] leading-relaxed text-[#5b616a]">
+              <p className="mt-6 text-[16px] leading-relaxed text-[#566776]">
                 {company.name} is a Murrieta-based moving company serving families,
                 individuals, and businesses throughout Southern California. The
                 company focuses on reliable service, careful handling, clear
@@ -227,11 +230,11 @@ export default function SpartanHome() {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {ABOUT_POINTS.map((p, i) => (
                 <Reveal key={p.t} delay={0.12 + i * 0.05}>
-                  <div className="flex items-center gap-3 border border-[#14171C]/8 bg-[#FAF8F3] px-4 py-3.5">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#14171C] text-[#CDA869]">
+                  <div className="flex items-center gap-3 border border-[#0E2840]/8 bg-[#FAF6EC] px-4 py-3.5">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#0E2840] text-[#E4C77E]">
                       <p.Icon size={17} />
                     </span>
-                    <span className="text-[14px] font-semibold text-[#20242C]">
+                    <span className="text-[14px] font-semibold text-[#1B2A38]">
                       {p.t}
                     </span>
                   </div>
@@ -239,7 +242,7 @@ export default function SpartanHome() {
               ))}
             </div>
             <Reveal delay={0.25}>
-              <p className="mt-6 text-[15px] leading-relaxed text-[#5b616a]">
+              <p className="mt-6 text-[15px] leading-relaxed text-[#566776]">
                 From stress-free moving support to licensed and insured service,
                 our crew is built to make your move easier, safer, and more
                 organized.
@@ -250,7 +253,7 @@ export default function SpartanHome() {
       </section>
 
       {/* ================= SERVICES PREVIEW ================= */}
-      <section className="border-y border-[#14171C]/8 bg-[#F4F1EA]">
+      <section className="border-y border-[#0E2840]/8 bg-[#F1EADB]">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
           <SectionHeading
             center
@@ -262,19 +265,19 @@ export default function SpartanHome() {
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s, i) => (
               <Reveal key={s.title} delay={(i % 3) * 0.06}>
-                <div className="group flex h-full flex-col border border-[#14171C]/8 bg-white p-7 transition-all hover:-translate-y-0.5 hover:border-[#9E2B24]/40 hover:shadow-[0_18px_50px_-26px_rgba(0,0,0,0.45)]">
-                  <span className="grid h-12 w-12 place-items-center rounded-md bg-[#14171C] text-[#CDA869] transition-colors group-hover:bg-[#9E2B24] group-hover:text-white">
+                <div className="group flex h-full flex-col border border-[#0E2840]/8 bg-white p-7 transition-all hover:-translate-y-0.5 hover:border-[#163C5E]/40 hover:shadow-[0_18px_50px_-26px_rgba(0,0,0,0.45)]">
+                  <span className="grid h-12 w-12 place-items-center rounded-md bg-[#0E2840] text-[#E4C77E] transition-colors group-hover:bg-[#163C5E] group-hover:text-white">
                     <s.Icon size={22} />
                   </span>
-                  <h3 className={cx(head, "mt-5 text-[1.25rem] font-bold uppercase text-[#14171C]")}>
+                  <h3 className={cx(head, "mt-5 text-[1.25rem] font-bold uppercase text-[#0E2840]")}>
                     {s.title}
                   </h3>
-                  <p className="mt-2.5 flex-1 text-[14.5px] leading-relaxed text-[#5b616a]">
+                  <p className="mt-2.5 flex-1 text-[14.5px] leading-relaxed text-[#566776]">
                     {s.copy}
                   </p>
                   <Link
                     href="/spartan/services"
-                    className="mt-5 inline-flex items-center gap-1.5 self-start text-[13px] font-bold uppercase tracking-[0.06em] text-[#9E2B24] transition-colors hover:text-[#14171C]"
+                    className="mt-5 inline-flex items-center gap-1.5 self-start text-[13px] font-bold uppercase tracking-[0.06em] text-[#163C5E] transition-colors hover:text-[#0E2840]"
                   >
                     Learn More <ArrowRight size={14} />
                   </Link>
@@ -284,16 +287,16 @@ export default function SpartanHome() {
             <Reveal delay={0.12}>
               <Link
                 href="/spartan/services"
-                className="flex h-full flex-col justify-center border border-dashed border-[#9E2B24]/40 bg-[#9E2B24]/[0.04] p-7 transition-colors hover:bg-[#9E2B24]/[0.08]"
+                className="flex h-full flex-col justify-center border border-dashed border-[#163C5E]/40 bg-[#163C5E]/[0.04] p-7 transition-colors hover:bg-[#163C5E]/[0.08]"
               >
-                <span className={cx(head, "text-[1.25rem] font-bold uppercase text-[#9E2B24]")}>
+                <span className={cx(head, "text-[1.25rem] font-bold uppercase text-[#163C5E]")}>
                   See the Full Process
                 </span>
-                <p className="mt-2.5 text-[14.5px] leading-relaxed text-[#5b616a]">
+                <p className="mt-2.5 text-[14.5px] leading-relaxed text-[#566776]">
                   Learn how the moving process works, step by step, and what to
                   expect on moving day.
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-[0.06em] text-[#9E2B24]">
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-[0.06em] text-[#163C5E]">
                   Services &amp; Process <ArrowRight size={14} />
                 </span>
               </Link>
@@ -303,7 +306,7 @@ export default function SpartanHome() {
       </section>
 
       {/* ================= WHY CHOOSE ================= */}
-      <section className="relative overflow-hidden bg-[#14171C]">
+      <section className="relative overflow-hidden bg-[#0E2840]">
         <div className="absolute inset-0 opacity-[0.10]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -342,7 +345,7 @@ export default function SpartanHome() {
               {WHY.map((w, i) => (
                 <Reveal key={w} delay={i * 0.04}>
                   <div className="flex items-start gap-3 border border-white/10 bg-white/[0.04] p-4">
-                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#9E2B24] text-white">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#C9A24B] text-[#0E2840]">
                       <Check size={14} strokeWidth={3} />
                     </span>
                     <span className="text-[14.5px] font-medium text-white/90">
@@ -366,7 +369,7 @@ export default function SpartanHome() {
                 title="Why Moving Licenses Matter"
               />
               <Reveal delay={0.1}>
-                <p className="mt-6 text-[16px] leading-relaxed text-[#5b616a]">
+                <p className="mt-6 text-[16px] leading-relaxed text-[#566776]">
                   When hiring a moving company, licensing is important because it
                   helps customers know they are working with a legitimate moving
                   business. Licensed movers are expected to follow moving
@@ -375,7 +378,7 @@ export default function SpartanHome() {
                 </p>
               </Reveal>
               <Reveal delay={0.16}>
-                <p className="mt-4 text-[16px] leading-relaxed text-[#5b616a]">
+                <p className="mt-4 text-[16px] leading-relaxed text-[#566776]">
                   {company.name} publicly lists {company.dot}, {company.mc}, and{" "}
                   {company.cal}. Customers should always verify licensing and
                   insurance before booking any move.
@@ -385,7 +388,7 @@ export default function SpartanHome() {
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <a
                     href={company.phoneHref}
-                    className="inline-flex items-center gap-2 text-[15px] font-bold text-[#9E2B24]"
+                    className="inline-flex items-center gap-2 text-[15px] font-bold text-[#163C5E]"
                   >
                     <Phone size={17} /> Have questions about your move? Call{" "}
                     {company.phone}.
@@ -399,17 +402,17 @@ export default function SpartanHome() {
                 {[company.dot, company.mc, company.cal].map((c) => (
                   <div
                     key={c}
-                    className="flex flex-col items-center border border-[#14171C]/8 bg-[#FAF8F3] px-4 py-7 text-center"
+                    className="flex flex-col items-center border border-[#0E2840]/8 bg-[#FAF6EC] px-4 py-7 text-center"
                   >
-                    <ShieldCheck size={26} className="text-[#9E2B24]" />
-                    <p className={cx(head, "mt-3 text-[1.05rem] font-bold uppercase leading-tight text-[#14171C]")}>
+                    <ShieldCheck size={26} className="text-[#163C5E]" />
+                    <p className={cx(head, "mt-3 text-[1.05rem] font-bold uppercase leading-tight text-[#0E2840]")}>
                       {c}
                     </p>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 border border-[#14171C]/8 bg-[#14171C] px-6 py-6 text-center">
-                <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#CDA869]">
+              <div className="mt-4 border border-[#0E2840]/8 bg-[#0E2840] px-6 py-6 text-center">
+                <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#E4C77E]">
                   Licensed &amp; Insured Business
                 </p>
                 <p className="mt-2 text-[14px] text-white/65">
@@ -421,6 +424,8 @@ export default function SpartanHome() {
           </div>
         </div>
       </section>
+
+      <Reviews />
 
       <CtaBand
         title="Ready to Plan Your Move?"
