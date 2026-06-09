@@ -76,6 +76,27 @@ const SIGNATURE = [
 export default function SanamluangPage() {
   const [box, setBox] = useState<{ src: string; label: string } | null>(null);
 
+  // Opening a menu pushes a history entry, so the browser / Android back
+  // button closes the lightbox and lands the user back on the menu section
+  // instead of leaving the site.
+  const openBox = (src: string, label: string) => {
+    window.history.pushState({ lightbox: true }, "");
+    setBox({ src, label });
+  };
+
+  // Manual close (X, Escape, tap-away): step back to drop the history entry
+  // we pushed; the popstate handler below clears the lightbox.
+  const closeBox = () => {
+    if (window.history.state?.lightbox) window.history.back();
+    else setBox(null);
+  };
+
+  useEffect(() => {
+    const onPop = () => setBox(null);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   return (
     <>
       <Nav />
@@ -84,14 +105,14 @@ export default function SanamluangPage() {
         <Accolades />
         <Story />
         <Specialty />
-        <Menu onOpen={(src, label) => setBox({ src, label })} />
+        <Menu onOpen={openBox} />
         <Visit />
       </main>
       <Footer />
       <Lightbox
         src={box?.src ?? null}
         label={box?.label ?? ""}
-        onClose={() => setBox(null)}
+        onClose={closeBox}
       />
     </>
   );
