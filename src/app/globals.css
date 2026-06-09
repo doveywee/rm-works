@@ -77,68 +77,65 @@ body::before {
   will-change: opacity, transform;
 }
 
+/* Glow is baked into each star's gradient (a warm core fading through orange to
+   transparent) so the layer is rasterized once — no per-frame `filter` repaint.
+   Only opacity (twinkle) and transform (drift) animate, both GPU-composited. */
 .star-layer--1 {
   background-image:
-    radial-gradient(2.4px 2.4px at 40px 60px, rgba(255, 234, 205, 1), transparent),
-    radial-gradient(1.8px 1.8px at 220px 150px, rgba(253, 186, 116, 1), transparent),
-    radial-gradient(1.6px 1.6px at 330px 310px, rgba(254, 215, 170, 0.95), transparent),
-    radial-gradient(1.4px 1.4px at 120px 250px, rgba(251, 146, 60, 0.9), transparent);
+    radial-gradient(4px 4px at 40px 60px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
+    radial-gradient(3px 3px at 220px 150px, rgba(253, 186, 116, 1) 0%, rgba(251, 146, 60, 0.45) 40%, transparent 74%),
+    radial-gradient(2.6px 2.6px at 330px 310px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
+    radial-gradient(2.4px 2.4px at 120px 250px, rgba(251, 146, 60, 0.9) 0%, transparent 70%);
   background-size: 300px 300px;
-  filter: drop-shadow(0 0 3px rgba(253, 186, 116, 0.65));
   animation: twinkle-a 2.6s ease-in-out infinite, drift-x 36s ease-in-out infinite;
 }
 .star-layer--2 {
   background-image:
-    radial-gradient(1.8px 1.8px at 90px 200px, rgba(253, 186, 116, 1), transparent),
-    radial-gradient(2.2px 2.2px at 300px 80px, rgba(255, 224, 190, 1), transparent),
-    radial-gradient(1.5px 1.5px at 160px 360px, rgba(254, 215, 170, 0.9), transparent),
-    radial-gradient(1.3px 1.3px at 360px 280px, rgba(251, 146, 60, 0.85), transparent);
+    radial-gradient(3px 3px at 90px 200px, rgba(253, 186, 116, 1) 0%, rgba(251, 146, 60, 0.45) 40%, transparent 74%),
+    radial-gradient(4px 4px at 300px 80px, rgba(255, 224, 190, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
+    radial-gradient(2.5px 2.5px at 160px 360px, rgba(254, 215, 170, 0.9) 0%, rgba(249, 115, 22, 0.25) 46%, transparent 76%),
+    radial-gradient(2.3px 2.3px at 360px 280px, rgba(251, 146, 60, 0.85) 0%, transparent 70%);
   background-size: 340px 340px;
-  filter: drop-shadow(0 0 3px rgba(251, 146, 60, 0.6));
   animation: twinkle-b 3.4s ease-in-out infinite, drift-y 44s ease-in-out infinite;
   animation-delay: -1.2s, -6s;
 }
 .star-layer--3 {
   background-image:
-    radial-gradient(1.5px 1.5px at 60px 320px, rgba(254, 215, 170, 0.95), transparent),
-    radial-gradient(2px 2px at 260px 240px, rgba(255, 224, 190, 1), transparent),
-    radial-gradient(1.6px 1.6px at 400px 120px, rgba(251, 146, 60, 0.9), transparent),
-    radial-gradient(1.3px 1.3px at 180px 60px, rgba(253, 186, 116, 0.85), transparent);
+    radial-gradient(2.6px 2.6px at 60px 320px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
+    radial-gradient(3.6px 3.6px at 260px 240px, rgba(255, 224, 190, 1) 0%, rgba(253, 186, 116, 0.5) 38%, transparent 76%),
+    radial-gradient(2.8px 2.8px at 400px 120px, rgba(251, 146, 60, 0.9) 0%, rgba(249, 115, 22, 0.2) 48%, transparent 74%),
+    radial-gradient(2.3px 2.3px at 180px 60px, rgba(253, 186, 116, 0.85) 0%, transparent 70%);
   background-size: 380px 380px;
-  filter: drop-shadow(0 0 4px rgba(253, 186, 116, 0.6));
   animation: twinkle-c 4.2s ease-in-out infinite, drift-x 52s ease-in-out infinite reverse;
   animation-delay: -2.7s, -10s;
 }
 .star-layer--4 {
   background-image:
-    radial-gradient(1.7px 1.7px at 140px 90px, rgba(254, 215, 170, 0.95), transparent),
-    radial-gradient(1.4px 1.4px at 350px 350px, rgba(253, 186, 116, 0.85), transparent),
-    radial-gradient(2.3px 2.3px at 210px 430px, rgba(255, 234, 205, 1), transparent),
-    radial-gradient(1.3px 1.3px at 30px 200px, rgba(251, 146, 60, 0.8), transparent);
+    radial-gradient(2.9px 2.9px at 140px 90px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
+    radial-gradient(2.4px 2.4px at 350px 350px, rgba(253, 186, 116, 0.85) 0%, transparent 72%),
+    radial-gradient(4px 4px at 210px 430px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
+    radial-gradient(2.2px 2.2px at 30px 200px, rgba(251, 146, 60, 0.8) 0%, transparent 70%);
   background-size: 360px 360px;
-  filter: drop-shadow(0 0 3px rgba(251, 146, 60, 0.55));
   animation: twinkle-a 3s ease-in-out infinite, drift-y 40s ease-in-out infinite reverse;
   animation-delay: -3.5s, -14s;
 }
 .star-layer--5 {
   background-image:
-    radial-gradient(1.3px 1.3px at 30px 150px, rgba(254, 215, 170, 0.85), transparent),
-    radial-gradient(1.6px 1.6px at 190px 260px, rgba(253, 186, 116, 0.9), transparent),
-    radial-gradient(1.4px 1.4px at 420px 300px, rgba(254, 215, 170, 0.8), transparent),
-    radial-gradient(2px 2px at 260px 120px, rgba(255, 224, 190, 0.95), transparent);
+    radial-gradient(2.3px 2.3px at 30px 150px, rgba(254, 215, 170, 0.85) 0%, transparent 72%),
+    radial-gradient(2.8px 2.8px at 190px 260px, rgba(253, 186, 116, 0.9) 0%, rgba(249, 115, 22, 0.22) 48%, transparent 76%),
+    radial-gradient(2.4px 2.4px at 420px 300px, rgba(254, 215, 170, 0.8) 0%, transparent 72%),
+    radial-gradient(3.4px 3.4px at 260px 120px, rgba(255, 224, 190, 0.95) 0%, rgba(253, 186, 116, 0.45) 38%, transparent 76%);
   background-size: 440px 440px;
-  filter: drop-shadow(0 0 3px rgba(253, 186, 116, 0.5));
   animation: twinkle-b 5s ease-in-out infinite, drift-x 60s ease-in-out infinite;
   animation-delay: -0.6s, -3s;
 }
 .star-layer--6 {
   background-image:
-    radial-gradient(2.6px 2.6px at 110px 380px, rgba(255, 234, 205, 1), transparent),
-    radial-gradient(1.5px 1.5px at 280px 50px, rgba(254, 215, 170, 0.85), transparent),
-    radial-gradient(1.7px 1.7px at 380px 220px, rgba(253, 186, 116, 0.9), transparent),
-    radial-gradient(1.4px 1.4px at 60px 90px, rgba(251, 146, 60, 0.85), transparent);
+    radial-gradient(4.4px 4.4px at 110px 380px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.14) 60%, transparent 80%),
+    radial-gradient(2.5px 2.5px at 280px 50px, rgba(254, 215, 170, 0.85) 0%, transparent 72%),
+    radial-gradient(2.9px 2.9px at 380px 220px, rgba(253, 186, 116, 0.9) 0%, rgba(249, 115, 22, 0.22) 48%, transparent 76%),
+    radial-gradient(2.3px 2.3px at 60px 90px, rgba(251, 146, 60, 0.85) 0%, transparent 70%);
   background-size: 500px 500px;
-  filter: drop-shadow(0 0 5px rgba(251, 146, 60, 0.65));
   animation: twinkle-c 4.6s ease-in-out infinite, drift-y 56s ease-in-out infinite;
   animation-delay: -4.1s, -20s;
 }
@@ -167,13 +164,9 @@ body::before {
   50% { transform: translate3d(-14px, 20px, 0); }
 }
 
-/* Phones: drop the per-layer drop-shadow (re-rasters every frame — the main
-   source of scroll jank) and thin the layer count so the GPU keeps up.
-   Twinkle + drift stay; they're cheap GPU-composited transforms/opacity. */
+/* Phones: thin the layer count to cut overdraw (fill-rate) on smaller GPUs.
+   The remaining layers still twinkle + drift, all GPU-composited. */
 @media (max-width: 767px) {
-  .star-layer {
-    filter: none;
-  }
   .star-layer--4,
   .star-layer--5,
   .star-layer--6 {

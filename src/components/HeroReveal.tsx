@@ -12,7 +12,7 @@ import {
 import { MagneticButton } from "./ui/MagneticButton";
 
 const HOLE_BG =
-  "radial-gradient(circle, #000 0%, #000 52%, rgba(8,8,8,0.96) 64%, rgba(249,115,22,0.7) 76%, rgba(251,146,60,1) 84%, rgba(255,224,190,1) 88%, rgba(253,186,116,1) 92%, rgba(249,115,22,0.6) 97%, rgba(249,115,22,0) 100%)";
+  "radial-gradient(circle, #000 0%, #000 50%, rgba(8,8,8,0.96) 62%, rgba(249,115,22,0.65) 74%, rgba(251,146,60,1) 82%, rgba(255,224,190,1) 86%, rgba(253,186,116,0.95) 90%, rgba(251,146,60,0.55) 95%, rgba(249,115,22,0.22) 99%, rgba(249,115,22,0) 100%)";
 
 /** A single headline word that gets torn off and spiralled into the hole. */
 function WarpWord({
@@ -35,12 +35,10 @@ function WarpWord({
   const rotate = useTransform(progress, [s, e], [0, dir * 112]);
   const skewX = useTransform(progress, [s, e], [0, dir * 13]);
   const y = useTransform(progress, [s, e], [0, dir * 48]);
-  const blurV = useTransform(progress, [s + 0.04, e], [0, 4]);
-  const filter = useTransform(blurV, (b) => `blur(${b}px)`);
 
   return (
     <motion.span
-      style={{ scale, opacity, rotate, skewX, y, filter }}
+      style={{ scale, opacity, rotate, skewX, y }}
       className={`inline-block will-change-transform ${
         gradient ? "gradient-text" : ""
       }`}
@@ -129,7 +127,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         <motion.div
           aria-hidden
           style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform md:[filter:drop-shadow(0_0_60px_rgba(251,146,60,0.85))_drop-shadow(0_0_140px_rgba(249,115,22,0.55))]"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
         {/* headline — real type, each word warped into the hole */}
