@@ -11,8 +11,10 @@ import {
 } from "framer-motion";
 import { MagneticButton } from "./ui/MagneticButton";
 
+// Clean, thin orange ring around a black disc — a simple defined border rather
+// than a thick glowy band. Still just a gradient that scales on the GPU.
 const HOLE_BG =
-  "radial-gradient(circle, #000 0%, #000 56%, rgba(10,10,10,0.95) 70%, rgba(249,115,22,0.75) 82%, rgba(255,224,190,1) 89%, rgba(249,115,22,0) 100%)";
+  "radial-gradient(circle, #000 0%, #000 87%, rgba(251,146,60,0.85) 90%, #fdba74 93%, rgba(251,146,60,0.5) 96%, transparent 99%)";
 
 // Soft orange glow that blooms OUTSIDE the disc's rim. Built as a radial
 // gradient (a texture the GPU just scales) rather than a drop-shadow blur
