@@ -186,6 +186,13 @@ body::before {
   .noise {
     display: none;
   }
+  /* backdrop-filter re-blurs everything scrolling behind the nav every frame —
+     one of the most expensive mobile scroll ops. Use a solid translucent pill
+     instead; visually near-identical, essentially free. */
+  .glass {
+    backdrop-filter: none;
+    background: rgba(18, 18, 18, 0.86);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

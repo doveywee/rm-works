@@ -14,6 +14,12 @@ import { MagneticButton } from "./ui/MagneticButton";
 const HOLE_BG =
   "radial-gradient(circle, #000 0%, #000 56%, rgba(10,10,10,0.95) 70%, rgba(249,115,22,0.75) 82%, rgba(255,224,190,1) 89%, rgba(249,115,22,0) 100%)";
 
+// Soft orange glow that blooms OUTSIDE the disc's rim. Built as a radial
+// gradient (a texture the GPU just scales) rather than a drop-shadow blur
+// (which re-rasters every frame) — so it costs nothing per frame on mobile.
+const HALO_BG =
+  "radial-gradient(circle, rgba(249,115,22,0) 60%, rgba(249,115,22,0.5) 73%, rgba(251,146,60,0.34) 83%, rgba(249,115,22,0.12) 91%, rgba(249,115,22,0) 97%)";
+
 /** A single headline word that gets torn off and spiralled into the hole. */
 function WarpWord({
   progress,
@@ -123,6 +129,13 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         id="top"
         className="sticky top-0 z-0 flex h-dvh items-center justify-center overflow-hidden"
       >
+        {/* orange glow halo — larger than the disc so it blooms around the rim */}
+        <motion.div
+          aria-hidden
+          style={{ scale: holeScale, opacity: holeOpacity, background: HALO_BG }}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[210vmax] w-[210vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
+        />
+
         {/* black hole disc */}
         <motion.div
           aria-hidden
