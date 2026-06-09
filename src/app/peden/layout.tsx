@@ -18,7 +18,7 @@ const sans = Inter({
 
 export const metadata: Metadata = {
   title:
-    "Chantelle Peden Hunt, MBA · Life Insurance & Financial Strategies · Corona, Riverside & the Inland Empire",
+    "New York Life · Chantelle Peden Hunt, MBA — Life Insurance & Financial Strategies in Corona, Riverside & the Inland Empire",
   description:
     "Chantelle Peden Hunt, MBA, Licensed Agent with New York Life, provides personalized life insurance, retirement planning, and financial strategies for families, professionals, and business owners across Corona, Riverside, and the Inland Empire, CA. Request a quote or schedule a consultation.",
   keywords: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title:
-      "Chantelle Peden Hunt, MBA · Licensed Agent with New York Life",
+      "New York Life · Chantelle Peden Hunt, MBA, Agent",
     description:
       "Personalized insurance and financial strategies for families, professionals, and business owners across Corona, Riverside, and the Inland Empire.",
     type: "website",

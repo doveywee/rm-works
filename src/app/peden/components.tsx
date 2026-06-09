@@ -183,7 +183,7 @@ function Logo({ light = false }: { light?: boolean }) {
             light ? "text-white" : "text-[#003B73]"
           )}
         >
-          Chantelle Peden Hunt, <span className="text-[#2E86C1]">MBA</span>
+          New York Life
         </span>
         <span
           className={cx(
@@ -191,7 +191,7 @@ function Logo({ light = false }: { light?: boolean }) {
             light ? "text-white/60" : "text-[#5A6B7A]"
           )}
         >
-          Licensed Agent · New York Life
+          Chantelle Peden Hunt, <span className="text-[#2E86C1]">MBA</span> · Agent
         </span>
       </span>
     </Link>
