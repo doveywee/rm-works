@@ -129,7 +129,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         <motion.div
           aria-hidden
           style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform [filter:drop-shadow(0_0_60px_rgba(251,146,60,0.85))_drop-shadow(0_0_140px_rgba(249,115,22,0.55))]"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[170vmax] w-[170vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform md:[filter:drop-shadow(0_0_60px_rgba(251,146,60,0.85))_drop-shadow(0_0_140px_rgba(249,115,22,0.55))]"
         />
 
         {/* headline — real type, each word warped into the hole */}

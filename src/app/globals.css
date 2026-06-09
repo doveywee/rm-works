@@ -167,6 +167,20 @@ body::before {
   50% { transform: translate3d(-14px, 20px, 0); }
 }
 
+/* Phones: drop the per-layer drop-shadow (re-rasters every frame — the main
+   source of scroll jank) and thin the layer count so the GPU keeps up.
+   Twinkle + drift stay; they're cheap GPU-composited transforms/opacity. */
+@media (max-width: 767px) {
+  .star-layer {
+    filter: none;
+  }
+  .star-layer--4,
+  .star-layer--5,
+  .star-layer--6 {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .starfield {
     opacity: 0.8 !important;
