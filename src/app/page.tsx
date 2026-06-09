@@ -9,10 +9,12 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CursorGlow } from "@/components/ui/CursorGlow";
+import { Starfield } from "@/components/Starfield";
 
 export default function Home() {
   return (
     <>
+      <Starfield />
       <ScrollProgress />
       <CursorGlow />
       <Nav />

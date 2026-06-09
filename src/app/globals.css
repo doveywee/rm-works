@@ -42,18 +42,140 @@ html {
 }
 
 body {
-  background: var(--color-ink);
+  background: #010102;
 }
 
+/* Ambient orange glow at the top of the night sky — wide, low-contrast
+   falloffs to keep the dark areas smooth (avoids banding). */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(1000px 700px at 15% -8%, rgba(249, 115, 22, 0.04), transparent 60%),
-    radial-gradient(700px 500px at 92% 4%, rgba(251, 146, 60, 0.03), transparent 55%);
+    radial-gradient(1400px 1000px at 12% -14%, rgba(249, 115, 22, 0.035), transparent 72%),
+    radial-gradient(1100px 800px at 94% 2%, rgba(251, 146, 60, 0.025), transparent 70%);
+}
+
+/* Light-orange starfield. The container's opacity is driven by scroll (the
+   black hole consumes the stars, then they bloom back in) — see Starfield.tsx.
+   Each tiled layer twinkles on its own clock so individual stars pulse
+   brighter/dimmer out of sync with one another. */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 240ms ease-out;
+}
+.star-layer {
+  position: absolute;
+  inset: -8%;
+  background-repeat: repeat;
+  will-change: opacity, transform;
+}
+
+.star-layer--1 {
+  background-image:
+    radial-gradient(2.4px 2.4px at 40px 60px, rgba(255, 234, 205, 1), transparent),
+    radial-gradient(1.8px 1.8px at 220px 150px, rgba(253, 186, 116, 1), transparent),
+    radial-gradient(1.6px 1.6px at 330px 310px, rgba(254, 215, 170, 0.95), transparent),
+    radial-gradient(1.4px 1.4px at 120px 250px, rgba(251, 146, 60, 0.9), transparent);
+  background-size: 300px 300px;
+  filter: drop-shadow(0 0 3px rgba(253, 186, 116, 0.65));
+  animation: twinkle-a 2.6s ease-in-out infinite, drift-x 36s ease-in-out infinite;
+}
+.star-layer--2 {
+  background-image:
+    radial-gradient(1.8px 1.8px at 90px 200px, rgba(253, 186, 116, 1), transparent),
+    radial-gradient(2.2px 2.2px at 300px 80px, rgba(255, 224, 190, 1), transparent),
+    radial-gradient(1.5px 1.5px at 160px 360px, rgba(254, 215, 170, 0.9), transparent),
+    radial-gradient(1.3px 1.3px at 360px 280px, rgba(251, 146, 60, 0.85), transparent);
+  background-size: 340px 340px;
+  filter: drop-shadow(0 0 3px rgba(251, 146, 60, 0.6));
+  animation: twinkle-b 3.4s ease-in-out infinite, drift-y 44s ease-in-out infinite;
+  animation-delay: -1.2s, -6s;
+}
+.star-layer--3 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 320px, rgba(254, 215, 170, 0.95), transparent),
+    radial-gradient(2px 2px at 260px 240px, rgba(255, 224, 190, 1), transparent),
+    radial-gradient(1.6px 1.6px at 400px 120px, rgba(251, 146, 60, 0.9), transparent),
+    radial-gradient(1.3px 1.3px at 180px 60px, rgba(253, 186, 116, 0.85), transparent);
+  background-size: 380px 380px;
+  filter: drop-shadow(0 0 4px rgba(253, 186, 116, 0.6));
+  animation: twinkle-c 4.2s ease-in-out infinite, drift-x 52s ease-in-out infinite reverse;
+  animation-delay: -2.7s, -10s;
+}
+.star-layer--4 {
+  background-image:
+    radial-gradient(1.7px 1.7px at 140px 90px, rgba(254, 215, 170, 0.95), transparent),
+    radial-gradient(1.4px 1.4px at 350px 350px, rgba(253, 186, 116, 0.85), transparent),
+    radial-gradient(2.3px 2.3px at 210px 430px, rgba(255, 234, 205, 1), transparent),
+    radial-gradient(1.3px 1.3px at 30px 200px, rgba(251, 146, 60, 0.8), transparent);
+  background-size: 360px 360px;
+  filter: drop-shadow(0 0 3px rgba(251, 146, 60, 0.55));
+  animation: twinkle-a 3s ease-in-out infinite, drift-y 40s ease-in-out infinite reverse;
+  animation-delay: -3.5s, -14s;
+}
+.star-layer--5 {
+  background-image:
+    radial-gradient(1.3px 1.3px at 30px 150px, rgba(254, 215, 170, 0.85), transparent),
+    radial-gradient(1.6px 1.6px at 190px 260px, rgba(253, 186, 116, 0.9), transparent),
+    radial-gradient(1.4px 1.4px at 420px 300px, rgba(254, 215, 170, 0.8), transparent),
+    radial-gradient(2px 2px at 260px 120px, rgba(255, 224, 190, 0.95), transparent);
+  background-size: 440px 440px;
+  filter: drop-shadow(0 0 3px rgba(253, 186, 116, 0.5));
+  animation: twinkle-b 5s ease-in-out infinite, drift-x 60s ease-in-out infinite;
+  animation-delay: -0.6s, -3s;
+}
+.star-layer--6 {
+  background-image:
+    radial-gradient(2.6px 2.6px at 110px 380px, rgba(255, 234, 205, 1), transparent),
+    radial-gradient(1.5px 1.5px at 280px 50px, rgba(254, 215, 170, 0.85), transparent),
+    radial-gradient(1.7px 1.7px at 380px 220px, rgba(253, 186, 116, 0.9), transparent),
+    radial-gradient(1.4px 1.4px at 60px 90px, rgba(251, 146, 60, 0.85), transparent);
+  background-size: 500px 500px;
+  filter: drop-shadow(0 0 5px rgba(251, 146, 60, 0.65));
+  animation: twinkle-c 4.6s ease-in-out infinite, drift-y 56s ease-in-out infinite;
+  animation-delay: -4.1s, -20s;
+}
+
+@keyframes twinkle-a {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 1; }
+}
+@keyframes twinkle-b {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.15; }
+}
+@keyframes twinkle-c {
+  0% { opacity: 0.3; }
+  30% { opacity: 1; }
+  60% { opacity: 0.12; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes drift-x {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(22px, -10px, 0); }
+}
+@keyframes drift-y {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-14px, 20px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield {
+    opacity: 0.8 !important;
+    transition: none;
+  }
+  .star-layer {
+    animation: none !important;
+    opacity: 0.8;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -127,7 +249,7 @@ body::before {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.02;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
