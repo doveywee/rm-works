@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar, Footer } from "./components";
+import { JsonLd } from "@/components/JsonLd";
+import { absoluteUrl } from "@/lib/seo";
 
 const display = Oswald({
   subsets: ["latin"],
@@ -45,12 +47,59 @@ export const metadata: Metadata = {
     "San Diego County movers",
     "Orange County movers",
   ],
+  alternates: { canonical: "/spartan" },
   openGraph: {
     title: "Spartan Moving and Transport Inc · Murrieta, CA",
     description:
       "Licensed and insured residential and commercial movers serving Murrieta, Temecula, Riverside County, Orange County, San Diego County, and Southern California.",
+    url: "/spartan",
+    siteName: "Spartan Moving and Transport Inc",
     type: "website",
+    images: [{ url: "/spartan-assets/logo.png" }],
   },
+  twitter: {
+    card: "summary",
+    title: "Spartan Moving and Transport Inc · Murrieta, CA",
+    description:
+      "Licensed and insured local & commercial movers serving Murrieta, Temecula, and Southern California.",
+    images: ["/spartan-assets/logo.png"],
+  },
+};
+
+// MovingCompany schema — NAP, service area, and carrier license identifiers.
+const spartanSchema = {
+  "@context": "https://schema.org",
+  "@type": "MovingCompany",
+  "@id": absoluteUrl("/spartan#business"),
+  name: "Spartan Moving and Transport Inc",
+  description:
+    "Licensed and insured Murrieta moving company providing residential and commercial moving, loading and unloading, and moving labor across Southern California.",
+  url: absoluteUrl("/spartan"),
+  image: absoluteUrl("/spartan-assets/logo.png"),
+  telephone: "+1-951-326-5763",
+  email: "angelatsambasis@yahoo.com",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "29577 Hubble Way",
+    addressLocality: "Murrieta",
+    addressRegion: "CA",
+    postalCode: "92563",
+    addressCountry: "US",
+  },
+  areaServed: [
+    "Murrieta",
+    "Temecula",
+    "Riverside County",
+    "Orange County",
+    "San Diego County",
+    "Southern California",
+  ].map((name) => ({ "@type": "AdministrativeArea", name })),
+  identifier: [
+    { "@type": "PropertyValue", propertyID: "USDOT", value: "3480106" },
+    { "@type": "PropertyValue", propertyID: "MC", value: "0602297" },
+    { "@type": "PropertyValue", propertyID: "CAL-T", value: "0192705" },
+  ],
 };
 
 export default function SpartanLayout({
@@ -62,6 +111,7 @@ export default function SpartanLayout({
     <div
       className={`${display.variable} ${sans.variable} ${mono.variable} min-h-screen bg-[#F4EFE3] text-[#1B2A38] [font-family:var(--font-spartan-sans)] antialiased selection:bg-[#C9A24B]/30`}
     >
+      <JsonLd data={spartanSchema} />
       <Navbar />
       <main>{children}</main>
       <Footer />
