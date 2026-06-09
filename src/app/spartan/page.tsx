@@ -226,9 +226,14 @@ export default function SpartanHome() {
             title="What We Move"
             intro="From a single heavy item to a full home or office, our crew brings strength, care, and organization to every job."
             action={
-              <Btn href="/spartan/services" variant="outline" size="sm">
-                Full services &amp; process <ArrowUpRight size={14} />
-              </Btn>
+              <div className="flex flex-wrap gap-3">
+                <Btn href="/spartan/services" variant="outline" size="sm">
+                  Full services &amp; process <ArrowUpRight size={14} />
+                </Btn>
+                <Btn href="/spartan/services#rules" variant="outline" size="sm">
+                  Important moving rules <ArrowUpRight size={14} />
+                </Btn>
+              </div>
             }
           />
           <div className="mt-12">

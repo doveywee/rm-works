@@ -200,7 +200,7 @@ export default function SpartanServices() {
       </section>
 
       {/* ===================== RULES ===================== */}
-      <section className="bg-[#F4EFE3]">
+      <section id="rules" className="scroll-mt-28 bg-[#F4EFE3]">
         <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
           <SectionHead
             n="C"
