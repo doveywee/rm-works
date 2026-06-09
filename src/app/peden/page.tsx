@@ -1,9 +1,8 @@
 import {
   Hero,
   TrustStatement,
-  ServiceCards,
-  About,
   Services,
+  About,
   WhoIHelp,
   QuoteForm,
   FAQ,
@@ -15,9 +14,8 @@ export default function PedenPage() {
     <>
       <Hero />
       <TrustStatement />
-      <ServiceCards />
-      <About />
       <Services />
+      <About />
       <WhoIHelp />
       <QuoteForm />
       <FAQ />

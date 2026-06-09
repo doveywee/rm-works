@@ -450,111 +450,6 @@ export function TrustStatement() {
 }
 
 /* ===========================================================================
-   Service cards (homepage overview)
-   ========================================================================= */
-const SERVICE_CARDS = [
-  {
-    Icon: ShieldCheck,
-    title: "Life Insurance",
-    copy: "Protect your loved ones with coverage designed to support them when they need it most.",
-  },
-  {
-    Icon: PiggyBank,
-    title: "Retirement Planning",
-    copy: "Prepare for the future with strategies focused on long-term security and peace of mind.",
-  },
-  {
-    Icon: LineChart,
-    title: "Financial Strategies",
-    copy: "Get personalized guidance to help build a stronger financial foundation.",
-  },
-  {
-    Icon: Building2,
-    title: "Small Business Insurance",
-    copy: "Protect your business, employees, and long-term goals with thoughtful planning.",
-  },
-  {
-    Icon: Briefcase,
-    title: "Business Protection",
-    copy: "Support business continuity and protect the people who help your company thrive.",
-  },
-];
-
-export function ServiceCards() {
-  return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-        <div className="max-w-2xl">
-          <Reveal>
-            <Eyebrow>How I can help</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2
-              className={cx(
-                serif,
-                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#0F2A43] sm:text-[2.6rem]"
-              )}
-            >
-              Guidance for every stage of your life and business.
-            </h2>
-          </Reveal>
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICE_CARDS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.05}>
-              <div className="group flex h-full flex-col rounded-2xl border border-[#0F2A43]/8 bg-white p-7 shadow-[0_2px_24px_-16px_rgba(15,42,67,0.4)] transition-all hover:-translate-y-1 hover:border-[#BD9B5A]/40 hover:shadow-[0_12px_40px_-18px_rgba(15,42,67,0.35)]">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#F7F2E9] text-[#0F2A43] transition-colors group-hover:bg-[#0F2A43] group-hover:text-[#BD9B5A]">
-                  <s.Icon size={22} />
-                </span>
-                <h3
-                  className={cx(
-                    serif,
-                    "mt-5 text-[1.3rem] font-semibold text-[#0F2A43]"
-                  )}
-                >
-                  {s.title}
-                </h3>
-                <p className="mt-2.5 flex-1 text-[15px] leading-relaxed text-[#5A6B7A]">
-                  {s.copy}
-                </p>
-                <a
-                  href="#services"
-                  className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#A8853F] transition-colors hover:text-[#0F2A43]"
-                >
-                  Learn more <ArrowRight size={14} />
-                </a>
-              </div>
-            </Reveal>
-          ))}
-
-          {/* CTA card */}
-          <Reveal delay={SERVICE_CARDS.length * 0.05}>
-            <a
-              href="#quote"
-              className="flex h-full flex-col justify-between rounded-2xl bg-[#0F2A43] p-7 text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#0A1F33]"
-            >
-              <div>
-                <h3 className={cx(serif, "text-[1.3rem] font-semibold")}>
-                  Not sure where to start?
-                </h3>
-                <p className="mt-2.5 text-[15px] leading-relaxed text-white/70">
-                  Let&rsquo;s talk through your goals together — no pressure,
-                  just clear answers.
-                </p>
-              </div>
-              <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-semibold text-[#BD9B5A]">
-                Request a consultation <ArrowRight size={15} />
-              </span>
-            </a>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===========================================================================
    About
    ========================================================================= */
 const ABOUT_POINTS = [
@@ -659,44 +554,189 @@ export function About() {
 /* ===========================================================================
    Services (detailed)
    ========================================================================= */
-const SERVICES = [
+type Service = {
+  Icon: typeof ShieldCheck;
+  title: string;
+  copy: string;
+  intro: string;
+  points: string[];
+  who: string;
+};
+
+const SERVICES: Service[] = [
   {
     Icon: ShieldCheck,
     title: "Life Insurance",
-    copy: "Help your family protect their future with coverage for income replacement, final expenses, and long-term security. Chantelle explains term and permanent life insurance in a simple, educational way so you can choose what fits.",
-    cta: "Request guidance",
+    copy: "Coverage built around the people who depend on you most.",
+    intro:
+      "Life insurance is one of the most meaningful ways to protect your family. Chantelle helps you understand how a policy can step in for your income and give your loved ones stability during a difficult time.",
+    points: [
+      "Income replacement so your family can keep their way of life",
+      "Help with final expenses, debts, or a remaining mortgage",
+      "A financial head start toward your children's future and education",
+      "Term vs. permanent life insurance explained in plain language — term covers a set period (like 10, 20, or 30 years), while permanent is designed to last a lifetime and may build value over time",
+    ],
+    who: "Parents, primary earners, newlyweds, and anyone with people who count on them.",
   },
   {
     Icon: PiggyBank,
     title: "Retirement Planning",
-    copy: "Prepare for the future and support your long-term goals. Together you'll think through retirement income, protection, and financial stability so you can look ahead with confidence.",
-    cta: "Learn more",
+    copy: "Look ahead with confidence and a plan that fits your life.",
+    intro:
+      "Retirement should feel like something to look forward to. Chantelle helps you think through where your income will come from and how to protect what you've worked hard to build.",
+    points: [
+      "Think through your retirement income and where it will come from",
+      "Strategies focused on protecting what you've already saved",
+      "Options that can complement a 401(k), IRA, or pension",
+      "A steady emphasis on long-term stability and peace of mind",
+    ],
+    who: "Everyone from early-career savers to those approaching retirement.",
   },
   {
     Icon: LineChart,
     title: "Financial Strategies",
-    copy: "Personalized financial guidance to help individuals and families understand their options and build a secure financial foundation — one step at a time.",
-    cta: "Request guidance",
+    copy: "Personalized guidance to build a stronger foundation.",
+    intro:
+      "Strong finances start with clarity. Chantelle takes time to understand your full picture, then helps you connect the pieces — protection, savings, and goals — into a strategy you actually understand.",
+    points: [
+      "A clear picture of where you are and where you'd like to go",
+      "Guidance on protecting your income and your family",
+      "Aligning insurance and savings with your real-life goals",
+      "Education first — you make the decisions, at your own pace",
+    ],
+    who: "Individuals and families who want clarity and a plan they understand.",
   },
   {
     Icon: Building2,
     title: "Small Business Insurance",
-    copy: "Help protect your company, employees, and family. Coverage and planning for small business owners focused on business continuity and protecting what you've built.",
-    cta: "Learn more",
+    copy: "Protect your company, your team, and the family behind it.",
+    intro:
+      "Your business supports a lot of people. Chantelle helps small business owners put protection in place so a setback doesn't put everything you've built at risk.",
+    points: [
+      "Protection focused on keeping your business running",
+      "Coverage considerations for owners and key people",
+      "Options that can help you attract and protect employees",
+      "Planning that's built to grow alongside your business",
+    ],
+    who: "Small business owners and the self-employed across Riverside County.",
   },
   {
     Icon: HeartPulse,
     title: "Health Insurance / Benefits",
-    copy: "Understand your insurance and benefit options with support for individuals, families, and small business owners who want clarity and peace of mind.",
-    cta: "Request guidance",
+    copy: "Understand your options with someone who explains them clearly.",
+    intro:
+      "Benefits can be confusing. Chantelle helps individuals, families, and small business owners cut through the noise and feel confident about the choices in front of them.",
+    points: [
+      "Guidance on benefit options for individuals and families",
+      "Support for small business owners exploring employee benefits",
+      "Plain-language answers to your coverage questions",
+      "Help comparing options so you can choose with confidence",
+    ],
+    who: "Individuals, families, and small business owners weighing their options.",
   },
   {
     Icon: Briefcase,
     title: "Business Protection",
-    copy: "Guidance for entrepreneurs and small business owners — protection strategies for owners, key people, employees, and your long-term business goals.",
-    cta: "Learn more",
+    copy: "Safeguard the owners, key people, and goals behind your company.",
+    intro:
+      "Behind every business are the people who make it work. Chantelle helps entrepreneurs plan for continuity so the company — and the people in it — are protected for the long term.",
+    points: [
+      "Protection strategies for owners and key contributors",
+      "Planning for business continuity and succession",
+      "Ways to help safeguard the people who drive your company",
+      "Guidance tailored to entrepreneurs and growing teams",
+    ],
+    who: "Entrepreneurs, partners, and small business owners planning ahead.",
   },
 ];
+
+function ServiceCard({ s, delay }: { s: Service; delay: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Reveal delay={delay}>
+      <div
+        className={cx(
+          "flex h-full flex-col rounded-2xl border bg-white p-7 transition-all",
+          open
+            ? "border-[#BD9B5A]/50 shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
+            : "border-[#0F2A43]/8 hover:border-[#BD9B5A]/40 hover:shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]"
+        )}
+      >
+        <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#0F2A43] text-[#BD9B5A]">
+          <s.Icon size={22} />
+        </span>
+        <h3
+          className={cx(
+            serif,
+            "mt-5 text-[1.35rem] font-semibold text-[#0F2A43]"
+          )}
+        >
+          {s.title}
+        </h3>
+        <p className="mt-3 text-[15px] leading-relaxed text-[#5A6B7A]">
+          {s.copy}
+        </p>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="mt-5 border-t border-[#0F2A43]/8 pt-5">
+                <p className="text-[14px] leading-relaxed text-[#5A6B7A]">
+                  {s.intro}
+                </p>
+                <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#A8853F]">
+                  How Chantelle can help
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {s.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#F7F2E9] text-[#245C46]">
+                        <Check size={12} strokeWidth={3} />
+                      </span>
+                      <span className="text-[14px] leading-relaxed text-[#3A4754]">
+                        {p}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-5 rounded-xl bg-[#F7F2E9] px-4 py-3">
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0F2A43]">
+                    Who it&rsquo;s for ·{" "}
+                  </span>
+                  <span className="text-[13px] text-[#5A6B7A]">{s.who}</span>
+                </div>
+                <a
+                  href="#quote"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0F2A43] px-5 py-2.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0A1F33]"
+                >
+                  Request guidance <ArrowRight size={14} />
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="mt-6 inline-flex items-center gap-1.5 self-start text-[14px] font-semibold text-[#A8853F] transition-colors hover:text-[#0F2A43]"
+          aria-expanded={open}
+        >
+          {open ? "Show less" : "Learn more"}
+          <ChevronDown
+            size={15}
+            className={cx("transition-transform", open && "rotate-180")}
+          />
+        </button>
+      </div>
+    </Reveal>
+  );
+}
 
 export function Services() {
   return (
@@ -720,39 +760,38 @@ export function Services() {
             <p className="mt-4 text-[16px] leading-relaxed text-[#5A6B7A]">
               From life insurance in Riverside to retirement planning in Corona
               and small business insurance across Riverside County, Chantelle
-              helps you find the strategy that fits your life.
+              helps you find the strategy that fits your life. Select{" "}
+              <span className="font-semibold text-[#0F2A43]">Learn more</span> on
+              any service to see how she can help.
             </p>
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={(i % 3) * 0.06}>
-              <div className="group flex h-full flex-col rounded-2xl border border-[#0F2A43]/8 bg-white p-7 transition-all hover:border-[#BD9B5A]/40 hover:shadow-[0_18px_50px_-24px_rgba(15,42,67,0.4)]">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#0F2A43] text-[#BD9B5A]">
-                  <s.Icon size={22} />
-                </span>
-                <h3
-                  className={cx(
-                    serif,
-                    "mt-5 text-[1.35rem] font-semibold text-[#0F2A43]"
-                  )}
-                >
-                  {s.title}
-                </h3>
-                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-[#5A6B7A]">
-                  {s.copy}
-                </p>
-                <a
-                  href="#quote"
-                  className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#A8853F] transition-colors group-hover:gap-2.5 hover:text-[#0F2A43]"
-                >
-                  {s.cta} <ArrowRight size={14} />
-                </a>
-              </div>
-            </Reveal>
+            <ServiceCard key={s.title} s={s} delay={(i % 3) * 0.06} />
           ))}
         </div>
+
+        <Reveal delay={0.1}>
+          <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl bg-[#0F2A43] px-8 py-8 text-center sm:flex-row sm:text-left">
+            <div>
+              <h3 className={cx(serif, "text-[1.4rem] font-semibold text-white")}>
+                Not sure which fits your situation?
+              </h3>
+              <p className="mt-1.5 text-[15px] text-white/70">
+                Let&rsquo;s talk it through together — no pressure, just clear
+                answers.
+              </p>
+            </div>
+            <a
+              href="#quote"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#BD9B5A] px-6 py-3.5 text-[15px] font-semibold text-[#0F2A43] transition-all hover:bg-[#cda863]"
+            >
+              Request a consultation <ArrowRight size={16} />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
