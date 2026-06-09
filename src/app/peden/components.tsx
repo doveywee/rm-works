@@ -38,7 +38,7 @@ import {
    Chantelle Peden Hunt, MBA — Licensed Agent with New York Life
    ----------------------------------------------------------------------------
    Palette: white · ink #16202B · navy #003B73 · gold #2E86C1
-            sand #EAF2FB · green #0A5BA0 · muted #5A6B7A
+            sand #F2F5F9 · green #003B73 · muted #5A6B7A
    ========================================================================= */
 
 export const cx = (...c: (string | false | undefined | null)[]) =>
@@ -269,7 +269,7 @@ export function Navbar() {
             className={cx(
               "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold shadow-sm transition-all hover:shadow-md",
               onDark
-                ? "bg-white text-[#003B73] hover:bg-[#EAF2FB]"
+                ? "bg-white text-[#003B73] hover:bg-[#F2F5F9]"
                 : "bg-[#003B73] text-white hover:bg-[#002A52]"
             )}
           >
@@ -305,7 +305,7 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#3A4754] hover:bg-[#EAF2FB]"
+                  className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#3A4754] hover:bg-[#F2F5F9]"
                 >
                   {l.label}
                 </a>
@@ -370,7 +370,7 @@ export function Hero() {
             <div className="mt-9 flex flex-wrap gap-3.5">
               <a
                 href="#quote"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg shadow-black/20 transition-all hover:bg-[#EAF2FB] hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg shadow-black/20 transition-all hover:bg-[#F2F5F9] hover:shadow-xl"
               >
                 Request a Quote <ArrowRight size={17} />
               </a>
@@ -410,7 +410,7 @@ export function Hero() {
    ========================================================================= */
 export function TrustStatement() {
   return (
-    <section className="bg-[#EAF2FB]">
+    <section className="bg-[#F2F5F9]">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
           <Reveal className="md:col-span-4">
@@ -464,7 +464,7 @@ const ABOUT_POINTS = [
 
 export function About() {
   return (
-    <section id="about" className="relative bg-[#003B73]">
+    <section id="about" className="relative bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2">
         <Reveal>
           <div className="relative rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#0A4E92] to-[#002A52] p-8 shadow-2xl sm:p-10">
@@ -527,20 +527,20 @@ export function About() {
 
         <div>
           <Reveal>
-            <Eyebrow light>About Chantelle</Eyebrow>
+            <Eyebrow>About Chantelle</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2
               className={cx(
                 serif,
-                "mt-4 text-[2.1rem] font-semibold leading-tight text-white sm:text-[2.6rem]"
+                "mt-4 text-[2.1rem] font-semibold leading-tight text-[#003B73] sm:text-[2.6rem]"
               )}
             >
               A trusted, local guide for your financial future.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="mt-6 space-y-4 text-[16px] leading-relaxed text-white/75">
+            <div className="mt-6 space-y-4 text-[16px] leading-relaxed text-[#475467]">
               <p>
                 Chantelle Peden Hunt, MBA, is a Licensed Agent with New York
                 Life serving individuals, families, and business owners
@@ -563,12 +563,12 @@ export function About() {
           <div className="mt-9 grid gap-4 sm:grid-cols-3">
             {ABOUT_POINTS.map((p, i) => (
               <Reveal key={p.title} delay={0.12 + i * 0.05}>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <p.Icon size={22} className="text-[#2E86C1]" />
-                  <h3 className="mt-3 text-[14px] font-semibold text-white">
+                <div className="h-full rounded-2xl border border-[#003B73]/10 bg-[#F4F6FA] p-5">
+                  <p.Icon size={22} className="text-[#0A66B8]" />
+                  <h3 className="mt-3 text-[14px] font-semibold text-[#003B73]">
                     {p.title}
                   </h3>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-white/65">
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-[#5A6B7A]">
                     {p.copy}
                   </p>
                 </div>
@@ -726,7 +726,7 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
                 <ul className="mt-3 space-y-2.5">
                   {s.points.map((p) => (
                     <li key={p} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#EAF2FB] text-[#0A5BA0]">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#F2F5F9] text-[#003B73]">
                         <Check size={12} strokeWidth={3} />
                       </span>
                       <span className="text-[14px] leading-relaxed text-[#3A4754]">
@@ -735,7 +735,7 @@ function ServiceCard({ s, delay }: { s: Service; delay: number }) {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-5 rounded-xl bg-[#EAF2FB] px-4 py-3">
+                <div className="mt-5 rounded-xl bg-[#F2F5F9] px-4 py-3">
                   <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#003B73]">
                     Who it&rsquo;s for ·{" "}
                   </span>
@@ -816,7 +816,7 @@ export function Services() {
             </div>
             <a
               href="#quote"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#EAF2FB]"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#F2F5F9]"
             >
               Request a consultation <ArrowRight size={16} />
             </a>
@@ -842,7 +842,7 @@ const WHO = [
 
 export function WhoIHelp() {
   return (
-    <section id="who" className="relative overflow-hidden bg-gradient-to-b from-[#0A5BA0] to-[#002A52]">
+    <section id="who" className="relative overflow-hidden bg-gradient-to-b from-[#003B73] to-[#002A52]">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2E86C1]/30 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
@@ -871,7 +871,7 @@ export function WhoIHelp() {
             <Reveal delay={0.15}>
               <a
                 href="#quote"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg transition-all hover:bg-[#EAF2FB]"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#003B73] shadow-lg transition-all hover:bg-[#F2F5F9]"
               >
                 Start the conversation <ArrowRight size={16} />
               </a>
@@ -917,7 +917,7 @@ export function QuoteForm() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="quote" className="bg-[#EAF2FB]">
+    <section id="quote" className="bg-[#F2F5F9]">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -950,7 +950,7 @@ export function QuoteForm() {
                   { Icon: MapPin, t: "Serving Corona, Riverside & the Inland Empire" },
                 ].map(({ Icon, t }) => (
                   <div key={t} className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-white text-[#0A5BA0] shadow-sm">
+                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-white text-[#003B73] shadow-sm">
                       <Icon size={17} />
                     </span>
                     <span className="text-[15px] text-[#3A4754]">{t}</span>
@@ -970,7 +970,7 @@ export function QuoteForm() {
             >
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
-                  <span className="grid h-16 w-16 place-items-center rounded-full bg-[#0A5BA0]/10 text-[#0A5BA0]">
+                  <span className="grid h-16 w-16 place-items-center rounded-full bg-[#003B73]/10 text-[#003B73]">
                     <Check size={30} strokeWidth={2.5} />
                   </span>
                   <h3
@@ -1080,7 +1080,7 @@ export function QuoteForm() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-[#003B73]/15 bg-[#F4F9FE] px-4 py-3 text-[15px] text-[#16202B] outline-none transition-all placeholder:text-[#9aa6b1] focus:border-[#2E86C1] focus:ring-2 focus:ring-[#2E86C1]/20";
+  "w-full rounded-xl border border-[#003B73]/15 bg-[#F7F9FC] px-4 py-3 text-[15px] text-[#16202B] outline-none transition-all placeholder:text-[#9aa6b1] focus:border-[#2E86C1] focus:ring-2 focus:ring-[#2E86C1]/20";
 
 function Field({
   label,
@@ -1182,7 +1182,7 @@ export function FAQ() {
                       "grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all",
                       isOpen
                         ? "bg-[#003B73] text-[#2E86C1] rotate-180"
-                        : "bg-[#EAF2FB] text-[#003B73]"
+                        : "bg-[#F2F5F9] text-[#003B73]"
                     )}
                   >
                     <ChevronDown size={16} />
@@ -1249,7 +1249,7 @@ export function Contact() {
               <div className="mt-9 flex flex-wrap gap-3.5">
                 <a
                   href="tel:+10000000000"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#EAF2FB]"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-[#003B73] transition-all hover:bg-[#F2F5F9]"
                 >
                   <Phone size={16} /> Call
                 </a>
