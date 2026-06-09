@@ -164,8 +164,22 @@ body::before {
   50% { transform: translate3d(-14px, 20px, 0); }
 }
 
-/* Phones: thin the layer count to cut overdraw (fill-rate) on smaller GPUs.
-   The remaining layers still twinkle + drift, all GPU-composited. */
+/* Touch devices: keep the starfield as a fully static, cheap fixed layer.
+   Continuously-animating fixed layers force mobile browsers off their fast
+   scroll path, which is what made the scroll-linked black hole stutter. Static
+   stars composite once and never repaint, so the hero scrolls smoothly. */
+@media (pointer: coarse) {
+  .star-layer {
+    animation: none;
+  }
+  /* mix-blend-mode re-composites the whole stacking context every scroll
+     frame — a major mobile fps cost for a barely-visible grain. */
+  .noise {
+    display: none;
+  }
+}
+
+/* Phones: also thin the layer count to cut overdraw (fill-rate). */
 @media (max-width: 767px) {
   .star-layer--4,
   .star-layer--5,
