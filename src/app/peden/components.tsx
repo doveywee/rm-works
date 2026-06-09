@@ -28,7 +28,6 @@ import {
   ArrowRight,
   Check,
   ChevronDown,
-  Quote,
   GraduationCap,
   Users,
   Clock,
@@ -46,8 +45,6 @@ export const cx = (...c: (string | false | undefined | null)[]) =>
   c.filter(Boolean).join(" ");
 
 const serif = "[font-family:var(--font-serif-p)]";
-
-const GOLD = "#BD9B5A";
 
 /* Unsplash helper — warm, community & family lifestyle imagery (no portraits). */
 const img = (id: string, w = 1400) =>
@@ -218,41 +215,59 @@ export function Navbar() {
     };
   }, [open]);
 
+  // Over the dark hero the bar is transparent, so everything must read light.
+  const onDark = !scrolled && !open;
+
   return (
     <header
       className={cx(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-[#0F2A43]/8 shadow-[0_2px_20px_-12px_rgba(15,42,67,0.4)]"
+        scrolled || open
+          ? "bg-white/95 backdrop-blur-md border-b border-[#0F2A43]/8 shadow-[0_2px_20px_-12px_rgba(15,42,67,0.4)]"
           : "bg-transparent"
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3.5 sm:px-8">
-        <Logo />
+        <Logo light={onDark} />
 
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[14px] font-medium text-[#3A4754] transition-colors hover:text-[#0F2A43]"
+              className={cx(
+                "text-[14px] font-medium transition-colors",
+                onDark
+                  ? "text-white/80 hover:text-white"
+                  : "text-[#3A4754] hover:text-[#0F2A43]"
+              )}
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <a
             href="tel:+10000000000"
-            className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#0F2A43] hover:text-[#A8853F]"
+            className={cx(
+              "inline-flex items-center gap-2 text-[14px] font-semibold transition-colors",
+              onDark
+                ? "text-white hover:text-[#D8B978]"
+                : "text-[#0F2A43] hover:text-[#A8853F]"
+            )}
           >
             <Phone size={15} />
             (000) 000-0000
           </a>
           <a
             href="#quote"
-            className="inline-flex items-center gap-2 rounded-full bg-[#0F2A43] px-5 py-2.5 text-[14px] font-semibold text-white shadow-sm transition-all hover:bg-[#0A1F33] hover:shadow-md"
+            className={cx(
+              "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold shadow-sm transition-all hover:shadow-md",
+              onDark
+                ? "bg-[#BD9B5A] text-[#0F2A43] hover:bg-[#cda863]"
+                : "bg-[#0F2A43] text-white hover:bg-[#0A1F33]"
+            )}
           >
             Request a Quote
             <ArrowRight size={15} />
@@ -261,7 +276,10 @@ export function Navbar() {
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-lg text-[#0F2A43] lg:hidden"
+          className={cx(
+            "grid h-10 w-10 place-items-center rounded-lg transition-colors lg:hidden",
+            onDark ? "text-white" : "text-[#0F2A43]"
+          )}
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -318,52 +336,52 @@ export function Hero() {
         <img
           src={img("1511895426328-dc8714191300", 1900)}
           alt=""
-          className="h-full w-full object-cover opacity-[0.18]"
+          className="h-full w-full object-cover object-top opacity-[0.16]"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0F2A43] via-[#0F2A43]/95 to-[#0A1F33]/90" />
-        <div
-          className="absolute -right-32 -top-24 h-[34rem] w-[34rem] rounded-full opacity-20 blur-3xl"
-          style={{ background: GOLD }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F33] via-[#0F2A43]/92 to-[#0F2A43]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-12">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-x-12 gap-y-14 px-5 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Reveal>
-            <Eyebrow light>Corona · Riverside · Inland Empire, CA</Eyebrow>
+            <p className="flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-[#D8B978]">
+              <span className="h-px w-8 bg-[#BD9B5A]/70" />
+              Corona · Riverside · Inland Empire, CA
+            </p>
           </Reveal>
           <Reveal delay={0.05}>
             <h1
               className={cx(
                 serif,
-                "mt-5 text-[2.6rem] font-semibold leading-[1.06] tracking-tight text-white sm:text-[3.6rem]"
+                "mt-6 text-[2.7rem] font-semibold leading-[1.04] tracking-[-0.01em] text-white sm:text-[3.7rem]"
               )}
             >
-              Protecting What Matters Most —{" "}
+              Protecting what matters most —
+              <br className="hidden sm:block" />{" "}
               <span className="text-[#D8B978]">
-                Your Family, Future, and Business.
+                your family, future, and business.
               </span>
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/75">
-              Chantelle Peden Hunt, MBA, Licensed Agent with New York Life,
-              provides personalized insurance and financial strategies for
-              individuals, families, and business owners across Corona,
-              Riverside, and the Inland Empire.
+            <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-white/70">
+              I&rsquo;m Chantelle Peden Hunt, MBA, a Licensed Agent with New York
+              Life. I help individuals, families, and business owners across the
+              Inland Empire protect their income, plan for retirement, and build
+              a financial foundation that lasts.
             </p>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap gap-3.5">
               <a
                 href="#quote"
-                className="inline-flex items-center gap-2 rounded-full bg-[#BD9B5A] px-7 py-3.5 text-[15px] font-semibold text-[#0F2A43] shadow-lg shadow-[#BD9B5A]/20 transition-all hover:bg-[#cda863] hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-[#BD9B5A] px-7 py-3.5 text-[15px] font-semibold text-[#0F2A43] shadow-lg shadow-black/20 transition-all hover:bg-[#cda863] hover:shadow-xl"
               >
                 Request a Quote <ArrowRight size={17} />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-white backdrop-blur transition-all hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-[15px] font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
               >
                 Schedule a Consultation
               </a>
@@ -371,7 +389,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] text-white/65">
+            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/12 pt-6 text-[13px] text-white/55">
               <span className="inline-flex items-center gap-2">
                 <GraduationCap size={16} className="text-[#BD9B5A]" /> MBA ·
                 Business &amp; Leadership
@@ -388,30 +406,25 @@ export function Hero() {
           </Reveal>
         </div>
 
-        {/* image card */}
+        {/* portrait-orientation image with an overlaid personal note */}
         <Reveal delay={0.15} className="lg:col-span-5">
-          <div className="relative">
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/10 shadow-2xl">
+          <div className="relative mx-auto max-w-sm lg:max-w-none">
+            <div className="absolute -inset-3 -z-0 rounded-[1.9rem] border border-[#BD9B5A]/30" />
+            <div className="relative overflow-hidden rounded-[1.5rem] shadow-2xl ring-1 ring-white/10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img("1476703993599-0035a21b17a9", 1000)}
                 alt="A parent and children at home, planning for the future"
                 className="aspect-[4/5] w-full object-cover"
               />
-            </div>
-            <div className="absolute -bottom-5 -left-5 hidden rounded-2xl bg-white p-4 shadow-xl ring-1 ring-black/5 sm:block">
-              <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#F7F2E9]">
-                  <HeartPulse size={18} className="text-[#245C46]" />
-                </span>
-                <div className="leading-tight">
-                  <p className="text-[13px] font-semibold text-[#0F2A43]">
-                    Coverage built around you
-                  </p>
-                  <p className="text-[12px] text-[#5A6B7A]">
-                    Families · Professionals · Owners
-                  </p>
-                </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A1F33] via-[#0A1F33]/70 to-transparent p-6 pt-20">
+                <p className="text-[15px] font-medium leading-snug text-white">
+                  &ldquo;My job is to make the complicated feel simple — and to
+                  be here for your family long after the paperwork is done.&rdquo;
+                </p>
+                <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#D8B978]">
+                  Chantelle Peden Hunt, MBA
+                </p>
               </div>
             </div>
           </div>
@@ -427,23 +440,31 @@ export function Hero() {
 export function TrustStatement() {
   return (
     <section className="bg-[#F7F2E9]">
-      <div className="mx-auto max-w-5xl px-5 py-16 text-center sm:px-8 sm:py-20">
-        <Reveal>
-          <Quote size={34} className="mx-auto text-[#BD9B5A]" />
-        </Reveal>
-        <Reveal delay={0.05}>
-          <p
-            className={cx(
-              serif,
-              "mt-5 text-[1.6rem] font-medium leading-snug text-[#0F2A43] sm:text-[2rem]"
-            )}
-          >
-            Insurance and financial planning can feel overwhelming. Chantelle
-            helps simplify the process by taking time to understand your goals,
-            explain your options, and create strategies designed around your
-            life, family, and future.
-          </p>
-        </Reveal>
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+        <div className="grid gap-8 md:grid-cols-12 md:gap-12">
+          <Reveal className="md:col-span-4">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#A8853F]">
+              Why work with Chantelle
+            </p>
+            <p className="mt-4 text-[15px] leading-relaxed text-[#5A6B7A]">
+              A local agent who treats your goals like her own — and stays in
+              your corner for the long haul.
+            </p>
+          </Reveal>
+          <Reveal delay={0.08} className="md:col-span-8">
+            <p
+              className={cx(
+                serif,
+                "border-l-2 border-[#BD9B5A] pl-6 text-[1.5rem] font-medium leading-snug text-[#0F2A43] sm:text-[1.95rem]"
+              )}
+            >
+              Insurance and financial planning can feel overwhelming. I help
+              simplify the process — taking the time to understand your goals,
+              explain your options in plain language, and shape strategies
+              around your life, your family, and your future.
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -1195,11 +1216,10 @@ export function FAQ() {
    ========================================================================= */
 export function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#0F2A43]">
-      <div
-        className="absolute -left-32 bottom-0 h-[28rem] w-[28rem] rounded-full opacity-15 blur-3xl"
-        style={{ background: GOLD }}
-      />
+    <section
+      id="contact"
+      className="relative overflow-hidden border-t-2 border-[#BD9B5A]/40 bg-[#0F2A43]"
+    >
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-6">
