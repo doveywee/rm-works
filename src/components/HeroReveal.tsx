@@ -12,7 +12,7 @@ import {
 import { MagneticButton } from "./ui/MagneticButton";
 
 const HOLE_BG =
-  "radial-gradient(circle, #000 0%, #000 50%, rgba(8,8,8,0.96) 62%, rgba(249,115,22,0.65) 74%, rgba(251,146,60,1) 82%, rgba(255,224,190,1) 86%, rgba(253,186,116,0.95) 90%, rgba(251,146,60,0.55) 95%, rgba(249,115,22,0.22) 99%, rgba(249,115,22,0) 100%)";
+  "radial-gradient(circle, #000 0%, #000 56%, rgba(10,10,10,0.95) 70%, rgba(249,115,22,0.75) 82%, rgba(255,224,190,1) 89%, rgba(249,115,22,0) 100%)";
 
 /** A single headline word that gets torn off and spiralled into the hole. */
 function WarpWord({

@@ -164,26 +164,26 @@ body::before {
   50% { transform: translate3d(-14px, 20px, 0); }
 }
 
-/* Touch devices: keep the starfield as a fully static, cheap fixed layer.
-   Continuously-animating fixed layers force mobile browsers off their fast
-   scroll path, which is what made the scroll-linked black hole stutter. Static
-   stars composite once and never repaint, so the hero scrolls smoothly. */
+/* Touch devices: reduce the starfield to a single static layer and, crucially,
+   turn OFF `will-change`. A promoted (will-change) fixed layer is something the
+   compositor must juggle every frame even when idle — that overhead is what
+   keeps the scroll-linked black hole from feeling smooth on phones. With one
+   un-promoted static layer the hero scrolls as cheaply as it did before. */
 @media (pointer: coarse) {
   .star-layer {
     animation: none;
+    will-change: auto;
+  }
+  .star-layer--2,
+  .star-layer--3,
+  .star-layer--4,
+  .star-layer--5,
+  .star-layer--6 {
+    display: none;
   }
   /* mix-blend-mode re-composites the whole stacking context every scroll
      frame — a major mobile fps cost for a barely-visible grain. */
   .noise {
-    display: none;
-  }
-}
-
-/* Phones: also thin the layer count to cut overdraw (fill-rate). */
-@media (max-width: 767px) {
-  .star-layer--4,
-  .star-layer--5,
-  .star-layer--6 {
     display: none;
   }
 }
