@@ -85,6 +85,16 @@ export function GoldRule({ className }: { className?: string }) {
   );
 }
 
+/* Centered section divider — the gold rule with the lotus, used to open
+   every content section in place of a text kicker. */
+export function SectionDivider({ className }: { className?: string }) {
+  return (
+    <div className={cx("mx-auto w-full max-w-2xl", className)}>
+      <GoldRule />
+    </div>
+  );
+}
+
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.34em] text-[#C8A24C] [font-family:var(--font-slc-caps)]">

@@ -8,7 +8,7 @@ import {
   A,
   cx,
   Lotus,
-  GoldRule,
+  SectionDivider,
   Eyebrow,
   Reveal,
   GoldButton,
@@ -252,10 +252,13 @@ function Accolades() {
 function Story() {
   return (
     <section id="story" className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-24 sm:px-8 lg:grid-cols-2">
+      <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+        <Reveal>
+          <SectionDivider className="mb-14" />
+        </Reveal>
+        <div className="grid items-center gap-12 lg:grid-cols-2">
         <Reveal className="order-2 lg:order-1">
-          <Eyebrow>The Name</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
+          <h2 className="text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
             A royal ground, a<span className="text-[#E0BC6A]"> gathering place</span>.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[#EFE6D4]/75">
@@ -270,9 +273,6 @@ function Story() {
             bring to Claremont: honest Thai cooking, generous bowls, and a table
             that stays open late.
           </p>
-          <div className="mt-8 max-w-xs">
-            <GoldRule />
-          </div>
         </Reveal>
 
         <Reveal y={28} className="order-1 lg:order-2">
@@ -294,6 +294,7 @@ function Story() {
             </div>
           </div>
         </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -307,11 +308,8 @@ function Specialty() {
     <section id="specialty" className="border-y border-[#C8A24C]/15 bg-[#0F0C08]">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="mb-5 flex justify-center">
-            <GoldRule className="w-40" />
-          </div>
-          <Eyebrow>The House Specialty</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
+          <SectionDivider className="mb-8" />
+          <h2 className="text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
             Bowls worth the drive
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#EFE6D4]/70">
@@ -365,8 +363,8 @@ function Menu({ onOpen }: { onOpen: (src: string, label: string) => void }) {
     <section id="menu" className="relative">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <Eyebrow>Our Menu</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
+          <SectionDivider className="mb-8" />
+          <h2 className="text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
             Nine pages, one kitchen
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#EFE6D4]/70">
@@ -417,9 +415,11 @@ function Visit() {
   return (
     <section id="visit" className="border-t border-[#C8A24C]/15 bg-[#0F0C08]">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+        <Reveal>
+          <SectionDivider className="mb-14" />
+        </Reveal>
         <Reveal className="max-w-2xl">
-          <Eyebrow>Find Us</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
+          <h2 className="text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
             Come for a bowl
           </h2>
         </Reveal>
