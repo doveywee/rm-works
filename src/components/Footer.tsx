@@ -60,6 +60,14 @@ export function Footer() {
             <a href="#" className="transition-colors hover:text-chalk">
               Terms
             </a>
+            <a
+              href="https://rmworks.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-chalk"
+            >
+              Web Design by RMWorks
+            </a>
           </div>
         </div>
       </div>

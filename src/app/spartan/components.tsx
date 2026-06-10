@@ -1187,6 +1187,14 @@ export function Footer() {
             <a href="#" className="hover:text-[#E4C77E]">Privacy</a>
             <a href="#" className="hover:text-[#E4C77E]">Terms</a>
             <span>{company.city}</span>
+            <a
+              href="https://rmworks.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#E4C77E]"
+            >
+              Web Design by RMWorks
+            </a>
           </div>
         </div>
       </div>

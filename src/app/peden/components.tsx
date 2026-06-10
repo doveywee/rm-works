@@ -1425,6 +1425,14 @@ export function Footer() {
             <a href="#" className="hover:text-[#2E86C1]">
               Compliance
             </a>
+            <a
+              href="https://rmworks.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#2E86C1]"
+            >
+              Web Design by RMWorks
+            </a>
           </div>
         </div>
       </div>

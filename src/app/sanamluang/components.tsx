@@ -442,6 +442,14 @@ export function Footer() {
             © {new Date().getFullYear()} Sanamluang Thai Cuisine · Claremont, CA
           </span>
           <span>Open daily · {slc.tel}</span>
+          <a
+            href="https://rmworks.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#C8A24C]"
+          >
+            Web Design by RMWorks
+          </a>
         </div>
       </div>
     </footer>
