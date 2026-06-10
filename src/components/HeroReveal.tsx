@@ -11,12 +11,9 @@ import {
 } from "framer-motion";
 import { MagneticButton } from "./ui/MagneticButton";
 
-// Clean orange ring around a black disc. The band spans ~19% of the radius —
-// wide enough to survive rasterization when the layer is captured small and
-// bitmap-scaled up (a thin 3% band disappeared on mobile). Still one gradient
-// texture scaled on the GPU; no per-frame cost.
-const HOLE_BG =
-  "radial-gradient(circle, #000 0%, #000 78%, rgba(251,146,60,0.9) 84%, #fdba74 88%, rgba(251,146,60,0.45) 93%, transparent 97%)";
+// The disc's fill (and its orange rim) lives in CSS (.hole-disc in globals.css)
+// so mobile can swap the soft gradient glow for a cheaper crisp orange border
+// without touching the scroll-linked scale/opacity. Desktop keeps the soft band.
 
 // Soft orange glow that blooms OUTSIDE the disc's rim. Built as a radial
 // gradient (a texture the GPU just scales) rather than a drop-shadow blur
@@ -144,11 +141,12 @@ export function HeroReveal({ children }: { children: ReactNode }) {
           className="hero-halo pointer-events-none absolute left-1/2 top-1/2 z-10 h-[110vmax] w-[110vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
-        {/* black hole disc */}
+        {/* black hole disc — fill set in CSS (.hole-disc) so mobile can swap the
+            soft glow for a cheaper crisp ring; scale/opacity stay scroll-linked */}
         <motion.div
           aria-hidden
-          style={{ scale: holeScale, opacity: holeOpacity, background: HOLE_BG }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[90vmax] w-[90vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
+          style={{ scale: holeScale, opacity: holeOpacity }}
+          className="hole-disc pointer-events-none absolute left-1/2 top-1/2 z-20 h-[90vmax] w-[90vmax] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
         />
 
         {/* headline — real type, each word warped into the hole */}

@@ -19,11 +19,7 @@ export function Starfield() {
     if (!el) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
-    // On phones/touch devices the field stays a cheap static layer (full
-    // opacity, no per-scroll work). The black-hole disc physically covers the
-    // stars as it engulfs the screen, so the "consume" still reads for free.
-    if (reduce || coarse) return;
+    if (reduce) return;
 
     let raf = 0;
     const update = () => {

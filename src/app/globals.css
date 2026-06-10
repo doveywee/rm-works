@@ -164,37 +164,65 @@ body::before {
   50% { transform: translate3d(-14px, 20px, 0); }
 }
 
-/* Touch devices: reduce the starfield to a single static layer and, crucially,
-   turn OFF `will-change`. A promoted (will-change) fixed layer is something the
-   compositor must juggle every frame even when idle — that overhead is what
-   keeps the scroll-linked black hole from feeling smooth on phones. With one
-   un-promoted static layer the hero scrolls as cheaply as it did before. */
+/* Black-hole disc fill. Background lives here (not inline) so mobile can swap
+   the soft glow for a cheaper crisp ring. Desktop keeps the soft wide band. */
+.hole-disc {
+  background: radial-gradient(
+    circle,
+    #000 0%,
+    #000 78%,
+    rgba(251, 146, 60, 0.9) 84%,
+    #fdba74 88%,
+    rgba(251, 146, 60, 0.45) 93%,
+    transparent 97%
+  );
+}
+
+/* Touch devices: keep the look, remove the per-frame WORK that stutters the
+   black-hole scrub. */
 @media (pointer: coarse) {
+  /* The six fixed, full-screen star layers each animate opacity (twinkle) and
+     transform (drift) forever, and are `will-change`-promoted. Continuously
+     repainting promoted fixed layers is what knocks mobile off the fast scroll
+     path and makes the hole stutter. Freeze them: stars stay fully visible
+     (they settle at full brightness) — only the subtle pulse/drift is gone.
+     `!important` so the per-layer `animation:` shorthands can't win the cascade. */
   .star-layer {
-    animation: none;
+    animation: none !important;
     will-change: auto;
   }
-  .star-layer--2,
-  .star-layer--3,
-  .star-layer--4,
-  .star-layer--5,
-  .star-layer--6 {
-    display: none;
-  }
-  /* mix-blend-mode re-composites the whole stacking context every scroll
-     frame — a major mobile fps cost for a barely-visible grain. */
-  .noise {
-    display: none;
-  }
   /* backdrop-filter re-blurs everything scrolling behind the nav every frame —
-     one of the most expensive mobile scroll ops. Use a solid translucent pill
-     instead; visually near-identical, essentially free. */
+     one of the most expensive mobile scroll ops. Over the dark hero during the
+     black hole the blur is invisible anyway, so a solid translucent pill is
+     visually identical and essentially free. */
   .glass {
     backdrop-filter: none;
     background: rgba(18, 18, 18, 0.86);
   }
-  /* One fewer screen-filling layer for the GPU to blend each scrub frame. The
-     disc's own gradient rim still glows orange on mobile. */
+  /* mix-blend-mode grain re-composites the whole stacking context every scroll
+     frame for a barely-visible texture — not worth the per-frame cost on phones. */
+  .noise {
+    display: none;
+  }
+  /* Cheaper black hole: a crisp orange BORDER instead of the soft gradient glow.
+     `closest-side` sizes the gradient to the inscribed (rounded-full) circle, so
+     100% lands exactly on the VISIBLE rim — without it the default farthest-corner
+     gradient pushes the ring past ~71% into the clipped-away corner region and it
+     vanishes. Hard stops keep the ring a clean line and rasterize cheaply. */
+  .hole-disc {
+    background: radial-gradient(
+      circle closest-side,
+      #000 0%,
+      #000 93%,
+      rgba(249, 115, 22, 0.55) 95%,
+      rgba(249, 115, 22, 0.8) 96.5%,
+      rgba(249, 115, 22, 0.55) 98%,
+      transparent 100%
+    );
+  }
+  /* Drop the separate full-screen halo layer entirely — one fewer screen-filling
+     gradient for the GPU to composite/raster each scrub frame. The disc's own
+     orange ring above carries the colour. This is the biggest saving here. */
   .hero-halo {
     display: none;
   }
