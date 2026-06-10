@@ -16,29 +16,7 @@ import {
   PageHeader,
   PlateRow,
 } from "../components";
-
-const FAQS = [
-  {
-    q: "How do I get the most accurate quote?",
-    a: "Provide your moving date, pickup and drop-off locations, number of rooms, stairs or elevators, parking details, heavy items, and any packing needs.",
-  },
-  {
-    q: "Why mention stairs, elevators, or parking?",
-    a: "These details affect the time, equipment, and planning needed for the move.",
-  },
-  {
-    q: "Are you licensed and insured?",
-    a: `${company.name} publicly lists DOT #${company.dot}, MC #${company.mc}, and CAL ${company.cal}. Customers should verify all licensing and insurance information before booking.`,
-  },
-  {
-    q: "What should I do before movers arrive?",
-    a: "Pack and label boxes, clear walkways, reserve parking if needed, separate valuables, and keep important personal items with you.",
-  },
-  {
-    q: "What items should I not put on the truck?",
-    a: "Personally transport cash, jewelry, important documents, medications, hazardous materials, flammable items, and anything extremely personal or irreplaceable.",
-  },
-];
+import { FAQS } from "./faq";
 
 const CONTACT = [
   { Icon: Phone, label: "Phone", value: company.phone, href: company.phoneHref },
@@ -196,7 +174,7 @@ export default function SpartanContact() {
                 <MapEmbed
                   query={company.address}
                   zoom={13}
-                  title="Spartan Moving and Transport Inc — Murrieta, CA location"
+                  title="Spartan Moving and Transport Inc, Murrieta, CA location"
                   className="aspect-[16/10]"
                 />
               </div>

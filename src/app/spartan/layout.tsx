@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar, Footer } from "./components";
 import { JsonLd } from "@/components/JsonLd";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, LAST_UPDATED, DATE_PUBLISHED } from "@/lib/seo";
 
 const display = Oswald({
   subsets: ["latin"],
@@ -100,6 +100,8 @@ const spartanSchema = {
     { "@type": "PropertyValue", propertyID: "MC", value: "0602297" },
     { "@type": "PropertyValue", propertyID: "CAL-T", value: "0192705" },
   ],
+  datePublished: DATE_PUBLISHED,
+  dateModified: LAST_UPDATED,
 };
 
 export default function SpartanLayout({

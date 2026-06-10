@@ -19,7 +19,7 @@ const SERVICES = [
   {
     n: "01",
     title: "Residential",
-    copy: "Moving to a new home, apartment, or condo takes planning, care, and the right crew. We handle local residential moves — furniture, boxes, appliances, and household items.",
+    copy: "Moving to a new home, apartment, or condo takes planning, care, and the right crew. We handle local residential moves: furniture, boxes, appliances, and household items.",
   },
   {
     n: "02",
@@ -51,7 +51,7 @@ const SERVICES = [
 const STEPS = [
   {
     title: "Request a Quote",
-    copy: "Call or submit the quote form with your moving details — date, pickup and drop-off locations, property type, number of rooms, and any heavy or fragile items.",
+    copy: "Call or submit the quote form with your moving details: date, pickup and drop-off locations, property type, number of rooms, and any heavy or fragile items.",
   },
   {
     title: "Share Move Details",
@@ -149,7 +149,7 @@ export default function SpartanServices() {
             n="A"
             kicker="Services"
             title="Moving Help, Tailored to Your Move"
-            intro="Residential, commercial, and labor-only — strength, care, and organization on every job."
+            intro="Residential, commercial, and labor-only. Strength, care, and organization on every job."
           />
           <div className="mt-12">
             {SERVICES.map((s, i) => (

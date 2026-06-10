@@ -32,7 +32,7 @@ export function Contact() {
     try {
       const formData = new FormData(e.currentTarget);
       formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-      formData.append("subject", "New project inquiry — RM Works");
+      formData.append("subject", "New project inquiry · RM Works");
       formData.append("from_name", "RM Works website");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",

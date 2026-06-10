@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { Navbar, Footer } from "./components";
+import { FAQS } from "./faq";
 import { JsonLd } from "@/components/JsonLd";
-import { absoluteUrl } from "@/lib/seo";
+import {
+  absoluteUrl,
+  faqPageSchema,
+  LAST_UPDATED,
+  DATE_PUBLISHED,
+} from "@/lib/seo";
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -75,6 +81,8 @@ const pedenSchema = [
       "Financial strategies",
       "Small business insurance",
     ],
+    datePublished: DATE_PUBLISHED,
+    dateModified: LAST_UPDATED,
   },
   {
     "@context": "https://schema.org",
@@ -87,6 +95,7 @@ const pedenSchema = [
     areaServed,
     url: absoluteUrl("/peden"),
   },
+  faqPageSchema("/peden", FAQS),
 ];
 
 export default function PedenLayout({

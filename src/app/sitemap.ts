@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, LAST_UPDATED } from "@/lib/seo";
 
 // Required for static export (output: "export").
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Stable, intentional lastmod (see LAST_UPDATED) instead of build time, so the
+  // freshness signal reflects real content edits rather than every deploy.
+  const now = new Date(LAST_UPDATED);
 
   // Static routes across all client sites, with priority reflecting depth.
   const staticPaths: [string, number, MetadataRoute.Sitemap[number]["changeFrequency"]][] = [

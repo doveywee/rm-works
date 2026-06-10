@@ -31,7 +31,7 @@ const SERVICES = [
   {
     n: "01",
     title: "Residential",
-    copy: "Homes, apartments, and condos — furniture, boxes, appliances, and household items, handled with care.",
+    copy: "Homes, apartments, and condos: furniture, boxes, appliances, and household items, handled with care.",
   },
   {
     n: "02",
@@ -110,7 +110,7 @@ export default function SpartanHome() {
               <p className="max-w-xl text-[16.5px] leading-relaxed text-white/70">
                 {company.name} provides residential and commercial moving across
                 Murrieta, Riverside County, Orange County, San Diego County, and
-                surrounding Southern California — strong, careful, professional
+                surrounding Southern California. Strong, careful, professional
                 moving help you can trust.
               </p>
             </Reveal>
@@ -163,7 +163,7 @@ export default function SpartanHome() {
             intro={
               <>
                 {company.name} serves families, individuals, and businesses across
-                Southern California — reliable service, careful handling, and clear
+                Southern California: reliable service, careful handling, and clear
                 communication from the first call to final placement.
               </>
             }
@@ -260,7 +260,7 @@ export default function SpartanHome() {
             n="03"
             kicker="Why Spartan"
             title="The Right Team Makes the Difference"
-            intro="We help customers plan their move, understand what to expect, and get the help they need — with care, strength, and professionalism."
+            intro="We help customers plan their move, understand what to expect, and get the help they need, with care, strength, and professionalism."
             action={
               <Btn href="/spartan/contact" variant="gold" size="sm">
                 Request a Quote <ArrowRight size={14} />
@@ -305,10 +305,19 @@ export default function SpartanHome() {
               <Reveal delay={0.12}>
                 <p className="mt-6 max-w-xl text-[15.5px] leading-relaxed text-[#5A6675]">
                   Licensing tells you you&rsquo;re working with a legitimate moving
-                  business — one expected to follow regulations, operate
+                  business, one expected to follow regulations, operate
                   responsibly, and provide a safer, more professional move.{" "}
                   {company.name} publicly lists its DOT, MC, and CAL credentials.
-                  Always verify licensing and insurance before booking any move.
+                  You can verify our USDOT and carrier status on the{" "}
+                  <a
+                    href="https://safer.fmcsa.dot.gov/CompanySnapshot.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="font-medium text-[#A87E33] underline decoration-[#A87E33]/40 underline-offset-2 hover:text-[#0E2840]"
+                  >
+                    FMCSA SAFER
+                  </a>{" "}
+                  system before booking any move.
                 </p>
               </Reveal>
               <Reveal delay={0.18}>
@@ -341,7 +350,7 @@ export default function SpartanHome() {
 
       <CtaBand
         title="Ready to Plan Your Move?"
-        sub="Request a quote or call the crew — we'll help you move easier, safer, and more organized."
+        sub="Request a quote or call the crew. We'll help you move easier, safer, and more organized."
       />
     </>
   );

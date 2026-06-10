@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Marcellus, Inter } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
-import { absoluteUrl } from "@/lib/seo";
+import {
+  absoluteUrl,
+  faqPageSchema,
+  LAST_UPDATED,
+  DATE_PUBLISHED,
+} from "@/lib/seo";
+import { FAQS } from "./faq";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -98,6 +104,8 @@ const sanamluangSchema = {
       closes: "22:00",
     },
   ],
+  datePublished: DATE_PUBLISHED,
+  dateModified: LAST_UPDATED,
 };
 
 export default function SanamluangLayout({
@@ -109,7 +117,7 @@ export default function SanamluangLayout({
     <div
       className={`${display.variable} ${serifCaps.variable} ${sans.variable} min-h-screen bg-[#14100B] text-[#EFE6D4] [font-family:var(--font-slc-sans)] antialiased selection:bg-[#C8A24C]/30`}
     >
-      <JsonLd data={sanamluangSchema} />
+      <JsonLd data={[sanamluangSchema, faqPageSchema("/sanamluang", FAQS)]} />
       {children}
     </div>
   );

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageSchema } from "@/lib/seo";
+import { FAQS } from "./faq";
 
 // page.tsx is a client component, so per-page metadata lives in this layout.
 export const metadata: Metadata = {
@@ -21,5 +24,10 @@ export default function SpartanContactLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={faqPageSchema("/spartan/contact", FAQS)} />
+      {children}
+    </>
+  );
 }

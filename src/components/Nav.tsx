@@ -53,7 +53,7 @@ export function Nav() {
         <a
           href="#top"
           onClick={onLogoClick}
-          aria-label={scrolled && !expanded ? "Open menu" : "RM Works — home"}
+          aria-label={scrolled && !expanded ? "Open menu" : "RM Works, home"}
           className="flex items-center gap-2.5 group"
         >
           <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-white to-white/50">

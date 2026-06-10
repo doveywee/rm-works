@@ -18,6 +18,7 @@ import {
   MapEmbed,
   Lightbox,
 } from "./components";
+import { FAQS } from "./faq";
 
 /* --- real press blurbs the restaurant uses (verbatim) ------------------- */
 const ACCOLADES = [
@@ -107,6 +108,7 @@ export default function SanamluangPage() {
         <Specialty />
         <Menu onOpen={openBox} />
         <Visit />
+        <FAQ />
       </main>
       <Footer />
       <Lightbox
@@ -289,7 +291,7 @@ function Story() {
             institutions.
           </p>
           <p className="mt-4 text-base leading-relaxed text-[#EFE6D4]/75">
-            We borrowed the name for the same spirit it carries at home — a place
+            We borrowed the name for the same spirit it carries at home, a place
             where everyone gathers and shares a meal. That is what we set out to
             bring to Claremont: honest Thai cooking, generous bowls, and a table
             that stays open late.
@@ -444,6 +446,19 @@ function Visit() {
             Come for a bowl
           </h2>
         </Reveal>
+        <Reveal className="mt-5 max-w-2xl">
+          <p className="text-base leading-relaxed text-[#EFE6D4]/70">
+            Browse the{" "}
+            <a href="#menu" className="text-[#C8A24C] underline underline-offset-2 hover:text-[#E0BC6A]">
+              full noodle menu
+            </a>{" "}
+            before you arrive, or check{" "}
+            <a href="#faq" className="text-[#C8A24C] underline underline-offset-2 hover:text-[#E0BC6A]">
+              good to know
+            </a>{" "}
+            for hours, takeout, and vegetarian options.
+          </p>
+        </Reveal>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
           <Reveal className="flex flex-col gap-6">
@@ -482,6 +497,39 @@ function Visit() {
             </div>
           </Reveal>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ===========================================================================
+   FAQ — answer-engine-friendly questions (kept in sync with sanamluang/faq.ts,
+   which also feeds the FAQPage JSON-LD in the layout)
+   ========================================================================= */
+function FAQ() {
+  return (
+    <section id="faq" className="border-t border-[#C8A24C]/15 bg-[#14100B]">
+      <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+        <Reveal>
+          <SectionDivider className="mb-14" />
+        </Reveal>
+        <Reveal className="max-w-2xl">
+          <h2 className="text-4xl leading-tight text-[#EFE6D4] [font-family:var(--font-slc-display)] sm:text-5xl">
+            Good to know
+          </h2>
+        </Reveal>
+        <dl className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {FAQS.map((f) => (
+            <Reveal key={f.q}>
+              <dt className="text-[1.35rem] leading-snug text-[#E0BC6A] [font-family:var(--font-slc-display)]">
+                {f.q}
+              </dt>
+              <dd className="mt-2 text-[15px] leading-relaxed text-[#EFE6D4]/75">
+                {f.a}
+              </dd>
+            </Reveal>
+          ))}
+        </dl>
       </div>
     </section>
   );

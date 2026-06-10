@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { FAQS } from "./faq";
 import {
   useEffect,
   useRef,
@@ -352,7 +353,7 @@ export function Hero() {
                 "mt-6 text-[2.8rem] font-semibold leading-[1.03] tracking-[-0.01em] text-white sm:text-[4.1rem]"
               )}
             >
-              Protecting what matters most —{" "}
+              Protecting what matters most:{" "}
               <span className="text-[#8FC7EE]">
                 your family, future, and business.
               </span>
@@ -418,7 +419,7 @@ export function TrustStatement() {
               Why work with Chantelle
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-[#5A6B7A]">
-              A local agent who treats your goals like her own — and stays in
+              A local agent who treats your goals like her own, and stays in
               your corner for the long haul.
             </p>
           </Reveal>
@@ -430,7 +431,7 @@ export function TrustStatement() {
               )}
             >
               Insurance and financial planning can feel overwhelming. I help
-              simplify the process — taking the time to understand your goals,
+              simplify the process, taking the time to understand your goals,
               explain your options in plain language, and shape strategies
               around your life, your family, and your future.
             </p>
@@ -453,7 +454,7 @@ const ABOUT_POINTS = [
   {
     Icon: Users,
     title: "Built for real people",
-    copy: "She works with individuals, families, and business owners — meeting you where you are.",
+    copy: "She works with individuals, families, and business owners, meeting you where you are.",
   },
   {
     Icon: HandHeart,
@@ -489,7 +490,7 @@ export function About() {
                 {
                   Icon: GraduationCap,
                   label: "Background",
-                  value: "MBA — business, leadership & mentoring",
+                  value: "MBA in business, leadership & mentoring",
                 },
                 {
                   Icon: ShieldCheck,
@@ -552,8 +553,8 @@ export function About() {
               </p>
               <p>
                 Her approach is personal, educational, and relationship-focused.
-                She takes the time to understand what matters to you — your
-                family, your goals, your business — and explains every option in
+                She takes the time to understand what matters to you, your
+                family, your goals, your business, and explains every option in
                 plain language, building relationships that last well beyond a
                 single policy.
               </p>
@@ -604,7 +605,7 @@ const SERVICES: Service[] = [
       "Income replacement so your family can keep their way of life",
       "Help with final expenses, debts, or a remaining mortgage",
       "A financial head start toward your children's future and education",
-      "Term vs. permanent life insurance explained in plain language — term covers a set period (like 10, 20, or 30 years), while permanent is designed to last a lifetime and may build value over time",
+      "Term vs. permanent life insurance explained in plain language: term covers a set period (like 10, 20, or 30 years), while permanent is designed to last a lifetime and may build value over time",
     ],
     who: "Parents, primary earners, newlyweds, and anyone with people who count on them.",
   },
@@ -627,12 +628,12 @@ const SERVICES: Service[] = [
     title: "Financial Strategies",
     copy: "Personalized guidance to build a stronger foundation.",
     intro:
-      "Strong finances start with clarity. Chantelle takes time to understand your full picture, then helps you connect the pieces — protection, savings, and goals — into a strategy you actually understand.",
+      "Strong finances start with clarity. Chantelle takes time to understand your full picture, then helps you connect the pieces (protection, savings, and goals) into a strategy you actually understand.",
     points: [
       "A clear picture of where you are and where you'd like to go",
       "Guidance on protecting your income and your family",
       "Aligning insurance and savings with your real-life goals",
-      "Education first — you make the decisions, at your own pace",
+      "Education first: you make the decisions, at your own pace",
     ],
     who: "Individuals and families who want clarity and a plan they understand.",
   },
@@ -669,7 +670,7 @@ const SERVICES: Service[] = [
     title: "Business Protection",
     copy: "Safeguard the owners, key people, and goals behind your company.",
     intro:
-      "Behind every business are the people who make it work. Chantelle helps entrepreneurs plan for continuity so the company — and the people in it — are protected for the long term.",
+      "Behind every business are the people who make it work. Chantelle helps entrepreneurs plan for continuity so the company (and the people in it) are protected for the long term.",
     points: [
       "Protection strategies for owners and key contributors",
       "Planning for business continuity and succession",
@@ -810,7 +811,7 @@ export function Services() {
                 Not sure which fits your situation?
               </h3>
               <p className="mt-1.5 text-[15px] text-white/70">
-                Let&rsquo;s talk it through together — no pressure, just clear
+                Let&rsquo;s talk it through together. No pressure, just clear
                 answers.
               </p>
             </div>
@@ -864,7 +865,7 @@ export function WhoIHelp() {
             <Reveal delay={0.1}>
               <p className="mt-5 text-[16px] leading-relaxed text-white/75">
                 Whether you&rsquo;re just starting a family, growing a business,
-                or planning for retirement, Chantelle meets you where you are —
+                or planning for retirement, Chantelle meets you where you are,
                 with patience, clarity, and a plan that fits your life.
               </p>
             </Reveal>
@@ -937,7 +938,7 @@ export function QuoteForm() {
             <Reveal delay={0.1}>
               <p className="mt-4 text-[16px] leading-relaxed text-[#5A6B7A]">
                 Have questions about protecting your family, future, or
-                business? Reach out to start the conversation — there&rsquo;s no
+                business? Reach out to start the conversation. There&rsquo;s no
                 obligation, just honest guidance built around your goals.
               </p>
             </Reveal>
@@ -1105,39 +1106,9 @@ function Field({
 }
 
 /* ===========================================================================
-   FAQ
+   FAQ  (Q&A content lives in ./faq so the server layout can emit FAQPage JSON-LD
+   from the same source — see peden/faq.ts)
    ========================================================================= */
-const FAQS = [
-  {
-    q: "Do I need life insurance?",
-    a: "If anyone relies on your income — a spouse, children, aging parents, or business partners — life insurance can help protect them financially if something happens to you. Chantelle will help you think through your situation and whether coverage makes sense for you.",
-  },
-  {
-    q: "How much life insurance should I have?",
-    a: "It depends on your income, debts, family needs, and long-term goals. There's no single right answer, which is why Chantelle takes time to understand your circumstances before discussing options — never a one-size-fits-all number.",
-  },
-  {
-    q: "What is the difference between term and permanent life insurance?",
-    a: "In simple terms, term life insurance covers you for a set period (like 10, 20, or 30 years), while permanent life insurance is designed to last your lifetime and may build value over time. Chantelle can explain how each works so you can decide what fits — this is general education, not specific financial advice.",
-  },
-  {
-    q: "Can business owners get insurance for themselves or employees?",
-    a: "Yes. Business owners can explore options to protect themselves, key people, and employees, as well as strategies to support business continuity. Chantelle works with small business owners and the self-employed throughout Riverside County and the Inland Empire.",
-  },
-  {
-    q: "Do you help with retirement planning?",
-    a: "Absolutely. Chantelle helps individuals and families think through retirement income, protection, and long-term financial stability as part of a broader, personalized strategy.",
-  },
-  {
-    q: "Is a consultation required before getting a quote?",
-    a: "No, but a short conversation helps. Understanding your goals allows Chantelle to provide guidance and options that actually fit your needs — rather than a generic quote.",
-  },
-  {
-    q: "What areas do you serve?",
-    a: "Chantelle serves clients across Corona, Riverside, and the greater Inland Empire in Southern California, and can often assist neighboring communities as well.",
-  },
-];
-
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
@@ -1285,7 +1256,7 @@ export function Contact() {
               <ContactCard
                 Icon={Clock}
                 label="Availability"
-                value="By appointment — flexible hours"
+                value="By appointment, flexible hours"
               />
             </div>
 
@@ -1404,7 +1375,7 @@ export function Footer() {
             Disclaimer &amp; Compliance Notice
           </p>
           <p className="mt-2">
-            [Placeholder — to be reviewed and approved by Chantelle and/or New
+            [Placeholder: to be reviewed and approved by Chantelle and/or New
             York Life compliance before publishing.] Chantelle Peden Hunt is a
             Licensed Agent. This website is for general informational purposes
             only and does not constitute financial, tax, legal, or investment
@@ -1415,6 +1386,27 @@ export function Footer() {
             the claims-paying ability of the issuer. Please consult a qualified
             professional regarding your individual situation. Product and company
             names referenced are placeholders pending review.
+          </p>
+          <p className="mt-3">
+            You can verify any insurance agent&rsquo;s license through the{" "}
+            <a
+              href="https://www.insurance.ca.gov/01-consumers/120-company/03-agents-brokers/"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="font-medium text-white/60 underline decoration-white/25 underline-offset-2 hover:text-[#2E86C1]"
+            >
+              California Department of Insurance
+            </a>
+            , and learn more about coverage and the carrier at{" "}
+            <a
+              href="https://www.newyorklife.com/"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="font-medium text-white/60 underline decoration-white/25 underline-offset-2 hover:text-[#2E86C1]"
+            >
+              New York Life
+            </a>
+            .
           </p>
         </div>
 

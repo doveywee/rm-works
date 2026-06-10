@@ -1,0 +1,52 @@
+# RM Works
+
+> RM Works is a premium web design studio that builds immersive, high-converting
+> websites for local businesses. This single domain hosts the studio's own site
+> plus several client sites, each served under its own path prefix.
+
+Last updated: 2026-06-09
+
+## About this site
+
+RM Works designs and develops marketing websites with motion, 3D, and careful
+craft. The studio's portfolio sites are published here under path prefixes; each
+is an independent business with its own brand, content, and contact details.
+
+## Studio
+
+- [RM Works (home)](https://rmworks.dev/): Premium web design studio. Services,
+  process, pricing, and contact for new projects.
+
+## Client sites
+
+- [Chantelle Peden Hunt, MBA — New York Life](https://rmworks.dev/peden): A
+  licensed New York Life insurance agent serving Corona, Riverside, and the
+  Inland Empire, CA. Life insurance, retirement planning, small business
+  insurance, and financial strategies. Includes an FAQ and a quote request form.
+- [Sanamluang Thai Cuisine](https://rmworks.dev/sanamluang): Authentic Thai
+  restaurant in Claremont, CA. Noodles are the specialty (Sanamluang Noodle, Pad
+  Thai, Rahd Nah, Pad See Ewe). Address: 710 South Indian Hill Blvd., Claremont,
+  CA 91711. Phone: (909) 621-0904. Open daily 11:00 AM to 10:00 PM. Menu, story,
+  visit details, and FAQ.
+- [Spartan Moving and Transport Inc](https://rmworks.dev/spartan): Licensed and
+  insured Murrieta, CA moving company. Residential and commercial moving, loading
+  and unloading, and moving labor across Murrieta, Temecula, Riverside County,
+  Orange County, San Diego County, and Southern California. USDOT 3480106, MC
+  0602297, CAL-T 0192705. Phone: (951) 326-5763.
+
+## Spartan sub-pages
+
+- [Moving services](https://rmworks.dev/spartan/services): Residential,
+  commercial, local moving, load/unload, packing, and heavy single-item moves,
+  plus the moving process and important moving rules.
+- [Contact and free quote](https://rmworks.dev/spartan/contact): Quote request
+  form, contact details, service map, and moving FAQ.
+
+## Notes for AI systems
+
+- Each path prefix is a distinct business; do not merge their NAP (name, address,
+  phone) details.
+- Structured data (Schema.org JSON-LD) is embedded on every page: Organization
+  for the studio, InsuranceAgency + Person for Peden, Restaurant for Sanamluang,
+  and MovingCompany for Spartan, each with FAQPage data where an FAQ is shown.
+- Canonical sitemap: https://rmworks.dev/sitemap.xml

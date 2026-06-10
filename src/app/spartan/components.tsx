@@ -423,7 +423,7 @@ export function ManifestRow({
   const inner = (
     <div
       className={cx(
-        "group relative grid grid-cols-[2.6rem_1fr] items-start gap-x-5 gap-y-2 border-t border-[#0E2840]/15 py-7 transition-colors sm:grid-cols-[3.5rem_1fr_auto] sm:items-center sm:gap-x-8",
+        "group relative grid grid-cols-[2.6rem_1fr_auto] items-start gap-x-4 gap-y-3 border-t border-[#0E2840]/15 py-7 transition-colors sm:grid-cols-[3.5rem_18rem_1fr_auto] sm:items-center sm:gap-x-8",
         last && "border-b",
         href && "hover:bg-[#0E2840]/[0.03]"
       )}
@@ -431,35 +431,35 @@ export function ManifestRow({
       <span
         className={cx(
           mono,
-          "text-[14px] font-medium text-[#A87E33] transition-colors group-hover:text-[#C9A24B] sm:text-[15px]"
+          "col-start-1 row-start-1 text-[14px] font-medium text-[#A87E33] transition-colors group-hover:text-[#C9A24B] sm:text-[15px]"
         )}
       >
         {n}
       </span>
-      <div className="sm:flex sm:items-center sm:gap-10">
-        <h3
-          className={cx(
-            head,
-            "shrink-0 text-[1.5rem] font-bold uppercase leading-none text-[#0E2840] sm:w-72 sm:text-[1.7rem]"
-          )}
-        >
-          {title}
-        </h3>
-        <p className="col-start-2 mt-2 max-w-2xl text-[14.5px] leading-relaxed text-[#5A6675] sm:mt-0">
-          {copy}
-        </p>
-      </div>
+      <h3
+        className={cx(
+          head,
+          "col-start-2 row-start-1 self-center text-[1.5rem] font-bold uppercase leading-none text-[#0E2840] sm:col-start-2 sm:text-[1.7rem]"
+        )}
+      >
+        {title}
+      </h3>
+      <p className="col-span-3 col-start-1 row-start-2 text-[14.5px] leading-relaxed text-[#5A6675] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-2xl">
+        {copy}
+      </p>
       {href && (
         <ArrowUpRight
           size={22}
-          className="col-start-2 row-start-1 ml-auto self-start text-[#0E2840]/40 transition-all group-hover:text-[#C9A24B] sm:col-auto sm:row-auto sm:self-auto group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          className="col-start-3 row-start-1 self-start text-[#0E2840]/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#C9A24B] sm:col-start-4 sm:self-auto"
         />
       )}
     </div>
   );
   return href ? (
     <Reveal>
-      <Link href={href}>{inner}</Link>
+      <Link href={href} className="block">
+        {inner}
+      </Link>
     </Reveal>
   ) : (
     <Reveal>{inner}</Reveal>
@@ -686,6 +686,9 @@ export function BlueprintBg() {
       <img
         src="/spartan-assets/logo.png"
         alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         className="absolute -right-16 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 object-contain opacity-[0.06] md:block"
       />
     </div>
@@ -777,7 +780,7 @@ export function QuoteForm() {
           Request Logged
         </h3>
         <p className="mt-2 max-w-sm text-[15px] text-[#5A6675]">
-          Thank you — {company.name} will review your move details and follow up.
+          Thank you. {company.name} will review your move details and follow up.
           Need faster help? Call{" "}
           <a href={company.phoneHref} className="font-bold text-[#A87E33]">
             {company.phone}
@@ -863,7 +866,7 @@ export function QuoteForm() {
             name="message"
             rows={4}
             className={cx(inputCls, "resize-none")}
-            placeholder="Tell us about your move — anything that helps us plan."
+            placeholder="Tell us about your move. Anything that helps us plan."
           />
         </Field>
         <div className="sm:col-span-2">
@@ -999,7 +1002,7 @@ export function Reviews() {
     <section className="bg-[#EDE6D6]">
       <div className="mx-auto max-w-[1400px] px-6 py-20 sm:py-28">
         <SectionHead
-          n="—"
+          n="★"
           kicker="Customer Reviews"
           title={<>Trusted by SoCal Movers</>}
           intro={
@@ -1035,7 +1038,7 @@ export function Reviews() {
               and on time. Gladly would hire them for any move.”
             </blockquote>
             <figcaption className={cx(mono, "mt-6 text-[12px] uppercase tracking-[0.16em] text-[#5A6675]")}>
-              <span className="text-[#0E2840]">Tabatha R.</span> — San Diego, CA
+              <span className="text-[#0E2840]">Tabatha R.</span>, San Diego, CA
             </figcaption>
           </figure>
         </Reveal>
@@ -1063,7 +1066,7 @@ export function Reviews() {
                     "mt-4 text-[11px] uppercase tracking-[0.16em] text-[#5A6675]"
                   )}
                 >
-                  <span className="text-[#0E2840]">{r.name}</span> — {r.loc}
+                  <span className="text-[#0E2840]">{r.name}</span>, {r.loc}
                 </figcaption>
               </figure>
             </Reveal>
@@ -1102,7 +1105,7 @@ export function Footer() {
             </div>
             <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-white/50">
               Murrieta-based movers with {company.years} years and {company.moves}{" "}
-              completed moves — reliable, careful, professional residential and
+              completed moves, reliable, careful, professional residential and
               commercial moving across Southern California.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
