@@ -1,36 +1,33 @@
 @import "tailwindcss";
 
-/* ---- Design tokens ---------------------------------------------------- */
+/* ---- Design tokens ----------------------------------------------------
+   "Studio Dossier" palette: warm paper, ink, international orange.
+   These tokens are used ONLY by the RM Works homepage. The client sites
+   (/peden, /sanamluang, /spartan) define their own palettes inline.     */
 @theme {
-  --color-ink: #0d0d0d;
-  --color-ink-soft: #131313;
-  --color-surface: #191919;
-  --color-surface-2: #202020;
-  --color-line: #2c2c2c;
-  --color-mist: #b8afa6;
-  --color-fog: #7a7068;
-  --color-chalk: #f5f0ea;
+  --color-paper: #f6f2e9;
+  --color-paper-2: #efe9da;
+  --color-ink: #1a1611;
+  --color-soot: #57503f;
+  --color-faint: #8c8273;
+  --color-rule: #d9d0bc;
+  --color-accent: #e0440b;
+  --color-accent-deep: #ae3406;
 
-  --color-violet-glow: #fb923c;
-  --color-indigo-glow: #f97316;
-  --color-cyan-glow: #fed7aa;
-  --color-accent: #f97316;
-
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-
-  --shadow-glow: 0 0 70px -24px rgba(255, 255, 255, 0.18);
+  --font-display: var(--font-rm-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-rm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-rm-mono), ui-monospace, "SF Mono", monospace;
 
   /* Motion — strong custom curves (built-in CSS easings are too weak).
      Overriding the bare-transition defaults upgrades every `transition-*`
-     utility across the site in one place. */
+     utility across the site in one place. Shared by all four sites. */
   --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   --default-transition-duration: 200ms;
   --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snappy: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* ---- Base ------------------------------------------------------------- */
+/* ---- Base (shared by all four sites) ----------------------------------- */
 html {
   scroll-behavior: smooth;
 }
@@ -41,326 +38,64 @@ html {
   }
 }
 
+/* Default canvas behind every site; each site paints its own background on
+   its wrapper, the homepage overrides this per-document from page.tsx. */
 body {
   background: #010102;
-}
-
-/* Ambient orange glow at the top of the night sky — wide, low-contrast
-   falloffs to keep the dark areas smooth (avoids banding). */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(1400px 1000px at 12% -14%, rgba(249, 115, 22, 0.035), transparent 72%),
-    radial-gradient(1100px 800px at 94% 2%, rgba(251, 146, 60, 0.025), transparent 70%);
-}
-
-/* Light-orange starfield. The container's opacity is driven by scroll (the
-   black hole consumes the stars, then they bloom back in) — see Starfield.tsx.
-   Each tiled layer twinkles on its own clock so individual stars pulse
-   brighter/dimmer out of sync with one another. */
-.starfield {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 240ms ease-out;
-}
-.star-layer {
-  position: absolute;
-  inset: -8%;
-  background-repeat: repeat;
-  will-change: opacity, transform;
-}
-
-/* Glow is baked into each star's gradient (a warm core fading through orange to
-   transparent) so the layer is rasterized once — no per-frame `filter` repaint.
-   Only opacity (twinkle) and transform (drift) animate, both GPU-composited. */
-.star-layer--1 {
-  background-image:
-    radial-gradient(4px 4px at 40px 60px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
-    radial-gradient(3px 3px at 220px 150px, rgba(253, 186, 116, 1) 0%, rgba(251, 146, 60, 0.45) 40%, transparent 74%),
-    radial-gradient(2.6px 2.6px at 330px 310px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
-    radial-gradient(2.4px 2.4px at 120px 250px, rgba(251, 146, 60, 0.9) 0%, transparent 70%);
-  background-size: 300px 300px;
-  animation: twinkle-a 2.6s ease-in-out infinite, drift-x 36s ease-in-out infinite;
-}
-.star-layer--2 {
-  background-image:
-    radial-gradient(3px 3px at 90px 200px, rgba(253, 186, 116, 1) 0%, rgba(251, 146, 60, 0.45) 40%, transparent 74%),
-    radial-gradient(4px 4px at 300px 80px, rgba(255, 224, 190, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
-    radial-gradient(2.5px 2.5px at 160px 360px, rgba(254, 215, 170, 0.9) 0%, rgba(249, 115, 22, 0.25) 46%, transparent 76%),
-    radial-gradient(2.3px 2.3px at 360px 280px, rgba(251, 146, 60, 0.85) 0%, transparent 70%);
-  background-size: 340px 340px;
-  animation: twinkle-b 3.4s ease-in-out infinite, drift-y 44s ease-in-out infinite;
-  animation-delay: -1.2s, -6s;
-}
-.star-layer--3 {
-  background-image:
-    radial-gradient(2.6px 2.6px at 60px 320px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
-    radial-gradient(3.6px 3.6px at 260px 240px, rgba(255, 224, 190, 1) 0%, rgba(253, 186, 116, 0.5) 38%, transparent 76%),
-    radial-gradient(2.8px 2.8px at 400px 120px, rgba(251, 146, 60, 0.9) 0%, rgba(249, 115, 22, 0.2) 48%, transparent 74%),
-    radial-gradient(2.3px 2.3px at 180px 60px, rgba(253, 186, 116, 0.85) 0%, transparent 70%);
-  background-size: 380px 380px;
-  animation: twinkle-c 4.2s ease-in-out infinite, drift-x 52s ease-in-out infinite reverse;
-  animation-delay: -2.7s, -10s;
-}
-.star-layer--4 {
-  background-image:
-    radial-gradient(2.9px 2.9px at 140px 90px, rgba(254, 215, 170, 0.95) 0%, rgba(249, 115, 22, 0.28) 46%, transparent 76%),
-    radial-gradient(2.4px 2.4px at 350px 350px, rgba(253, 186, 116, 0.85) 0%, transparent 72%),
-    radial-gradient(4px 4px at 210px 430px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.12) 60%, transparent 78%),
-    radial-gradient(2.2px 2.2px at 30px 200px, rgba(251, 146, 60, 0.8) 0%, transparent 70%);
-  background-size: 360px 360px;
-  animation: twinkle-a 3s ease-in-out infinite, drift-y 40s ease-in-out infinite reverse;
-  animation-delay: -3.5s, -14s;
-}
-.star-layer--5 {
-  background-image:
-    radial-gradient(2.3px 2.3px at 30px 150px, rgba(254, 215, 170, 0.85) 0%, transparent 72%),
-    radial-gradient(2.8px 2.8px at 190px 260px, rgba(253, 186, 116, 0.9) 0%, rgba(249, 115, 22, 0.22) 48%, transparent 76%),
-    radial-gradient(2.4px 2.4px at 420px 300px, rgba(254, 215, 170, 0.8) 0%, transparent 72%),
-    radial-gradient(3.4px 3.4px at 260px 120px, rgba(255, 224, 190, 0.95) 0%, rgba(253, 186, 116, 0.45) 38%, transparent 76%);
-  background-size: 440px 440px;
-  animation: twinkle-b 5s ease-in-out infinite, drift-x 60s ease-in-out infinite;
-  animation-delay: -0.6s, -3s;
-}
-.star-layer--6 {
-  background-image:
-    radial-gradient(4.4px 4.4px at 110px 380px, rgba(255, 234, 205, 1) 0%, rgba(253, 186, 116, 0.5) 36%, rgba(249, 115, 22, 0.14) 60%, transparent 80%),
-    radial-gradient(2.5px 2.5px at 280px 50px, rgba(254, 215, 170, 0.85) 0%, transparent 72%),
-    radial-gradient(2.9px 2.9px at 380px 220px, rgba(253, 186, 116, 0.9) 0%, rgba(249, 115, 22, 0.22) 48%, transparent 76%),
-    radial-gradient(2.3px 2.3px at 60px 90px, rgba(251, 146, 60, 0.85) 0%, transparent 70%);
-  background-size: 500px 500px;
-  animation: twinkle-c 4.6s ease-in-out infinite, drift-y 56s ease-in-out infinite;
-  animation-delay: -4.1s, -20s;
-}
-
-@keyframes twinkle-a {
-  0%, 100% { opacity: 0.08; }
-  50% { opacity: 1; }
-}
-@keyframes twinkle-b {
-  0%, 100% { opacity: 1; }
-  45% { opacity: 0.15; }
-}
-@keyframes twinkle-c {
-  0% { opacity: 0.3; }
-  30% { opacity: 1; }
-  60% { opacity: 0.12; }
-  100% { opacity: 0.3; }
-}
-
-@keyframes drift-x {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(22px, -10px, 0); }
-}
-@keyframes drift-y {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-14px, 20px, 0); }
-}
-
-/* Black-hole disc fill. Background lives here (not inline) so mobile can swap
-   the soft glow for a cheaper crisp ring. Desktop keeps the soft wide band. */
-.hole-disc {
-  background: radial-gradient(
-    circle,
-    #000 0%,
-    #000 78%,
-    rgba(251, 146, 60, 0.9) 84%,
-    #fdba74 88%,
-    rgba(251, 146, 60, 0.45) 93%,
-    transparent 97%
-  );
-}
-
-/* Touch devices: keep the look, remove the per-frame WORK that stutters the
-   black-hole scrub. */
-@media (pointer: coarse) {
-  /* The six fixed, full-screen star layers each animate opacity (twinkle) and
-     transform (drift) forever, and are `will-change`-promoted. Continuously
-     repainting promoted fixed layers is what knocks mobile off the fast scroll
-     path and makes the hole stutter. Freeze them: stars stay fully visible
-     (they settle at full brightness) — only the subtle pulse/drift is gone.
-     `!important` so the per-layer `animation:` shorthands can't win the cascade. */
-  .star-layer {
-    animation: none !important;
-    will-change: auto;
-  }
-  /* backdrop-filter re-blurs everything scrolling behind the nav every frame —
-     one of the most expensive mobile scroll ops. Over the dark hero during the
-     black hole the blur is invisible anyway, so a solid translucent pill is
-     visually identical and essentially free. */
-  .glass {
-    backdrop-filter: none;
-    background: rgba(18, 18, 18, 0.86);
-  }
-  /* mix-blend-mode grain re-composites the whole stacking context every scroll
-     frame for a barely-visible texture — not worth the per-frame cost on phones. */
-  .noise {
-    display: none;
-  }
-  /* Cheaper black hole: a crisp orange BORDER instead of the soft gradient glow.
-     `closest-side` sizes the gradient to the inscribed (rounded-full) circle, so
-     100% lands exactly on the VISIBLE rim — without it the default farthest-corner
-     gradient pushes the ring past ~71% into the clipped-away corner region and it
-     vanishes. Hard stops keep the ring a clean line and rasterize cheaply. */
-  .hole-disc {
-    background: radial-gradient(
-      circle closest-side,
-      #000 0%,
-      #000 93%,
-      rgba(249, 115, 22, 0.55) 95%,
-      rgba(249, 115, 22, 0.8) 96.5%,
-      rgba(249, 115, 22, 0.55) 98%,
-      transparent 100%
-    );
-  }
-  /* Drop the separate full-screen halo layer entirely — one fewer screen-filling
-     gradient for the GPU to composite/raster each scrub frame. The disc's own
-     orange ring above carries the colour. This is the biggest saving here. */
-  .hero-halo {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .starfield {
-    opacity: 0.8 !important;
-    transition: none;
-  }
-  .star-layer {
-    animation: none !important;
-    opacity: 0.8;
-  }
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-ink);
+  background: #0d0d0d;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-line);
+  background: #2c2c2c;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #34343f;
 }
 
-/* ---- Utilities -------------------------------------------------------- */
+/* ====================================================================== */
+/* RM Works homepage ("Studio Dossier") — everything below is scoped to    */
+/* .rm-home and is not used by the client sites.                           */
+/* ====================================================================== */
+
+.rm-home {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Unlayered, so it beats the body's layered selection utilities. */
+.rm-home ::selection {
+  background: rgba(224, 68, 11, 0.22);
+  color: var(--color-ink);
+}
+
 .font-display {
   font-family: var(--font-display);
 }
 
-.font-headline {
-  font-family: var(--font-headline);
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-}
-
-.gradient-text {
-  background: linear-gradient(
-    110deg,
-    #ffffff 0%,
-    #fed7aa 30%,
-    #ffffff 50%,
-    #fb923c 70%,
-    #ffffff 100%
-  );
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  /* prevent descenders (g, y) being clipped by background-clip:text */
-  padding-bottom: 0.12em;
-  animation: shimmer 9s linear infinite;
-}
-
-@keyframes shimmer {
-  to {
-    background-position: 220% center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gradient-text {
-    animation: none;
-  }
-}
-
-.grid-lines {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 100%);
-}
-
-.noise {
-  position: absolute;
+/* Subtle paper grain. Plain low opacity (no blend mode) keeps it cheap. */
+.rm-grain {
+  position: fixed;
   inset: 0;
+  z-index: 60;
   pointer-events: none;
-  opacity: 0.02;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
-/* Hero reveal — site tiles light up one by one, dim -> bright, in place */
-.site-reveal > * {
-  opacity: 0;
-}
-.site-reveal.is-revealed > * {
-  animation: tile-light 0.85s var(--ease-fluid) both;
-}
-.site-reveal.is-revealed > *:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.site-reveal.is-revealed > *:nth-child(2) {
-  animation-delay: 0.24s;
-}
-.site-reveal.is-revealed > *:nth-child(3) {
-  animation-delay: 0.43s;
-}
-.site-reveal.is-revealed > *:nth-child(4) {
-  animation-delay: 0.62s;
-}
-.site-reveal.is-revealed > *:nth-child(5) {
-  animation-delay: 0.81s;
-}
-.site-reveal.is-revealed > *:nth-child(6) {
-  animation-delay: 1s;
-}
-
-@keyframes tile-light {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+@media (pointer: coarse) {
+  .rm-grain {
+    display: none;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .site-reveal > *,
-  .site-reveal.is-revealed > * {
-    opacity: 1;
-    filter: none;
-    animation: none;
-  }
-}
-
-/* Marquee */
-@keyframes marquee {
+/* Ticker bands (ink + accent variants set in JSX). Pauses on hover. */
+@keyframes rm-marquee {
   from {
     transform: translateX(0);
   }
@@ -368,68 +103,184 @@ body::before {
     transform: translateX(-50%);
   }
 }
-.animate-marquee {
-  animation: marquee 32s linear infinite;
+.rm-marquee {
+  animation: rm-marquee 30s linear infinite;
+}
+.rm-marquee--rev {
+  animation-direction: reverse;
+}
+.rm-ticker:hover .rm-marquee {
+  animation-play-state: paused;
 }
 
-/* Spinning rim for the 2D black-hole landing circle */
-@keyframes bh-spin {
+/* ---- 3D + motion studies ---------------------------------------------- */
+
+/* Slow rotation (orbit badge, marks) */
+@keyframes rm-rotate {
   to {
     transform: rotate(360deg);
   }
 }
-.bh-rim {
-  animation: bh-spin 16s linear infinite;
+.rm-spin-slow {
+  animation: rm-rotate 18s linear infinite;
 }
+
+/* Orbital system: a tilted plane (.rm-ring) holding a spinning circle
+   (.rm-ring-spin) that carries a satellite. All transform-only. */
+.rm-ring {
+  position: absolute;
+  border-radius: 9999px;
+  transform-style: preserve-3d;
+}
+.rm-ring-spin {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(26, 22, 17, 0.32);
+  transform-style: preserve-3d;
+  animation: rm-rotate 16s linear infinite;
+}
+.rm-ring-spin--rev {
+  animation-direction: reverse;
+}
+.rm-sat {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  height: 10px;
+  width: 10px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  transform: translateX(-50%) rotateX(-72deg);
+  box-shadow: 0 0 0 3px rgba(224, 68, 11, 0.15);
+}
+
+/* CSS 3D hypercube (outer + counter-rotating inner cube) */
+.rm-scene {
+  perspective: 720px;
+}
+.rm-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rm-cube-rot 14s linear infinite;
+}
+.rm-cube--inner {
+  position: absolute;
+  inset: 25%;
+  animation: rm-cube-rot 9s linear infinite reverse;
+}
+.rm-cube__face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(224, 68, 11, 0.6);
+  background: rgba(224, 68, 11, 0.06);
+}
+@keyframes rm-cube-rot {
+  from {
+    transform: rotateX(-18deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-18deg) rotateY(360deg);
+  }
+}
+
+/* Kinetic type: letters bob on staggered loops (delays set inline) */
+@keyframes rm-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+.rm-bob {
+  display: inline-block;
+  animation: rm-bob 1.8s ease-in-out infinite;
+}
+
+/* Frame-budget equalizer: transform-only bars (delays set inline) */
+@keyframes rm-eq {
+  0%,
+  100% {
+    transform: scaleY(0.18);
+  }
+  45% {
+    transform: scaleY(1);
+  }
+  70% {
+    transform: scaleY(0.45);
+  }
+}
+.rm-eq {
+  transform-origin: bottom;
+  animation: rm-eq 1.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .bh-rim {
+  .rm-marquee,
+  .rm-spin-slow,
+  .rm-ring-spin,
+  .rm-cube,
+  .rm-cube--inner,
+  .rm-bob,
+  .rm-eq {
     animation: none;
   }
 }
 
-/* CSS 3D cube (used in the "Immersive 3D" service detail) */
-.scene3d {
-  perspective: 600px;
+/* Editorial link: hand-drawn underline that thickens on hover */
+.rm-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  transition: background-size 0.25s var(--ease-fluid), color 0.2s;
+  padding-bottom: 2px;
 }
-.cube3d {
-  position: relative;
-  width: 88px;
-  height: 88px;
-  transform-style: preserve-3d;
-  animation: cube-rot 12s linear infinite;
-}
-.cube3d__face {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(249, 115, 22, 0.5);
-  background: rgba(249, 115, 22, 0.08);
-  box-shadow: inset 0 0 30px rgba(249, 115, 22, 0.15);
-}
-@keyframes cube-rot {
-  from {
-    transform: rotateX(-22deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(-22deg) rotateY(360deg);
-  }
+.rm-link:hover {
+  background-size: 100% 2px;
+  color: var(--color-accent);
 }
 
-@keyframes float-slow {
-  0%, 100% {
+/* Scaled live-site miniature. The iframe renders at 250% of its container
+   (a ~1500px virtual viewport on desktop cards) and is scaled back down,
+   so each preview is the real site, live, in miniature. */
+.rm-mini {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 250%;
+  height: 250%;
+  transform: scale(0.4);
+  transform-origin: 0 0;
+  border: 0;
+  pointer-events: none;
+  background: #fff;
+}
+
+/* Headline load reveal: lines rise out of clipped slots */
+.rm-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.rm-line > span {
+  display: block;
+  transform: translateY(112%);
+  animation: rm-rise 0.9s var(--ease-fluid) forwards;
+}
+.rm-line:nth-child(2) > span {
+  animation-delay: 0.12s;
+}
+@keyframes rm-rise {
+  to {
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-12px);
-  }
 }
-.animate-float-slow {
-  animation: float-slow 7s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-float-slow,
-  .cube3d {
+  .rm-line > span {
+    transform: none;
     animation: none;
   }
 }

@@ -3,29 +3,24 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
+/** Scroll-into-view reveal: a gentle rise + fade, once. */
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
   className,
 }: {
   children: ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
 }) {
   const reduce = useReducedMotion();
   return (
     <motion.div
-      className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{
-        duration: 0.6,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
     >
       {children}
     </motion.div>

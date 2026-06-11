@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Syne } from "next/font/google";
+import { Instrument_Serif, Archivo, IBM_Plex_Mono } from "next/font/google";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
-const display = Space_Grotesk({
-  variable: "--font-display",
+// characterful editorial serif — used for every display headline on the
+// studio homepage (the client sites load their own fonts in their layouts)
+const display = Instrument_Serif({
+  variable: "--font-rm-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-// distinctive geometric display face — used for the hero headline
-const headline = Syne({
-  variable: "--font-headline",
+const sans = Archivo({
+  variable: "--font-rm-sans",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
 });
 
-const sans = Inter({
-  variable: "--font-sans",
+const mono = IBM_Plex_Mono({
+  variable: "--font-rm-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -54,9 +56,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${headline.variable} ${sans.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#010102] text-mist font-sans antialiased selection:bg-orange-500/30 selection:text-white">
+      <body className="min-h-full bg-[#010102] font-sans antialiased selection:bg-orange-500/30 selection:text-white">
         {children}
       </body>
     </html>
