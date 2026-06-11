@@ -35,7 +35,7 @@ export function Hero() {
               with <em className="text-accent">gravity.</em>
               <span
                 aria-hidden
-                className="ml-[0.1em] hidden align-top font-mono text-[0.14em] tracking-normal text-faint md:inline-block"
+                className="ml-[0.1em] hidden align-top font-mono text-[0.14em] tracking-normal text-faint min-[1200px]:inline-block"
               >
                 (n.) the pull that keeps
                 <br />
