@@ -1,13 +1,17 @@
-import { Nav } from "@/components/home/Nav";
-import { Hero } from "@/components/home/Hero";
-import { Ticker } from "@/components/home/Ticker";
-import { Lab } from "@/components/home/Lab";
-import { Services } from "@/components/home/Services";
-import { Skills } from "@/components/home/Skills";
-import { Process } from "@/components/home/Process";
-import { Pricing } from "@/components/home/Pricing";
-import { Contact } from "@/components/home/Contact";
-import { Footer } from "@/components/home/Footer";
+import { Nav } from "@/components/Nav";
+import { HeroReveal } from "@/components/HeroReveal";
+import { LogoMarquee } from "@/components/LogoMarquee";
+import { Services } from "@/components/Services";
+import { Templates } from "@/components/Templates";
+import { Process } from "@/components/Process";
+import { Pricing } from "@/components/Pricing";
+import { Contact } from "@/components/Contact";
+import { ClientsAccess } from "@/components/ClientsAccess";
+import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { CursorGlow } from "@/components/ui/CursorGlow";
+import { Starfield } from "@/components/Starfield";
+import { CookieConsent } from "@/components/home/CookieConsent";
 import { JsonLd } from "@/components/JsonLd";
 import { absoluteUrl, LAST_UPDATED, DATE_PUBLISHED } from "@/lib/seo";
 
@@ -39,56 +43,26 @@ const studioSchema = {
 
 export default function Home() {
   return (
-    <div className="rm-home min-h-dvh">
-      {/* Per-document overrides: with output:"export" every route is its own
-          HTML file, so this style only ships with the homepage. It repaints
-          the body canvas + scrollbar to paper without touching the client
-          sites, which keep the dark defaults from globals.css. */}
-      <style>{`
-        body { background: #f6f2e9 !important; }
-        ::-webkit-scrollbar-track { background: #efe9da !important; }
-        ::-webkit-scrollbar-thumb { background: #d9d0bc !important; }
-        ::-webkit-scrollbar-thumb:hover { background: #c8bda4 !important; }
-      `}</style>
+    <>
       <JsonLd data={studioSchema} />
-      <div className="rm-grain" aria-hidden />
+      <Starfield />
+      <ScrollProgress />
+      <CursorGlow />
       <Nav />
-      <main>
-        <Hero />
-        <Ticker
-          items={[
-            "Strategy",
-            "Art Direction",
-            "Design",
-            "Motion",
-            "Engineering",
-            "Brand",
-            "SEO",
-            "Launch",
-          ]}
-        />
-        <Lab />
-        <Services />
-        <Ticker
-          tone="accent"
-          reverse
-          items={[
-            "Next.js",
-            "React 19",
-            "TypeScript",
-            "Tailwind CSS",
-            "Framer Motion",
-            "CSS 3D",
-            "WebGL",
-            "Schema.org",
-          ]}
-        />
-        <Skills />
-        <Process />
-        <Pricing />
-        <Contact />
+      <main className="relative">
+        <div className="noise" aria-hidden />
+        <HeroReveal>
+          <LogoMarquee />
+          <Services />
+          <Templates />
+          <Process />
+          <Pricing />
+          <Contact />
+          <ClientsAccess />
+        </HeroReveal>
       </main>
       <Footer />
-    </div>
+      <CookieConsent />
+    </>
   );
 }

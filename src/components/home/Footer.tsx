@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "./Reveal";
 
 const navLinks = [
@@ -49,6 +50,9 @@ export function Footer() {
         <div className="flex flex-col items-start justify-between gap-3 border-t border-paper/15 pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-paper/50 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} RM Works. All rights reserved.</p>
           <div className="flex gap-8">
+            <Link href="/privacy" className="transition-colors hover:text-accent">
+              Privacy &amp; Cookies
+            </Link>
             <a href="#top" className="transition-colors hover:text-accent">
               Back to top ↑
             </a>

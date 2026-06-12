@@ -1,23 +1,49 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Archivo, IBM_Plex_Mono } from "next/font/google";
+import {
+  Space_Grotesk,
+  Inter,
+  Syne,
+  Instrument_Serif,
+  Archivo,
+  IBM_Plex_Mono,
+} from "next/font/google";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
-// characterful editorial serif — used for every display headline on the
-// studio homepage (the client sites load their own fonts in their layouts)
-const display = Instrument_Serif({
+/* ---- Fonts for the original dark site at "/" -------------------------- */
+const display = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+// distinctive geometric display face — used for the hero headline
+const headline = Syne({
+  variable: "--font-headline",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+});
+
+const sans = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+/* ---- Fonts for the "Studio Dossier" revamp at "/revamp" --------------- */
+// characterful editorial serif — used for every display headline on the revamp
+const rmDisplay = Instrument_Serif({
   variable: "--font-rm-display",
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
 });
 
-const sans = Archivo({
+const rmSans = Archivo({
   variable: "--font-rm-sans",
   subsets: ["latin"],
 });
 
-const mono = IBM_Plex_Mono({
+const rmMono = IBM_Plex_Mono({
   variable: "--font-rm-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -56,9 +82,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
+      className={`${display.variable} ${headline.variable} ${sans.variable} ${rmDisplay.variable} ${rmSans.variable} ${rmMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#010102] font-sans antialiased selection:bg-orange-500/30 selection:text-white">
+      <body className="min-h-full bg-[#010102] text-mist font-sans antialiased selection:bg-orange-500/30 selection:text-white">
         {children}
       </body>
     </html>

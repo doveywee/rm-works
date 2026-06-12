@@ -1,0 +1,213 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Check } from "lucide-react";
+
+// Free email delivery with no server, via Web3Forms. Get a key in ~30 seconds
+// at https://web3forms.com (enter ruijli@icloud.com — the key is emailed to you
+// instantly). Paste it below; submissions then arrive in that inbox.
+const WEB3FORMS_ACCESS_KEY = "a15d05e4-e638-46f4-9dca-88fd381439aa";
+
+export function Contact() {
+  const reduce = useReducedMotion();
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [pkg, setPkg] = useState("");
+
+  // auto-fill the package when a card in the Pricing section is chosen
+  useEffect(() => {
+    function onSelect(e: Event) {
+      setPkg((e as CustomEvent<string>).detail);
+    }
+    window.addEventListener("select-package", onSelect);
+    return () => window.removeEventListener("select-package", onSelect);
+  }, []);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(false);
+    setLoading(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+      formData.append("subject", "New project inquiry · RM Works");
+      formData.append("from_name", "RM Works website");
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section id="contact" className="relative mx-auto max-w-6xl px-6 py-28">
+      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-surface via-ink to-ink p-8 sm:p-14">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/[0.03] blur-3xl" />
+
+        <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-chalk sm:text-5xl text-balance">
+              Let&apos;s build something with gravity.
+            </h2>
+            <p className="mt-5 max-w-md text-mist">
+              Tell us about your project. We reply within one business day, and
+              the first call is a free strategy session, not a sales pitch.
+            </p>
+            <div className="mt-8 space-y-1 text-sm text-mist">
+              <p>
+                <span className="text-fog">Email</span> · Info@rmworks.dev
+              </p>
+              <p>
+                <span className="text-fog">Booking</span> · info@rmworks.dev
+              </p>
+            </div>
+          </div>
+
+          {sent ? (
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-center justify-center rounded-2xl border border-line bg-ink/60 p-10 text-center"
+            >
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-chalk text-ink">
+                <Check size={26} />
+              </span>
+              <h3 className="mt-5 font-display text-xl text-chalk">
+                Message sent
+              </h3>
+              <p className="mt-2 max-w-xs text-sm text-mist">
+                Thanks, we&apos;ll be in touch within one business day. Keep an
+                eye on your inbox.
+              </p>
+            </motion.div>
+          ) : (
+            <form onSubmit={onSubmit} className="grid grid-cols-1 gap-5">
+              <Field id="name" label="Name" placeholder="Ada Lovelace" required />
+              <Field
+                id="email"
+                label="Work email"
+                type="email"
+                placeholder="ada@company.com"
+                required
+              />
+              <div className="grid gap-2">
+                <label
+                  htmlFor="package"
+                  className="text-sm font-medium text-chalk"
+                >
+                  Package selection
+                </label>
+                <select
+                  id="package"
+                  name="package"
+                  className="h-12 rounded-xl border border-line bg-ink px-4 text-sm text-chalk outline-none transition-colors focus:border-white/40 focus:ring-2 focus:ring-white/15"
+                  value={pkg}
+                  onChange={(e) => setPkg(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select a package
+                  </option>
+                  <option>Website Design</option>
+                  <option>Management Package</option>
+                  <option>Creative Package</option>
+                </select>
+              </div>
+              <div className="grid gap-2">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-chalk"
+                >
+                  Project details
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  placeholder="What are you building, and what does success look like?"
+                  className="resize-none rounded-xl border border-line bg-ink px-4 py-3 text-sm text-chalk placeholder:text-fog outline-none transition-colors focus:border-white/40 focus:ring-2 focus:ring-white/15"
+                />
+                <p className="text-xs text-fog">
+                  The more context, the sharper our first reply.
+                </p>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-chalk px-7 text-sm font-medium text-ink transition-[transform,background-color,opacity] duration-200 hover:bg-white active:scale-[0.98] disabled:opacity-60 disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              >
+                {loading ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-ink/30 border-t-ink" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </>
+                )}
+              </button>
+
+              {error && (
+                <p className="text-center text-sm text-red-400">
+                  Something went wrong. Please try again, or email
+                  Info@rmworks.dev directly.
+                </p>
+              )}
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  required,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="grid gap-2">
+      <label htmlFor={id} className="text-sm font-medium text-chalk">
+        {label}
+        {required && <span className="text-fog"> *</span>}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        autoComplete={id === "email" ? "email" : id === "name" ? "name" : "off"}
+        className="h-12 rounded-xl border border-line bg-ink px-4 text-sm text-chalk placeholder:text-fog outline-none transition-colors focus:border-white/40 focus:ring-2 focus:ring-white/15"
+      />
+    </div>
+  );
+}

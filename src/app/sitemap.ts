@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/spartan", 0.9, "monthly"],
     ["/spartan/services", 0.7, "monthly"],
     ["/spartan/contact", 0.6, "yearly"],
+    ["/privacy", 0.3, "yearly"],
   ];
 
   return staticPaths.map(([path, priority, changeFrequency]) => ({
